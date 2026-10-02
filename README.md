@@ -2,6 +2,18 @@
 
 Finite element design and validation of an 8" × 3" I-beam for EMCH 308 (Introduction to Finite Element Stress Analysis) at the University of South Carolina (USC), Fall 2026. The beam was designed by a USC team and manufactured in partnership with Midlands Technical College (MTC).
 
+## Team 6
+
+| Name | Institution | Contact |
+|---|---|---|
+| Chase Gregg | USC | |
+| Sam McKool | USC | |
+| James Dierdorf | USC | |
+| Ryan Bilock | USC | rbilock@email.sc.edu |
+| MTC Student #6 | MTC | |
+
+**Instructors:** Andrew Gross (USC) and Gary Shannon (MTC)
+
 ## Design requirements
 
 - **Weight:** ≤ 1 lbf
@@ -19,11 +31,12 @@ Finite element design and validation of an 8" × 3" I-beam for EMCH 308 (Introdu
 
 | Folder | Contents |
 |---|---|
-| `abaqus/` | `.cae` model and `.odb` results for the final simulation |
-| `scripts/` | Python scripts for model setup and post-processing |
-| `cad/` | `.step` model and PDF manufacturing drawing (revision-controlled) |
+| `abaqus/` | `.cae` model, `.jnl` journal, and `.odb` results for the final simulation |
+| `abaqus/Python/` | Python scripts for model setup and post-processing |
+| `cad/` | `.step` model and PDF manufacturing drawing (revision-controlled, e.g. `USC06_MTC06_IBeam_RevA.step`) |
 | `results/` | Load–displacement plots comparing simulation and experiment |
 | `report/` | Final report: modeling approach, element selection, mesh study, and test comparison |
+| `Blackboard Files/` | Course reference documents: project statement, rubric, communication guide, and cost sheet |
 
 ## Tools
 

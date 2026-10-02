@@ -1,0 +1,31 @@
+# Abaqus temporary and job-status files
+# (keep .cae, .jnl, .odb, .inp, and .py files)
+*.lck
+*.rec
+*.rpy
+*.rpy.*
+*.sim
+*.prt
+*.com
+*.ipm
+*.log
+*.msg
+*.sta
+*.dat
+*.023
+*.SMA*
+*.mdl
+*.stt
+*.res
+*.abq
+*.pac
+*.sel
+
+# Python
+__pycache__/
+*.pyc
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
