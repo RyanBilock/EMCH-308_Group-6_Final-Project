@@ -6,13 +6,17 @@ Finite element design and validation of an 8" × 3" I-beam for EMCH 308 (Introdu
 
 | Name | Institution | Contact |
 |---|---|---|
-| Chase Gregg | USC | |
-| Sam McKool | USC | |
-| James Dierdorf | USC | |
+| Chase Gregg | USC | cgregg@email.sc.edu |
+| Sam McKool | USC | smckool@email.sc.edu |
+| James Dierdorf | USC | dierdorf@email.sc.edu |
 | Ryan Bilock | USC | rbilock@email.sc.edu |
-| MTC Student #6 | MTC | |
+| David Wilson | MTC | davidwilson358@student.midlandstech.edu |
 
-**Instructors:** Andrew Gross (USC) and Gary Shannon (MTC)
+**Instructors:** 
+| Name | Institution | Contact |
+|---|---|---|
+| Andrew Gross | USC | andrewgross@sc.edu |
+| Gary Shannon | MTC | shannong@midlandstech.edu |
 
 ## Design requirements
 
