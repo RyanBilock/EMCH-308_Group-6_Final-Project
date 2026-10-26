@@ -210,11 +210,6 @@ s1.callout((ECX + TW / 2 + RF * 0.293, EBY + TF + RF * 0.293), 0.0, 40, 0.55, 'R
 s1.text(ECX, EBY - 0.70, 'END VIEW (STOCK)', fs=FS_VIEW, bold=True, bg=False)
 s1.text(ECX, EBY - 0.95, 'SCALE 1:1', fs=10, bg=False)
 
-note1 = ['NOTE: HOLE SPACING (CENTER TO CENTER)',
-         'WEB HOLES: 2 APART ALONG THE LENGTH.',
-         'UPPER AND LOWER HOLES: .75 APART VERTICALLY.']
-for i, n in enumerate(note1):
-    s1.text(0.75, 2.75 - i * 0.32, n, fs=11, ha='left', bold=(i == 0), bg=False)
 s1.title_block('Rev B  –  web holes and stock section', '1:1', '1/2')
 
 # =========================== SHEET 2: TOP + BOTTOM FLANGE VIEWS (3:4) ===========================
@@ -250,14 +245,6 @@ def flange_view(sh, x0, yt, zs, label, n):
 
 flange_view(s2, 1.95, 6.70, TOP, 'TOP', 12)
 flange_view(s2, 10.0, 6.70, BOT, 'BOTTOM', 16)
-note2 = ['NOTE: HOLE SPACING (CENTER TO CENTER)',
-         'TOP FLANGE: .88 BETWEEN HOLES IN EACH',
-         '    GROUP OF 3; 2.6 ACROSS MID-SPAN.',
-         'BOTTOM FLANGE: .88 BETWEEN ALL HOLES.',
-         'BOTH FLANGES: ROWS 1.575 APART ACROSS',
-         '    THE FLANGE; .099 EDGE TO EDGE AT .88.']
-for i, n in enumerate(note2):
-    s2.text(0.75, 2.75 - i * 0.32, n, fs=11, ha='left', bold=(i == 0), bg=False)
 s2.title_block('Rev B  –  28 flange holes', '3:4', '2/2')
 
 out = '/home/claude/dwg/v3/USC06_MTC06_IBeam_RevB_Drawing'
