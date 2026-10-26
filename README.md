@@ -53,6 +53,8 @@ abaqus/
 └── python/
     ├── Baseline_Stock1_v1.py       Rebuilds Baseline_Stock1.cae (no extra cutouts)
     ├── Stock1_Drilled_v1.py        Rebuilds Stock1_Drilled.cae (recommended cutouts)
+    ├── Stock1_Drilled_Job_v1.py    Checks Stock1_Drilled.cae and submits its job into abaqus/Stock1_Drilled/
+    ├── FOS_Stock1_Drilled_v1.py    FoS, weight and peak stress of the drilled beam → results/Stock1_Drilled/
     ├── Stock1_Notched_v1.py        Notched Stock 1 design + job
     ├── Stock1_Plain_v1.py          Plain Stock 1 + job
     ├── FOS_ProjectBeam_v3.py       Offset-method FoS for every .odb in the work directory
@@ -74,7 +76,7 @@ cad/
 |---|---|---|---|---|
 | Stock 3, required holes only | 1.68 | 3.55 | — | Too heavy |
 | Stock 1, notched flanges | 0.957 | 1.64 | over $600 (milling) | Meets weight and FoS, cost too high |
-| Stock 1, drilled holes (Option A + B) | 0.993 | needs FEA | $510 | Recommended; FEA check pending |
+| Stock 1, drilled holes (Option A + B) | 0.993 | pending | $510 | Recommended; run `Stock1_Drilled_Job_v1.py`, then `FOS_Stock1_Drilled_v1.py` |
 
 ## Tools
 
