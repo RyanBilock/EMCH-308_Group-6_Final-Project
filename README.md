@@ -72,7 +72,7 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 │   │   └── Stock1_Drilled_v1/  model .cae / .jnl  +  job/ (.cae, .jnl, .inp)
 │   └── python/
 │       ├── final/              Stock1_Drilled_v2.py (builds final model + job) · FOS_Stock1_Drilled_v2.py ·
-│       │                       Export_STEP_v1.py (writes cad/USC06_MTC06_IBeam_RevA.step)
+│       │                       Export_STEP_v2.py (writes cad/USC06_MTC06_IBeam_RevB.step)
 │       ├── tools/              Baseline_Stock1_v1.py · FOS_ProjectBeam_v3.py (FoS for any .odb)
 │       ├── iterations/         Scripts for the notched, plain and drilled v1 designs
 │       └── fix_history/        Repair scripts for the original model, v1–v5 (see its README)
@@ -96,7 +96,7 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 2. **File → Run Script** → `abaqus/python/final/Stock1_Drilled_v2.py`. It builds the final beam, saves `Stock1_Drilled_v2.cae`, and submits the job in a `Stock1_Drilled_v2/` folder next to it (about 30 min).
 3. When the job shows *Completed*, **Run Script** → `abaqus/python/final/FOS_Stock1_Drilled_v2.py`. It finds the `.odb`, reports weight, FoS, cost and where the beam yields first, and saves a report, CSV and plot.
 
-4. To make the STEP file for manufacturing: set the work directory to the project folder and **Run Script** → `abaqus/python/final/Export_STEP_v1.py`. It exports only the `Beam` part to `cad/USC06_MTC06_IBeam_RevA.step` after checking its size, volume and holes. Import it with units = **inches**.
+4. To make the STEP file for manufacturing: set the work directory to the project folder and **Run Script** → `abaqus/python/final/Export_STEP_v2.py`. It exports only the `Beam` part to `cad/USC06_MTC06_IBeam_RevB.step` (Rev B: Rev A was the Stock 3 package already sent to MTC) after checking its size, volume and holes. Import it with units = **inches**.
 
 Scripts write their output next to `ProjectBeam.cae`; move the finished model and job into `abaqus/final_design/` to match this layout.
 
