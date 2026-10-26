@@ -38,6 +38,7 @@ Finite element design and validation of an 8" × 3" I-beam for EMCH 308 (Introdu
   - Top flange: z = ±1.30, ±2.18, ±3.06 in from mid-span (12 holes)
   - Bottom flange: z = ±0.44, ±1.32, ±2.20, ±3.08 in from mid-span (16 holes)
 - **Design sheet (views, dimensions, cost, FOS, weight):** [`cad/drawings/Design_Sheet_Stock1_Drilled_v2.pdf`](cad/drawings/Design_Sheet_Stock1_Drilled_v2.pdf) · [PNG](cad/drawings/Design_Sheet_Stock1_Drilled_v2.png)
+- **Manufacturing drawing (for MTC):** [`cad/USC06_MTC06_IBeam_RevB_Drawing.pdf`](cad/USC06_MTC06_IBeam_RevB_Drawing.pdf)
 - **Hole layout:** [`cad/drawings/Hole_Layout_Stock1_Drilled_v2.png`](cad/drawings/Hole_Layout_Stock1_Drilled_v2.png)
 - **No milling, no extra web holes.** Holes are kept clear of the load roller and the supports, where the web yields first.
 
@@ -81,6 +82,7 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 │   ├── final_design/           Stock 1 drilled v2: FoS report, CSV, plot
 │   └── iterations/             Stock3_Beam_8p2in · Stock1_Notched · Stock1_Drilled_v1
 ├── cad/
+│   ├── USC06_MTC06_IBeam_RevB_Drawing.pdf   Manufacturing drawing for MTC (Rev B, GD&T, MTC title block)
 │   ├── drawings/               Design_Sheet_Stock1_Drilled_v2 (.pdf/.png) · Hole_Layout_Stock1_Drilled_v2.png
 │   └── concept_drawings/       Earlier material-removal and cost-plan concepts (superseded)
 ├── cost/                       Course cost sheet filled in for the final design
