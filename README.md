@@ -73,7 +73,7 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 │   │   └── Stock1_Drilled_v1/  model .cae / .jnl  +  job/ (.cae, .jnl, .inp)
 │   └── python/
 │       ├── final/              Stock1_Drilled_v2.py (builds final model + job) · FOS_Stock1_Drilled_v2.py ·
-│       │                       Export_STEP_v2.py (writes cad/USC06_MTC06_IBeam_RevB.step)
+│       │                       Export_STEP_v3.py (writes cad/USC06_MTC06_IBeam_RevB.step, labelled in inches)
 │       ├── tools/              Baseline_Stock1_v1.py · FOS_ProjectBeam_v3.py (FoS for any .odb)
 │       ├── iterations/         Scripts for the notched, plain and drilled v1 designs
 │       └── fix_history/        Repair scripts for the original model, v1–v5 (see its README)
@@ -82,6 +82,8 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 │   ├── final_design/           Stock 1 drilled v2: FoS report, CSV, plot
 │   └── iterations/             Stock3_Beam_8p2in · Stock1_Notched · Stock1_Drilled_v1
 ├── cad/
+│   ├── USC06_MTC06_IBeam_RevB.step          3D model for MTC (Rev B, inches)
+│   ├── creo/                   Creo Parametric part made from the STEP file
 │   ├── USC06_MTC06_IBeam_RevB_Drawing.pdf   Manufacturing drawing (Rev B, 2 sheets, course-example style)
 │   ├── drawings/               Design_Sheet_Stock1_Drilled_v2 · Hole_Layout_Stock1_Drilled_v2 · RevB drawing GD&T version
 │   └── concept_drawings/       Earlier material-removal and cost-plan concepts (superseded)
@@ -98,7 +100,7 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 2. **File → Run Script** → `abaqus/python/final/Stock1_Drilled_v2.py`. It builds the final beam, saves `Stock1_Drilled_v2.cae`, and submits the job in a `Stock1_Drilled_v2/` folder next to it (about 30 min).
 3. When the job shows *Completed*, **Run Script** → `abaqus/python/final/FOS_Stock1_Drilled_v2.py`. It finds the `.odb`, reports weight, FoS, cost and where the beam yields first, and saves a report, CSV and plot.
 
-4. To make the STEP file for manufacturing: set the work directory to the project folder and **Run Script** → `abaqus/python/final/Export_STEP_v2.py`. It exports only the `Beam` part to `cad/USC06_MTC06_IBeam_RevB.step` (Rev B: Rev A was the Stock 3 package already sent to MTC) after checking its size, volume and holes. Import it with units = **inches**.
+4. To make the STEP file for manufacturing: set the work directory to the project folder and **Run Script** → `abaqus/python/final/Export_STEP_v3.py`. It exports only the `Beam` part to `cad/USC06_MTC06_IBeam_RevB.step` (Rev B: Rev A was the Stock 3 package already sent to MTC) after checking its size, volume and holes. The file is labelled in inches, so CAD programs import it at the right size; check one dimension after import.
 
 Scripts write their output next to `ProjectBeam.cae`; move the finished model and job into `abaqus/final_design/` to match this layout.
 
