@@ -1,0 +1,7 @@
+FACTOR OF SAFETY - Beam_8p2in.odb (offset method, 0.020 in offset)
+  beam length analysed   = 8.200 in
+  elastic slope k        = 485101 lbf/in
+  peak load reached      = 19926 lbf
+  offset-line load       = 17727 lbf at 0.0573 in travel
+  FOS = 17727 / 5000     = 3.545
+  required FOS >= 1.25 (load >= 6250 lbf)  ->  PASS

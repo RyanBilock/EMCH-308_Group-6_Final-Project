@@ -36,11 +36,45 @@ Finite element design and validation of an 8" × 3" I-beam for EMCH 308 (Introdu
 | Folder | Contents |
 |---|---|
 | `abaqus/` | `.cae` model, `.jnl` journal, and `.odb` results for the final simulation |
-| `abaqus/Python/` | Python scripts for model setup and post-processing |
+| `abaqus/python/` | Python scripts for model setup and post-processing |
 | `cad/` | `.step` model and PDF manufacturing drawing (revision-controlled, e.g. `USC06_MTC06_IBeam_RevA.step`) |
 | `results/` | Load–displacement plots comparing simulation and experiment |
 | `report/` | Final report: modeling approach, element selection, mesh study, and test comparison |
 | `Blackboard Files/` | Course reference documents: project statement, rubric, communication guide, and cost sheet |
+
+### Current files
+
+```
+abaqus/
+├── ProjectBeam.cae / .jnl          Original model (rollers, material); the scripts open it
+├── Baseline_Stock1.cae / .jnl      Standard Stock 1 beam, 8.2 in, required holes only
+├── Stock1_Drilled.cae / .jnl       Stock 1 + recommended drilled holes (cost-compliant plan)
+├── Stock1_Notched/                 Completed notched-flange analysis (.cae, .jnl, .inp)
+└── python/
+    ├── Baseline_Stock1_v1.py       Rebuilds Baseline_Stock1.cae (no extra cutouts)
+    ├── Stock1_Drilled_v1.py        Rebuilds Stock1_Drilled.cae (recommended cutouts)
+    ├── Stock1_Notched_v1.py        Notched Stock 1 design + job
+    ├── Stock1_Plain_v1.py          Plain Stock 1 + job
+    ├── FOS_ProjectBeam_v3.py       Offset-method FoS for every .odb in the work directory
+    └── fix_ProjectBeam_v11.py      Stock 3 repair and meshing script (reference)
+results/
+├── Stock1_Notched/                 FoS 1.64, 0.957 lb: load–displacement plot, CSV, FoS table
+└── Stock3_Beam_8p2in/              FoS 3.55, over the weight limit: plot, CSV, FoS summary
+cad/
+└── concept_drawings/               Material-removal and cost-plan drawings
+```
+
+**Running the scripts:** in Abaqus/CAE, set the work directory to `abaqus/` (the folder holding `ProjectBeam.cae`), then use **File → Run Script** on a file in `abaqus/python/`. To recompute FoS, set the work directory to the folder holding the `.odb` and run `FOS_ProjectBeam_v3.py`.
+
+**Not on GitHub:** `Stock1_Notched.odb` (354 MB) is over GitHub's 100 MB file limit and stays on the team's project drive; it can be regenerated from `abaqus/Stock1_Notched/Stock1_Notched.inp`. Superseded scripts and models live in a local `archive/` folder.
+
+### Design status
+
+| Design | Weight (lb) | FoS | Est. cost | Status |
+|---|---|---|---|---|
+| Stock 3, required holes only | 1.68 | 3.55 | — | Too heavy |
+| Stock 1, notched flanges | 0.957 | 1.64 | over $600 (milling) | Meets weight and FoS, cost too high |
+| Stock 1, drilled holes (Option A + B) | 0.993 | needs FEA | $510 | Recommended; FEA check pending |
 
 ## Tools
 

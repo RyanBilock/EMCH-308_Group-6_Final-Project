@@ -1,0 +1,13 @@
+FACTOR OF SAFETY COMPARISON  (offset method, 0.02 in offset; design load 5000 lbf)
+Folder: E:\Semester Project
+
+Job                  Length    Weight  Complete     P_offset       FOS   Weight  FOS
+                       (in)      (lb)                  (lbf)             <=1 lb  >=1.25
+--------------------------------------------------------------------------------------------
+Beam_Fixed            8.200     1.681       10%       > 5063    > 1.01     FAIL  FAIL
+Stock1_Notched        8.200     0.957      100%         8186      1.64     PASS  PASS
+
+Notes:
+  "> value": the curve never reached the offset line, so the value is a lower bound.
+  Jobs below 100 % complete stopped early; rerun them before using the numbers.
+  Weight is from the analysed mesh, so it reflects the modelled geometry.
