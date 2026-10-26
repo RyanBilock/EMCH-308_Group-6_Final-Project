@@ -55,6 +55,8 @@ abaqus/
     ├── Stock1_Drilled_v1.py        Rebuilds Stock1_Drilled.cae (recommended cutouts)
     ├── Stock1_Drilled_Job_v1.py    Checks Stock1_Drilled.cae and submits its job into abaqus/Stock1_Drilled/
     ├── FOS_Stock1_Drilled_v1.py    FoS, weight and peak stress of the drilled beam → results/Stock1_Drilled/
+    ├── Stock1_Drilled_v2.py        Redesigned drilled beam (no web holes, holes clear of rollers) + job
+    ├── FOS_Stock1_Drilled_v2.py    FoS with exact curved-element weight and first-yield location
     ├── Stock1_Notched_v1.py        Notched Stock 1 design + job
     ├── Stock1_Plain_v1.py          Plain Stock 1 + job
     ├── FOS_ProjectBeam_v3.py       Offset-method FoS for every .odb in the work directory
@@ -76,7 +78,8 @@ cad/
 |---|---|---|---|---|
 | Stock 3, required holes only | 1.68 | 3.55 | — | Too heavy |
 | Stock 1, notched flanges | 0.957 | 1.64 | over $600 (milling) | Meets weight and FoS, cost too high |
-| Stock 1, drilled holes (Option A + B) | 0.993 | pending | $510 | Recommended; run `Stock1_Drilled_Job_v1.py`, then `FOS_Stock1_Drilled_v1.py` |
+| Stock 1, drilled v1 (Option A + B) | 0.993 | 1.246 | $510 | Fails FoS by 0.004 (web yields around the extra web holes) |
+| Stock 1, drilled v2 (28 × Ø25/32 flange holes) | 0.994 | ≈1.5 screened | $143 | Recommended; run `Stock1_Drilled_v2.py`, then `FOS_Stock1_Drilled_v2.py` |
 
 ## Tools
 

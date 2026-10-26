@@ -1,0 +1,14 @@
+FACTOR OF SAFETY - Stock 1 drilled plan (A+B)
+ODB: E:\Semester Project\Stock1_Drilled\Stock1_Drilled.odb
+Job status: completed successfully; step 100 % complete
+
+Beam length analysed      = 8.200 in
+Weight (from mesh)        = 1.002 lb    limit 1.00 lb   -> FAIL
+Elastic slope k           = 184688 lbf/in
+Peak load reached         = 6956 lbf
+Offset-line load          = 6228 lbf at 0.0548 in travel
+FOS = P_offset / 5000     = 1.246    required >= 1.25 (P >= 6250 lbf)   -> FAIL
+Peak von Mises at 4960 lbf = 42.3 ksi (saved frame at step time 0.40)
+Cost (cost-sheet estimate) = $510    limit $600   -> PASS
+
+OVERALL: does NOT meet every requirement (see FAIL lines)

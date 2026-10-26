@@ -36,3 +36,4 @@ archive/
 # .odb files over GitHub's 100 MB file limit
 abaqus/Stock1_Notched/Stock1_Notched.odb
 abaqus/Stock1_Drilled/Stock1_Drilled.odb
+abaqus/Stock1_Drilled_v2/Stock1_Drilled_v2.odb
