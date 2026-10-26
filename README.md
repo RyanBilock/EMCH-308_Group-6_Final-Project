@@ -82,7 +82,7 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 │   ├── final_design/           Stock 1 drilled v2: FoS report, CSV, plot
 │   └── iterations/             Stock3_Beam_8p2in · Stock1_Notched · Stock1_Drilled_v1
 ├── cad/
-│   ├── USC06_MTC06_IBeam_RevB_Drawing.pdf   Manufacturing drawing for MTC (Rev B, MTC format, ordinate dims)
+│   ├── USC06_MTC06_IBeam_RevB_Drawing.pdf   Manufacturing drawing (Rev B, 2 sheets, course-example style)
 │   ├── drawings/               Design_Sheet_Stock1_Drilled_v2 · Hole_Layout_Stock1_Drilled_v2 · RevB drawing GD&T version
 │   └── concept_drawings/       Earlier material-removal and cost-plan concepts (superseded)
 ├── cost/                       Course cost sheet filled in for the final design
