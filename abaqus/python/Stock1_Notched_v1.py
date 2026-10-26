@@ -20,7 +20,7 @@ STOCK 1 = Aluminum Association I 3 x 2.03, 6061: height 3.00, flange width
     side of mid-span, both edges of both flanges; flange 1.00 wide there.
     Expected weight 0.960 lb.
 
-EVERYTHING ELSE is fix_ProjectBeam_v11.py:
+EVERYTHING ELSE is fix_ProjectBeam_v5.py (fix_history folder):
     WHAT IT FIXES (errors in Erros.txt / ProjectBeam.jnl)
         1. "Zero pivot ... TOPROLLER-1.1 D.O.F. 2" (fatal): the top roller was
            force-loaded and free in U2, so it had no stiffness until contact
@@ -45,7 +45,7 @@ EVERYTHING ELSE is fix_ProjectBeam_v11.py:
         bottom-flange centre line (U1 at two nodes, U3 at the mid-span node).
         They add no stress.
     
-    CHANGES IN v8
+    CHANGES IN v2
         7. Beam length 8.5 -> 8.2 in (BEAM_LENGTH).  0.15 in is trimmed from each
            end, so the four Fig. 1 access holes stay at +/-1 in and +/-3 in from
            mid-span and the 8 in support span is unchanged (0.1 in overhang).
@@ -53,20 +53,20 @@ EVERYTHING ELSE is fix_ProjectBeam_v11.py:
            nearly meets the web-flange fillet) are removed by seeding the hole
            edges finer.  Several seed combinations are tried; the first with no
            flagged elements (and under the node limit) is kept.
-    CHANGES IN v11
+    CHANGES IN v5
        14. Beam contact surfaces are built from the mesh: only the element faces
            that lie on the flat top (y = top) and bottom (y = bottom) flange planes.
-           In v10 the seam-ignore merged each flat face with the flange tips,
+           In v4 the seam-ignore merged each flat face with the flange tips,
            underside and fillets, so the contact surfaces covered the whole
-           flange skin (10,902 / 11,126 faces vs 3,936 in v9) and the solver
+           flange skin (10,902 / 11,126 faces vs 3,936 in v3) and the solver
            carried ~200,000 open contact constraints.  The roller contact itself
-           is unchanged.  If the mesh-face search is not available, the v10
+           is unchanged.  If the mesh-face search is not available, the v4
            geometry-face method is used instead.
     
-    CHANGES IN v10
-       13. Distorted elements (15 in the v9 run: 9 where the hole edges come within
+    CHANGES IN v4
+       13. Distorted elements (15 in the v3 run: 9 where the hole edges come within
            ~0.08 in of the web-fillet seam, 6 at the top-flange tip rounds):
-           - local hole-edge seeding is removed (every v9 try with it was worse:
+           - local hole-edge seeding is removed (every v3 try with it was worse:
              174-697 flagged vs 15 without);
            - stage 1 sweeps global mesh settings (size, curvature control,
              minimum size factor) and keeps the cleanest mesh;
@@ -75,13 +75,13 @@ EVERYTHING ELSE is fix_ProjectBeam_v11.py:
              flange-tip rounds) so it no longer squeezes elements into the thin
              strips beside them, then sweeps again.  The better stage is kept;
              the seam-ignore is undone if it does not help.
-           The CAE mesh check matched the solver's list exactly in v9, so the
+           The CAE mesh check matched the solver's list exactly in v3, so the
            count reported here is what the job will report.
     
-    CHANGES IN v9
+    CHANGES IN v3
        10. New job name "Beam_8p2in" (an old Beam_Fixed.lck lock file blocks the
            old name); if a lock file exists for the name, a suffix is added.
-       11. Every progress line is also written to fix_ProjectBeam_v11_log.txt in
+       11. Every progress line is also written to Stock1_Notched_v1_log.txt in
            the work directory, including where any flagged element sits.
        12. More mesh variations are tried (8) to clear the distorted elements in
            the 0.1 in strips between the holes and the web-flange fillets.
@@ -151,7 +151,7 @@ NODE_TARGET  = 230000   # stay this far under it; seed grows until N <= this
 # (global seed, hole-edge seed or None) tried in order until no element is
 # flagged; the best one under NODE_TARGET is kept
 # (global seed, curvature deviation factor, min size factor), tried in order
-# until a mesh has no flagged elements; the first entry is the v9 mesh
+# until a mesh has no flagged elements; the first entry is the v3 mesh
 MESH_SWEEP = ((0.100, 0.10, 0.10), (0.100, 0.10, 0.30), (0.105, 0.10, 0.10),
               (0.095, 0.10, 0.10), (0.100, 0.07, 0.10), (0.100, 0.15, 0.10),
               (0.105, 0.10, 0.30), (0.0975, 0.10, 0.20))
@@ -847,7 +847,7 @@ if n_top and n_bot:
     log('Beam contact surfaces from the mesh: top %d, bottom %d element faces '
         '(flat flange planes only).' % (n_top, n_bot))
 else:
-    log('Mesh-face surfaces not available; using geometry faces (v10 method).')
+    log('Mesh-face surfaces not available; using geometry faces (v4 method).')
     top_faces, n_top = flange_faces(y_top)
     bot_faces, n_bot = flange_faces(y_bot)
     log('Beam contact faces (meshed): top = %d, bottom = %d' % (n_top, n_bot))

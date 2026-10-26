@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-fix_ProjectBeam.py  (v11)  --  EMCH 308 Team 6, three-point-bend I-beam repair
+fix_ProjectBeam_v1.py  --  EMCH 308 Team 6, three-point-bend I-beam repair
 ==============================================================================
+(Renumbered in the fix history; originally delivered as fix_ProjectBeam.py / fix_ProjectBeam_v7.py.)
 
 HOW TO RUN (Abaqus/CAE)
     1. File > Set Work Directory...  -> the folder holding ProjectBeam.cae
     2. (Nothing to open: the script opens ProjectBeam.cae from the work
        directory itself.)
-    3. File > Run Script...  -> fix_ProjectBeam_v11.py
+    3. File > Run Script...  -> fix_ProjectBeam_v1.py
     The repaired model is saved as ProjectBeam_fixed.cae (the original file is
     not changed) and job "Beam_Fixed" is submitted.  Progress lines start with
     [fix_ProjectBeam] in the message area at the bottom of the window.
@@ -37,50 +38,6 @@ WHAT IT FIXES (errors in Erros.txt / ProjectBeam.jnl)
     The beam's rigid-body restraints are put on mesh nodes on the
     bottom-flange centre line (U1 at two nodes, U3 at the mid-span node).
     They add no stress.
-
-CHANGES IN v8
-    7. Beam length 8.5 -> 8.2 in (BEAM_LENGTH).  0.15 in is trimmed from each
-       end, so the four Fig. 1 access holes stay at +/-1 in and +/-3 in from
-       mid-span and the 8 in support span is unchanged (0.1 in overhang).
-    8. The 6 distorted tets at the top of the inner hole (where the hole edge
-       nearly meets the web-flange fillet) are removed by seeding the hole
-       edges finer.  Several seed combinations are tried; the first with no
-       flagged elements (and under the node limit) is kept.
-CHANGES IN v11
-   14. Beam contact surfaces are built from the mesh: only the element faces
-       that lie on the flat top (y = top) and bottom (y = bottom) flange planes.
-       In v10 the seam-ignore merged each flat face with the flange tips,
-       underside and fillets, so the contact surfaces covered the whole
-       flange skin (10,902 / 11,126 faces vs 3,936 in v9) and the solver
-       carried ~200,000 open contact constraints.  The roller contact itself
-       is unchanged.  If the mesh-face search is not available, the v10
-       geometry-face method is used instead.
-
-CHANGES IN v10
-   13. Distorted elements (15 in the v9 run: 9 where the hole edges come within
-       ~0.08 in of the web-fillet seam, 6 at the top-flange tip rounds):
-       - local hole-edge seeding is removed (every v9 try with it was worse:
-         174-697 flagged vs 15 without);
-       - stage 1 sweeps global mesh settings (size, curvature control,
-         minimum size factor) and keeps the cleanest mesh;
-       - stage 2 (only if elements are still flagged) tells the mesher to
-         ignore the smooth tangent seams that run along the beam (web-fillet,
-         flange-tip rounds) so it no longer squeezes elements into the thin
-         strips beside them, then sweeps again.  The better stage is kept;
-         the seam-ignore is undone if it does not help.
-       The CAE mesh check matched the solver's list exactly in v9, so the
-       count reported here is what the job will report.
-
-CHANGES IN v9
-   10. New job name "Beam_8p2in" (an old Beam_Fixed.lck lock file blocks the
-       old name); if a lock file exists for the name, a suffix is added.
-   11. Every progress line is also written to fix_ProjectBeam_v11_log.txt in
-       the work directory, including where any flagged element sits.
-   12. More mesh variations are tried (8) to clear the distorted elements in
-       the 0.1 in strips between the holes and the web-flange fillets.
-    9. Field output is written at 10 points in the step instead of every
-       increment (the last ODB was 2.6 GB).  RF2/U2 history is still written
-       every increment for the load-deflection curve.
 
 UNITS: in, kip, ksi.  Works with the Python 3 (2024+) and Python 2.7 builds.
 """
@@ -119,11 +76,7 @@ BOT_PART     = 'BotRoller'
 
 R_TOP        = 0.492    # in  loading roller radius   (0.984 in diameter)
 R_BOT        = 0.197    # in  support roller radius   (0.394 in diameter)
-SPAN         = 8.0      # in  support centre-to-centre distance (test fixture)
-BEAM_LENGTH  = 8.2      # in  overall beam length (trimmed equally at both ends)
-HOLE_R       = 0.5      # in  Fig. 1 access holes, diameter 1.0 in
-HOLES        = ((-3.0, -0.375), (-1.0, 0.375), (1.0, 0.375), (3.0, -0.375))
-                        # (z from mid-span, y from mid-height) of each hole
+SPAN         = 8.0      # in  support centre-to-centre distance
 
 U_TARGET     = 0.08     # in  top-roller travel (RF2 vs U2 = load-deflection)
 TOP_ADJUST_TOL = 1.0e-3 # in  strain-free gap closure, top roller only
@@ -136,18 +89,8 @@ GLOBAL_SEED  = 0.1      # in    global element size (same as the original)
 CURV_DEV     = 0.1      # curvature control (same as the original)
 NODE_LIMIT   = 250000   # Academic Teaching licence limit (nodes, whole model)
 NODE_TARGET  = 230000   # stay this far under it; seed grows until N <= this
-# (global seed, hole-edge seed or None) tried in order until no element is
-# flagged; the best one under NODE_TARGET is kept
-# (global seed, curvature deviation factor, min size factor), tried in order
-# until a mesh has no flagged elements; the first entry is the v9 mesh
-MESH_SWEEP = ((0.100, 0.10, 0.10), (0.100, 0.10, 0.30), (0.105, 0.10, 0.10),
-              (0.095, 0.10, 0.10), (0.100, 0.07, 0.10), (0.100, 0.15, 0.10),
-              (0.105, 0.10, 0.30), (0.0975, 0.10, 0.20))
-IGNORE_TANGENT_SEAMS = True   # stage 2 (see header)
-TANGENT_DEG  = 5.0      # faces meeting within this angle count as a smooth seam
-FIELD_FRAMES = 10       # field-output frames in the step (history: every inc)
 
-JOB_NAME     = 'Beam_8p2in'
+JOB_NAME     = 'Beam_Fixed'
 NUM_CPUS     = 4        # capped at the number of processors on the machine
 SUBMIT_JOB   = True     # False = build and save only; submit from Job Manager
 
@@ -157,23 +100,8 @@ GEOM_TOL     = 1.0e-4   # in
 # ---------------------------------------------------------------------------
 # helpers
 # ---------------------------------------------------------------------------
-LOG_PATH = os.path.join(os.getcwd(), 'fix_ProjectBeam_v11_log.txt')
-try:
-    open(LOG_PATH, 'w').close()
-except Exception:
-    LOG_PATH = None
-
-
 def log(text):
-    line = '[fix_ProjectBeam] ' + text
-    print(line)
-    if LOG_PATH:
-        try:
-            fh = open(LOG_PATH, 'a')
-            fh.write(line + '\n')
-            fh.close()
-        except Exception:
-            pass
+    print('[fix_ProjectBeam] ' + text)
 
 
 def attempt(fn, what):
@@ -264,7 +192,7 @@ def find_model(db):
     return None
 
 
-log('fix_ProjectBeam v11 starting')
+log('fix_ProjectBeam v1 starting')
 # Always start from the untouched original so leftovers from an earlier run
 # (old seeds, a bloated mesh in *_fixed.cae) can't carry over.
 cae_path = os.path.join(os.getcwd(), CAE_NAME)
@@ -323,94 +251,11 @@ for bname in list(model.boundaryConditions.keys()):
 for sname in list(a.surfaces.keys()):
     if sname.startswith('CS_') or sname in ('General_Contact_Faces',):
         del a.surfaces[sname]
-if os.path.exists(os.path.join(os.getcwd(), JOB_NAME + '.lck')):
-    log('NOTE: %s.lck exists (an earlier run was cut off); using job name %s_b.'
-        % (JOB_NAME, JOB_NAME))
-    JOB_NAME += '_b'
 if JOB_NAME in mdb.jobs.keys():
     del mdb.jobs[JOB_NAME]
 for name in extra_beams:
     del a.features[name]
     log('Deleted duplicate beam instance "%s" (was an unconnected region).' % name)
-a.regenerate()
-beam = a.instances[beam_name]
-
-# ---------------------------------------------------------------------------
-# 2b. beam length: trim equally from both ends (holes stay centred)
-# ---------------------------------------------------------------------------
-p = model.parts[BEAM_PART]
-
-
-def part_box():
-    vs = [v.pointOn[0] for v in p.vertices]
-    return ([min(v[i] for v in vs) for i in range(3)],
-            [max(v[i] for v in vs) for i in range(3)])
-
-
-def cut_end(z_plane, inward, depth, xc, yc):
-    """Remove a slab 'depth' thick at the end face z = z_plane.  The cut
-    direction is checked against the part box and flipped if needed."""
-    dp = p.datums[p.DatumPlaneByPrincipalPlane(principalPlane=XYPLANE,
-                                               offset=z_plane).id]
-    ax = p.datums[p.DatumAxisByPrincipalAxis(principalAxis=YAXIS).id]
-    target = z_plane + inward * depth
-    for flip in (OFF, ON):
-        t = p.MakeSketchTransform(sketchPlane=dp, sketchUpEdge=ax,
-                                  sketchPlaneSide=SIDE1, sketchOrientation=RIGHT,
-                                  origin=(xc, yc, z_plane))
-        sk = model.ConstrainedSketch(name='__trim__', sheetSize=20.0, transform=t)
-        sk.rectangle(point1=(-5.0, -5.0), point2=(5.0, 5.0))
-        feat = None
-        try:
-            feat = p.CutExtrude(sketchPlane=dp, sketchUpEdge=ax, sketchPlaneSide=SIDE1,
-                                sketchOrientation=RIGHT, sketch=sk, depth=depth,
-                                flipExtrudeDirection=flip)
-        except Exception as err:
-            log('  end cut at z = %.3f (flip %s) not made: %s' % (z_plane, flip, err))
-        del model.sketches['__trim__']
-        if feat is None:
-            continue
-        lo, hi = part_box()
-        end_now = lo[2] if inward > 0 else hi[2]
-        if abs(end_now - target) < 1.0e-4:
-            return
-        p.deleteFeatures((feat.name,))           # cut went the wrong way
-    raise RuntimeError('Could not trim the beam end at z = %.4f in.' % z_plane)
-
-
-lo, hi = part_box()
-length0 = hi[2] - lo[2]
-trim = 0.5 * (length0 - BEAM_LENGTH)
-length_changed = False
-if trim < -1.0e-4:
-    raise RuntimeError('The model beam (%.3f in) is shorter than BEAM_LENGTH = %.3f in; '
-                       'this script only shortens it.' % (length0, BEAM_LENGTH))
-if trim > 1.0e-4:
-    p.deleteMesh()
-    xc, yc = 0.5 * (lo[0] + hi[0]), 0.5 * (lo[1] + hi[1])
-    cut_end(lo[2], +1.0, trim, xc, yc)
-    cut_end(hi[2], -1.0, trim, xc, yc)
-    lo, hi = part_box()
-    length_changed = True
-    log('Beam length %.3f -> %.3f in (%.3f in trimmed from each end; holes stay '
-        'centred).' % (length0, hi[2] - lo[2], trim))
-else:
-    log('Beam length already %.3f in.' % length0)
-
-# make sure every cell carries the aluminium section after the geometry edit
-sec_name = None
-for sa in p.sectionAssignments:
-    sec_name = sa.sectionName
-if sec_name is None:
-    raise RuntimeError('Part "%s" has no section assignment.' % BEAM_PART)
-while len(p.sectionAssignments):
-    del p.sectionAssignments[0]
-if 'BeamAll' in p.sets.keys():
-    del p.sets['BeamAll']
-p.Set(name='BeamAll', cells=p.cells)
-p.SectionAssignment(region=p.sets['BeamAll'], sectionName=sec_name, offset=0.0,
-                    offsetType=MIDDLE_SURFACE, offsetField='',
-                    thicknessAssignment=FROM_SECTION)
 a.regenerate()
 beam = a.instances[beam_name]
 
@@ -494,102 +339,21 @@ if REMESH:
         mesh.ElemType(elemCode=C3D20R, elemLibrary=STANDARD),
         mesh.ElemType(elemCode=C3D15, elemLibrary=STANDARD),
         mesh.ElemType(elemCode=C3D10, elemLibrary=STANDARD)))
-    def mesh_once(g, dev, mf):
-        p.deleteMesh()
-        attempt(lambda: p.deleteSeeds(regions=p.edges), 'clearing old edge seeds')
-        p.seedPart(size=g, deviationFactor=dev, minSizeFactor=mf)
+    # Drop any local edge seeds left from earlier runs; they force tiny elements.
+    attempt(lambda: p.deleteSeeds(regions=p.edges), 'clearing old edge seeds')
+    seed = GLOBAL_SEED
+    for k in range(8):
+        p.seedPart(size=seed, deviationFactor=CURV_DEV, minSizeFactor=0.1)
         p.generateMesh()
-        nb = attempt(lambda: len(bad_elements()), 'mesh quality check')
-        return 10 ** 9 if nb is None else nb
-
-    def sweep(tag):
-        best = None
-        for g, dev, mf in MESH_SWEEP:
-            nb = mesh_once(g, dev, mf)
-            nn = len(p.nodes)
-            log('Mesh try (%s): seed %.4f, curvature %.2f, min size %.2f -> %d elements, '
-                '%d nodes, %s flagged%s' % (tag, g, dev, mf, len(p.elements), nn,
-                                           '?' if nb >= 10 ** 9 else nb,
-                                           '  (over node target, not used)'
-                                           if nn > NODE_TARGET else ''))
-            if nn > NODE_TARGET:
-                continue
-            if best is None or nb < best[0]:
-                best = (nb, g, dev, mf)
-            if nb == 0:
-                break
-        return best
-
-    def face_normal(f, pt):
-        try:
-            return f.getNormal(point=pt)
-        except TypeError:
-            return f.getNormal()
-
-    def ignore_tangent_seams():
-        """Ignore straight seams running along the beam where the two faces
-        meet tangentially (web-fillet, fillet-flange, flange-tip rounds)."""
-        cos_lim = math.cos(math.radians(TANGENT_DEG))
-        seams = []
-        for e in p.edges:
-            try:
-                vs = e.getVertices()
-                if len(vs) != 2:
-                    continue
-                va, vb = p.vertices[vs[0]].pointOn[0], p.vertices[vs[1]].pointOn[0]
-                if (abs(va[0] - vb[0]) > 1e-4 or abs(va[1] - vb[1]) > 1e-4
-                        or abs(va[2] - vb[2]) < 1.0):
-                    continue                          # not a long seam along z
-                fids = e.getFaces()
-                if len(fids) != 2:
-                    continue
-                m = e.pointOn[0]
-                n1 = face_normal(p.faces[fids[0]], m)
-                n2 = face_normal(p.faces[fids[1]], m)
-                dot = abs(sum(a_ * b_ for a_, b_ in zip(n1, n2)))
-                l1 = math.sqrt(sum(a_ * a_ for a_ in n1))
-                l2 = math.sqrt(sum(a_ * a_ for a_ in n2))
-                if l1 > 0 and l2 > 0 and dot / (l1 * l2) >= cos_lim:
-                    seams.append(e)
-            except Exception:
-                continue
-        if not seams:
-            log('Stage 2: no smooth seams found to ignore.')
-            return 0
-        p.ignoreEntity(entities=tuple(seams))
-        log('Stage 2: ignoring %d smooth seams along the beam.' % len(seams))
-        return len(seams)
-
-    best = sweep('stage 1')
-    chosen, stage = best, 1
-    if best is not None and best[0] > 0 and IGNORE_TANGENT_SEAMS:
-        feats_before = set(p.features.keys())
-        n_ign = attempt(ignore_tangent_seams, 'seam ignore (virtual topology)')
-        if n_ign:
-            best2 = sweep('stage 2')
-            if best2 is not None and best2[0] < best[0]:
-                chosen, stage = best2, 2
-            else:
-                new_feats = [f for f in p.features.keys() if f not in feats_before]
-                if attempt(lambda: p.deleteFeatures(tuple(new_feats)) or True,
-                           'undoing the seam ignore') and new_feats:
-                    log('Stage 2 did not help; seam ignore undone.')
-                else:
-                    log('Stage 2 did not help and could not be undone; keeping its best mesh.')
-                    chosen, stage = best2 or best, 2
-    if chosen is None:
-        seed = GLOBAL_SEED
-        for k in range(8):
-            mesh_once(seed, CURV_DEV, 0.1)
-            if len(p.nodes) <= NODE_TARGET:
-                break
-            seed *= 1.15
-    else:
-        nb = mesh_once(chosen[1], chosen[2], chosen[3])
-        log('Kept stage %d mesh: seed %.4f, curvature %.2f, min size %.2f (%d flagged).'
-            % (stage, chosen[1], chosen[2], chosen[3], nb))
-    log('Beam mesh: %d elements, %d nodes (C3D10).' % (len(p.elements), len(p.nodes)))
-elif len(p.elements) == 0 or length_changed:
+        log('Beam meshed (C3D10), seed %.4f in: %d elements, %d nodes.'
+            % (seed, len(p.elements), len(p.nodes)))
+        if len(p.nodes) <= NODE_TARGET:
+            break
+        seed *= 1.15
+        p.deleteMesh()
+        log('  over the %d-node target (licence limit %d); coarsening.'
+            % (NODE_TARGET, NODE_LIMIT))
+elif len(p.elements) == 0:
     p.generateMesh()
 
 n_model_nodes = len(p.nodes) + 3          # + one reference node per roller
@@ -605,14 +369,6 @@ if bad:
           elements=p.elements.sequenceFromLabels(tuple(e.label for e in bad)))
     log('Mesh check: %d of %d elements flagged (part set "MeshWarnElems"). '
         'These are warnings only; the job still runs.' % (len(bad), len(p.elements)))
-    lo_, hi_ = part_box()
-    cx, cy, cz = [0.5 * (lo_[i] + hi_[i]) for i in range(3)]
-    for el in bad[:30]:
-        c = centroid(el)
-        dh = min(math.hypot(c[2] - cz - dz, c[1] - cy - dy) for dz, dy in HOLES)
-        log('  element %d at (x%+.3f, y%+.3f, z%+.3f) from beam centre; %.3f in '
-            'from the nearest hole centre' % (el.label, c[0] - cx, c[1] - cy,
-                                               c[2] - cz, dh))
 elif bad is not None:
     log('Mesh check: no distorted elements.')
 a.regenerate()
@@ -647,56 +403,12 @@ def flange_faces(y):
     raise RuntimeError('No meshed flange face found at y = %.4f in.' % y)
 
 
-FACE_KEYS = {'FACE1': 'face1Elements', 'FACE2': 'face2Elements',
-             'FACE3': 'face3Elements', 'FACE4': 'face4Elements',
-             'FACE5': 'face5Elements', 'FACE6': 'face6Elements'}
+top_faces, n_top = flange_faces(y_top)
+bot_faces, n_bot = flange_faces(y_bot)
+log('Beam contact faces (meshed): top = %d, bottom = %d' % (n_top, n_bot))
 
-
-def flat_mesh_surface(name, y):
-    """Element-based surface made only of the element faces lying on the
-    flat plane y = const (the face a roller touches)."""
-    tol = 1.0e-4
-    try:
-        mfs = beam.elementFaces.getByBoundingBox(
-            xMin=x_min - 0.01, yMin=y - tol, zMin=z_min - 0.01,
-            xMax=x_max + 0.01, yMax=y + tol, zMax=z_max + 0.01)
-    except Exception as err:
-        log('NOTE: mesh-face box search unavailable (%s); scanning faces.' % err)
-        mfs = [f for f in beam.elementFaces
-               if all(abs(nd.coordinates[1] - y) < tol for nd in f.getNodes())]
-    groups = {}
-    for f in mfs:
-        side = str(f.face).upper()
-        key = FACE_KEYS.get(side)
-        if key is None:
-            raise RuntimeError('Unexpected element face id %s.' % side)
-        for el in f.getElements():
-            groups.setdefault(key, set()).add(el.label)
-    if not groups:
-        return 0
-    kw = dict((k, beam.elements.sequenceFromLabels(tuple(sorted(v))))
-              for k, v in groups.items())
-    if name in a.surfaces.keys():
-        del a.surfaces[name]
-    a.Surface(name=name, **kw)
-    return len(mfs)
-
-
-n_top = attempt(lambda: flat_mesh_surface('CS_BeamTop', y_top), 'mesh-face top surface')
-n_bot = attempt(lambda: flat_mesh_surface('CS_BeamBot', y_bot), 'mesh-face bottom surface')
-if n_top and n_bot:
-    log('Beam contact surfaces from the mesh: top %d, bottom %d element faces '
-        '(flat flange planes only).' % (n_top, n_bot))
-else:
-    log('Mesh-face surfaces not available; using geometry faces (v10 method).')
-    top_faces, n_top = flange_faces(y_top)
-    bot_faces, n_bot = flange_faces(y_bot)
-    log('Beam contact faces (meshed): top = %d, bottom = %d' % (n_top, n_bot))
-    for sname in ('CS_BeamTop', 'CS_BeamBot'):
-        if sname in a.surfaces.keys():
-            del a.surfaces[sname]
-    a.Surface(name='CS_BeamTop', side1Faces=top_faces)
-    a.Surface(name='CS_BeamBot', side1Faces=bot_faces)
+a.Surface(name='CS_BeamTop', side1Faces=top_faces)
+a.Surface(name='CS_BeamBot', side1Faces=bot_faces)
 a.Surface(name='CS_' + top.name, side2Faces=top.faces[0:1])
 for inst in bot_insts:
     a.Surface(name='CS_' + inst.name, side2Faces=inst.faces[0:1])
@@ -793,9 +505,6 @@ model.boundaryConditions['TopRoller_Control'].setValuesInStep(
     stepName='Load', u2=-U_TARGET)
 log('Loading: top roller U2 = -%.4f in (displacement control; RF2 = load).' % U_TARGET)
 
-attempt(lambda: model.fieldOutputRequests['F-Output-1'].setValues(
-    numIntervals=FIELD_FRAMES), 'field-output interval')
-
 if 'H-LoadDisp' in model.historyOutputRequests.keys():
     del model.historyOutputRequests['H-LoadDisp']
 model.HistoryOutputRequest(name='H-LoadDisp', createStepName='Load',
@@ -814,10 +523,10 @@ n_cpu = max(1, min(NUM_CPUS, n_cpu))
 try:
     mdb.Job(name=JOB_NAME, model=model_name, type=ANALYSIS, resultsFormat=ODB,
             numCpus=n_cpu, numDomains=n_cpu, memory=90, memoryUnits=PERCENTAGE,
-            description='Repaired 3-point bend model (fix_ProjectBeam v11)')
+            description='Repaired 3-point bend model (fix_ProjectBeam v1)')
 except Exception:
     mdb.Job(name=JOB_NAME, model=model_name, type=ANALYSIS, numCpus=1,
-            description='Repaired 3-point bend model (fix_ProjectBeam v11)')
+            description='Repaired 3-point bend model (fix_ProjectBeam v1)')
     n_cpu = 1
 log('Job "%s" created (%d CPU%s).' % (JOB_NAME, n_cpu, '' if n_cpu == 1 else 's'))
 
@@ -834,6 +543,5 @@ if SUBMIT_JOB:
     log('Job "%s" submitted; watch it in Job Manager > Monitor.' % JOB_NAME)
 else:
     log('Submit job "%s" from Job Manager when ready.' % JOB_NAME)
-log('Done.  After the run: run FOS_ProjectBeam_v2.py for the factor of safety; open %s.odb' % JOB_NAME + ', Plot > Contours > On Deformed '
-    'Shape (Options > Common: deformation scale factor 10 to see the bending); '
-    'plot history RF2 vs U2 at RP_TopRoller for the load-deflection curve.')
+log('Done.  After the run, plot history output RF2 vs U2 at RP_TopRoller for the '
+    'load-deflection curve (0.02 in offset check).')

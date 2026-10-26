@@ -56,7 +56,7 @@ abaqus/
     ├── Stock1_Notched_v1.py        Notched Stock 1 design + job
     ├── Stock1_Plain_v1.py          Plain Stock 1 + job
     ├── FOS_ProjectBeam_v3.py       Offset-method FoS for every .odb in the work directory
-    └── fix_ProjectBeam_v11.py      Stock 3 repair and meshing script (reference)
+    └── fix_history/                Every repair script, renumbered v1–v5, plus FOS v1–v2 (see its README)
 results/
 ├── Stock1_Notched/                 FoS 1.64, 0.957 lb: load–displacement plot, CSV, FoS table
 └── Stock3_Beam_8p2in/              FoS 3.55, over the weight limit: plot, CSV, FoS summary
