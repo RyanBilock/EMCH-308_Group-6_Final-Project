@@ -31,63 +31,16 @@ Finite element design and validation of an 8" × 3" I-beam for EMCH 308 (Introdu
 - Two steel support rollers, Ø0.394", 8" center-to-center
 - Loaded to 6,250 lbf; FoS checked against a 0.02" offset line from the linear-elastic load–displacement response
 
-## Repository contents
-
-| Folder | Contents |
-|---|---|
-| `abaqus/` | `.cae` model, `.jnl` journal, and `.odb` results for the final simulation |
-| `abaqus/python/` | Python scripts for model setup and post-processing |
-| `cad/` | `.step` model and PDF manufacturing drawing (revision-controlled, e.g. `USC06_MTC06_IBeam_RevA.step`) |
-| `results/` | Load–displacement plots comparing simulation and experiment |
-| `report/` | Final report: modeling approach, element selection, mesh study, and test comparison |
-| `cost/` | Course cost sheet filled in for the final design |
-| `Blackboard Files/` | Course reference documents: project statement, rubric, communication guide, and cost sheet |
-
-### Current files
-
-```
-abaqus/
-├── ProjectBeam.cae / .jnl          Original model (rollers, material); the scripts open it
-├── Baseline_Stock1.cae / .jnl      Standard Stock 1 beam, 8.2 in, required holes only
-├── Stock1_Drilled_v2.cae / .jnl    FINAL DESIGN model: Stock 1, 28 drilled flange holes
-├── Stock1_Drilled_v2/              Final design job (.cae with job, .jnl, .inp)
-├── Stock1_Drilled.cae / .jnl       Drilled v1 model (superseded)
-├── Stock1_Drilled/                 Drilled v1 job (.cae, .jnl, .inp)
-├── Stock1_Notched/                 Notched-flange job (.cae, .jnl, .inp)
-└── python/
-    ├── Stock1_Drilled_v2.py        Builds the final design and submits its job
-    ├── FOS_Stock1_Drilled_v2.py    FoS, exact curved-element weight, first-yield location
-    ├── Baseline_Stock1_v1.py       Rebuilds Baseline_Stock1.cae (no extra cutouts)
-    ├── Stock1_Drilled_v1.py        Drilled v1 model (superseded)
-    ├── Stock1_Drilled_Job_v1.py    Job script for drilled v1
-    ├── FOS_Stock1_Drilled_v1.py    FoS for drilled v1 (straight-tet weight, superseded)
-    ├── Stock1_Notched_v1.py        Notched Stock 1 design + job
-    ├── Stock1_Plain_v1.py          Plain Stock 1 + job
-    ├── FOS_ProjectBeam_v3.py       Offset-method FoS for every .odb in the work directory
-    └── fix_history/                Every repair script, renumbered v1–v5, plus FOS v1–v2 (see its README)
-results/
-├── Stock1_Drilled_v2/              FINAL: FoS 1.625, 0.993 lb — plot, CSV, FoS report
-├── Stock1_Drilled/                 Drilled v1: FoS 1.246 (fails) — plot, CSV, FoS report
-├── Stock1_Notched/                 FoS 1.64, 0.957 lb — plot, CSV, FoS table
-└── Stock3_Beam_8p2in/              FoS 3.55, over the weight limit — plot, CSV, FoS summary
-cad/
-└── concept_drawings/               Hole_Layout_Stock1_Drilled_v2.png (final layout); older
-                                    material-removal and cost-plan drawings (superseded)
-cost/
-└── ProjectCostSheet_Stock1_Drilled_v2.xlsx   Course cost sheet filled in for the final design
-```
-
-**Running the scripts:** in Abaqus/CAE, set the work directory to the folder holding `ProjectBeam.cae` (`abaqus/`), then use **File → Run Script** on a file in `abaqus/python/`. `Stock1_Drilled_v2.py` writes its job into `Stock1_Drilled_v2/`; `FOS_Stock1_Drilled_v2.py` finds the `.odb` from anywhere in the project and writes to `results/Stock1_Drilled_v2/`.
-
-**Not on GitHub:** the `.odb` result files (314–398 MB) are over GitHub's 100 MB file limit and stay on the team's project drive; each can be regenerated from the `.inp` in its job folder. Superseded scripts and models live in a local `archive/` folder.
-
-### Final design: Stock 1 drilled v2
+## Final design: Stock 1 drilled v2
 
 - **Stock:** Stock 1, AA I 3 × 2.03 (6061), cut to 8.20 in
 - **Holes:** 4 × Ø1.00 Fig. 1 web holes (required) + 28 × Ø25/32 (0.78125) flange holes, drill thru, centred ±0.7875 from the web
   - Top flange: z = ±1.30, ±2.18, ±3.06 in from mid-span (12 holes)
   - Bottom flange: z = ±0.44, ±1.32, ±2.20, ±3.08 in from mid-span (16 holes)
+- **Drawing:** [`cad/drawings/Hole_Layout_Stock1_Drilled_v2.png`](cad/drawings/Hole_Layout_Stock1_Drilled_v2.png)
 - **No milling, no extra web holes.** Holes are kept clear of the load roller and the supports, where the web yields first.
+
+![Final hole layout](cad/drawings/Hole_Layout_Stock1_Drilled_v2.png)
 
 | Requirement | Limit | Final design | |
 |---|---|---|---|
@@ -95,7 +48,7 @@ cost/
 | FoS (offset method, 0.02 in) | ≥ 1.25 | 1.625 (P_offset = 8,123 lbf) | Pass |
 | Cost (course cost sheet) | ≤ $600 | $143.47 | Pass |
 
-**Cost breakdown** (from `ProjectCostSheet_F26_Deployable.xlsx` formulas):
+**Cost breakdown** (course cost-sheet formulas; filled-in sheet: [`cost/ProjectCostSheet_Stock1_Drilled_v2.xlsx`](cost/ProjectCostSheet_Stock1_Drilled_v2.xlsx)):
 
 | Item | Calculation | Cost |
 |---|---|---|
@@ -106,13 +59,52 @@ cost/
 
 If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005 in), add facing both ends: (0.5 + 0.04 × 2) h × $250/h = $145.00, for a total of $288.47 — still under $600.
 
-### Design history
+## Repository layout
+
+```
+├── abaqus/
+│   ├── base_models/            ProjectBeam.cae (original model: rollers, material) · Baseline_Stock1.cae
+│   ├── final_design/           Stock1_Drilled_v2.cae / .jnl  (final model)
+│   │   └── job/                Stock1_Drilled_v2 job: .cae with job, .jnl, .inp
+│   ├── iterations/
+│   │   ├── Stock1_Notched/     .cae, .jnl, .inp
+│   │   └── Stock1_Drilled_v1/  model .cae / .jnl  +  job/ (.cae, .jnl, .inp)
+│   └── python/
+│       ├── final/              Stock1_Drilled_v2.py (builds final model + job) · FOS_Stock1_Drilled_v2.py
+│       ├── tools/              Baseline_Stock1_v1.py · FOS_ProjectBeam_v3.py (FoS for any .odb)
+│       ├── iterations/         Scripts for the notched, plain and drilled v1 designs
+│       └── fix_history/        Repair scripts for the original model, v1–v5 (see its README)
+├── results/
+│   ├── Design_Comparison.png   All four Abaqus load–displacement curves
+│   ├── final_design/           Stock 1 drilled v2: FoS report, CSV, plot
+│   └── iterations/             Stock3_Beam_8p2in · Stock1_Notched · Stock1_Drilled_v1
+├── cad/
+│   ├── drawings/               Hole_Layout_Stock1_Drilled_v2.png (final hole layout)
+│   └── concept_drawings/       Earlier material-removal and cost-plan concepts (superseded)
+├── cost/                       Course cost sheet filled in for the final design
+├── report/                     Final report (to come)
+└── Blackboard Files/           Course documents: project statement, rubric, guide, blank cost sheet
+```
+
+**Not on GitHub:** the `.odb` result files (300+ MB each) are over GitHub's 100 MB file limit. They stay on the team's project drive and can be regenerated from the `.inp` in each job folder.
+
+## Running the models
+
+1. In Abaqus/CAE, **File → Set Work Directory** → `abaqus/base_models/` (the folder holding `ProjectBeam.cae`).
+2. **File → Run Script** → `abaqus/python/final/Stock1_Drilled_v2.py`. It builds the final beam, saves `Stock1_Drilled_v2.cae`, and submits the job in a `Stock1_Drilled_v2/` folder next to it (about 30 min).
+3. When the job shows *Completed*, **Run Script** → `abaqus/python/final/FOS_Stock1_Drilled_v2.py`. It finds the `.odb`, reports weight, FoS, cost and where the beam yields first, and saves a report, CSV and plot.
+
+Scripts write their output next to `ProjectBeam.cae`; move the finished model and job into `abaqus/final_design/` to match this layout.
+
+## Design history
+
+![Design comparison](results/Design_Comparison.png)
 
 | Design | Weight (lb) | FoS | Cost | Status |
 |---|---|---|---|---|
-| Stock 3, required holes only | 1.68 | 3.55 | — | Too heavy |
-| Stock 1, notched flanges | 0.957 | 1.64 | over $600 (milling) | Meets weight and FoS, cost too high |
-| Stock 1, drilled v1 (32 flange + 2 web holes, milled end reliefs) | 0.993 | 1.246 | $510 | Fails FoS (web yields around the extra web holes) |
+| Stock 3, required holes only | 1.68 | 3.545 | — | Too heavy |
+| Stock 1, notched flanges | 0.957 | 1.637 | over $600 (milling) | Meets weight and FoS, cost too high |
+| Stock 1, drilled v1 (32 flange + 2 web holes, milled end reliefs) | 0.993 | 1.246 | $510 | Fails FoS: the web yields around the extra web holes |
 | **Stock 1, drilled v2 (28 × Ø25/32 flange holes)** | **0.993** | **1.625** | **$143.47** | **Final: meets all three** |
 
 ## Tools

@@ -2,7 +2,7 @@
 
 Every version of the scripts that repaired the original `ProjectBeam.cae` model (Stock 3 I-beam) and computed its factor of safety (FoS). The scripts were renumbered into a clean sequence. Each file's header gives the name it was first delivered under.
 
-The current scripts are one folder up in `abaqus/python/`. The Stock 1 scripts there are built on `fix_ProjectBeam_v5.py`.
+The current scripts are in `abaqus/python/final/` (final design), `tools/` and `iterations/`. The Stock 1 scripts are built on `fix_ProjectBeam_v5.py`.
 
 ## Model repair: `fix_ProjectBeam_v1` → `v5`
 
@@ -20,6 +20,6 @@ The current scripts are one folder up in `abaqus/python/`. The Stock 1 scripts t
 |---|---|---|
 | `FOS_ProjectBeam_v1.py` | `Beam_Fixed.odb` | Offset-method FoS (0.02 in offset) for the first repaired model |
 | `FOS_ProjectBeam_v2.py` | `Beam_8p2in.odb` | Same method for the 8.2 in beam, with a length check |
-| `FOS_ProjectBeam_v3.py` | every `.odb` in the work directory | Comparison table, weight from the mesh, CSV per job, overlay plot. Current version: lives in `abaqus/python/` |
+| `FOS_ProjectBeam_v3.py` | every `.odb` in the work directory | Comparison table, weight from the mesh, CSV per job, overlay plot. Current version: lives in `abaqus/python/tools/` |
 
 Versions before `v1` were overwritten during development and no longer exist.
