@@ -65,11 +65,14 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 
 ```
 ├── abaqus/
-│   ├── base_models/            ProjectBeam.cae (original model: rollers, material) · Baseline_Stock1.cae
+│   ├── base_models/            ProjectBeam.cae (original model: rollers, material) · Baseline_Stock1.cae ·
+│   │                           ProjectBeam_fixed.cae (original model after the fix_history repairs)
 │   ├── final_design/           Stock1_Drilled_v2.cae / .jnl  (final model)
 │   │   └── job/                Stock1_Drilled_v2 job: .cae with job, .jnl, .inp, .odb (Git LFS)
 │   ├── iterations/
-│   │   ├── Stock3_Beam_8p2in/  .inp (Stock 3, 8.2 in Rev A design)
+│   │   ├── Stock3_Beam_8p2in/  Beam_8p2in.inp (Stock 3, 8.2 in Rev A design; source of the Stock 3 results) ·
+│   │   │                       Beam_8p2in_v10_refined.inp (finer mesh, fix_ProjectBeam v10; no results)
+│   │   ├── Stock1_Plain/       .cae, .jnl, .inp (Stock 1, no material removed)
 │   │   ├── Stock1_Notched/     .cae, .jnl, .inp
 │   │   └── Stock1_Drilled_v1/  model .cae / .jnl  +  job/ (.cae, .jnl, .inp)
 │   └── python/
