@@ -29,7 +29,6 @@ Everything for the final beam in one place. These are **copies**: each file also
 | | `Stock1_Drilled_v2_LoadDisp.png` | Load–displacement plot | `results/final_design/` |
 | | `Design_Comparison.png` | All design iterations compared | `results/` |
 | `Drawings/` | `USC06_MTC06_IBeam_RevB_Drawing.pdf` + `_sheet1/2.png` | Manufacturing drawing for MTC (2 sheets) | `cad/` |
-| | `USC06_MTC06_IBeam_RevB_Drawing_GDT_version.pdf` / `.png` | Same drawing with geometric dimensioning and tolerancing (GD&T) | `cad/drawings/` |
 | | `Design_Sheet_Stock1_Drilled_v2.pdf` / `.png` | One-page design sheet: views, dimensions, cost, FoS, weight | `cad/drawings/` |
 | | `Hole_Layout_Stock1_Drilled_v2.png` | Hole positions | `cad/drawings/` |
 | `CAD/` | `USC06_MTC06_IBeam_RevB.step` | 3D model for MTC (inches) | `cad/` |
