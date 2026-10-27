@@ -76,10 +76,10 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 │   │   ├── Stock1_Notched/     .cae, .jnl, .inp
 │   │   └── Stock1_Drilled_v1/  model .cae / .jnl  +  job/ (.cae, .jnl, .inp)
 │   └── python/
-│       ├── final/              Stock1_Drilled_v2.py (builds final model + job) · FOS_Stock1_Drilled_v2.py ·
+│       ├── final/              Stock1_Drilled_v2.py (builds final model + job) · FOS_Stock1_Drilled_v3.py ·
 │       │                       Export_STEP_v3.py (writes cad/USC06_MTC06_IBeam_RevB.step, labelled in inches)
 │       ├── tools/              Baseline_Stock1_v1.py · FOS_ProjectBeam_v3.py (FoS for any .odb)
-│       ├── iterations/         Scripts for the notched, plain and drilled v1 designs
+│       ├── iterations/         Scripts for the notched, plain and drilled v1 designs · FOS_Stock1_Drilled_v2.py (superseded)
 │       └── fix_history/        Repair scripts for the original model, v1–v5 (see its README)
 ├── results/
 │   ├── Design_Comparison.png   All four Abaqus load–displacement curves
@@ -97,7 +97,7 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 └── Organize_Project_v4.py      One-time script that tidied the project drive into this layout
 ```
 
-**Final design results (`.odb`):** `abaqus/final_design/job/Stock1_Drilled_v2.odb` (314 MB) is stored with [Git Large File Storage (LFS)](https://git-lfs.com), since it is over GitHub's 100 MB file limit. Install Git LFS once (`git lfs install`) before cloning, or run `git lfs pull` in an existing clone, to download the real file instead of a small pointer. Open it in Abaqus/CAE or run `FOS_Stock1_Drilled_v2.py` on it directly — no need to re-run the 30-minute job.
+**Final design results (`.odb`):** `abaqus/final_design/job/Stock1_Drilled_v2.odb` (314 MB) is stored with [Git Large File Storage (LFS)](https://git-lfs.com), since it is over GitHub's 100 MB file limit. Install Git LFS once (`git lfs install`) before cloning, or run `git lfs pull` in an existing clone, to download the real file instead of a small pointer. Open it in Abaqus/CAE or run `FOS_Stock1_Drilled_v3.py` on it directly — no need to re-run the 30-minute job.
 
 **Not on GitHub:** the iteration `.odb` files (50–540 MB each). They stay on the team's project drive and can be regenerated from the `.inp` in each job folder.
 
@@ -105,7 +105,7 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 
 1. In Abaqus/CAE, **File → Set Work Directory** → `abaqus/base_models/` (the folder holding `ProjectBeam.cae`).
 2. **File → Run Script** → `abaqus/python/final/Stock1_Drilled_v2.py`. It builds the final beam, saves `Stock1_Drilled_v2.cae`, and submits the job in a `Stock1_Drilled_v2/` folder next to it (about 30 min).
-3. When the job shows *Completed*, **Run Script** → `abaqus/python/final/FOS_Stock1_Drilled_v2.py`. It finds the `.odb`, reports weight, FoS, cost and where the beam yields first, and saves a report, CSV and plot.
+3. When the job shows *Completed*, **Run Script** → `abaqus/python/final/FOS_Stock1_Drilled_v3.py`. It finds the `.odb` from any work directory in the repo (a fresh run first, then `abaqus/final_design/job/`), reports weight, FoS, cost and where the beam yields first, and saves a report, CSV and plot to `results/final_design/`. (`Stock1_Drilled_v2.py` still prints "run FOS_Stock1_Drilled_v2.py" when its job finishes; use v3, which replaced it.)
 
 4. To make the STEP file for manufacturing: set the work directory to the project folder and **Run Script** → `abaqus/python/final/Export_STEP_v3.py`. It exports only the `Beam` part to `cad/USC06_MTC06_IBeam_RevB.step` (Rev B: Rev A was the Stock 3 package already sent to MTC) after checking its size, volume and holes. The file is labelled in inches, so CAD programs import it at the right size; check one dimension after import.
 
