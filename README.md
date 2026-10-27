@@ -63,7 +63,10 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 
 ## Repository layout
 
+**Looking for the final design?** Everything for it (model, job, `.odb`, FoS report, drawings, STEP, cost sheet, scripts) is copied into [`Final_Design/`](Final_Design/). The originals stay in the folders below.
+
 ```
+├── Final_Design/               Copies of every final-design file in one place (see its README)
 ├── abaqus/
 │   ├── base_models/            ProjectBeam.cae (original model: rollers, material) · Baseline_Stock1.cae ·
 │   │                           ProjectBeam_fixed.cae (original model after the fix_history repairs)

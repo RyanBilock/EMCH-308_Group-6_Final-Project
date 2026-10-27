@@ -1,0 +1,1194 @@
+# -*- coding: mbcs -*-
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models.changeKey(fromName='Model-1', toName='Project')
+mdb.models['Project'].ConstrainedSketch(name='__profile__', sheetSize=20.0)
+del mdb.models['Project'].sketches['__profile__']
+mdb.openDxf('C:/Users/dierdorf/8003K113_Multipurpose 6061 Aluminum I-Beam.DXF', 
+    scaleFromFile=OFF)
+mdb.models['Project'].ConstrainedSketchFromGeometryFile(geometryFile=mdb.acis, 
+    name='P8003K113_Multipurpose 6061 Alum')
+mdb.models['Project'].ConstrainedSketch(name='__profile__', sheetSize=20.0)
+mdb.models['Project'].sketches['__profile__'].sketchOptions.setValues(
+    gridOrigin=(7.28953494131565, 5.63282240927219))
+mdb.models['Project'].sketches['__profile__'].retrieveSketch(sketch=
+    mdb.models['Project'].sketches['P8003K113_Multipurpose 6061 Alum'])
+mdb.models['Project'].sketches['__profile__'].delete(objectList=(
+    mdb.models['Project'].sketches['__profile__'].geometry[4], 
+    mdb.models['Project'].sketches['__profile__'].geometry[5], 
+    mdb.models['Project'].sketches['__profile__'].geometry[6], 
+    mdb.models['Project'].sketches['__profile__'].geometry[7], 
+    mdb.models['Project'].sketches['__profile__'].geometry[8], 
+    mdb.models['Project'].sketches['__profile__'].geometry[9], 
+    mdb.models['Project'].sketches['__profile__'].geometry[10], 
+    mdb.models['Project'].sketches['__profile__'].geometry[11], 
+    mdb.models['Project'].sketches['__profile__'].geometry[12], 
+    mdb.models['Project'].sketches['__profile__'].geometry[13], 
+    mdb.models['Project'].sketches['__profile__'].geometry[14], 
+    mdb.models['Project'].sketches['__profile__'].geometry[15], 
+    mdb.models['Project'].sketches['__profile__'].geometry[16], 
+    mdb.models['Project'].sketches['__profile__'].geometry[17], 
+    mdb.models['Project'].sketches['__profile__'].geometry[18], 
+    mdb.models['Project'].sketches['__profile__'].geometry[19], 
+    mdb.models['Project'].sketches['__profile__'].geometry[20], 
+    mdb.models['Project'].sketches['__profile__'].geometry[21], 
+    mdb.models['Project'].sketches['__profile__'].geometry[22], 
+    mdb.models['Project'].sketches['__profile__'].geometry[23], 
+    mdb.models['Project'].sketches['__profile__'].geometry[24], 
+    mdb.models['Project'].sketches['__profile__'].geometry[25], 
+    mdb.models['Project'].sketches['__profile__'].geometry[26], 
+    mdb.models['Project'].sketches['__profile__'].geometry[27], 
+    mdb.models['Project'].sketches['__profile__'].geometry[28], 
+    mdb.models['Project'].sketches['__profile__'].geometry[29], 
+    mdb.models['Project'].sketches['__profile__'].geometry[30], 
+    mdb.models['Project'].sketches['__profile__'].geometry[31], 
+    mdb.models['Project'].sketches['__profile__'].geometry[32], 
+    mdb.models['Project'].sketches['__profile__'].geometry[33], 
+    mdb.models['Project'].sketches['__profile__'].geometry[34], 
+    mdb.models['Project'].sketches['__profile__'].geometry[35], 
+    mdb.models['Project'].sketches['__profile__'].geometry[36], 
+    mdb.models['Project'].sketches['__profile__'].geometry[37], 
+    mdb.models['Project'].sketches['__profile__'].geometry[38], 
+    mdb.models['Project'].sketches['__profile__'].geometry[39], 
+    mdb.models['Project'].sketches['__profile__'].geometry[40], 
+    mdb.models['Project'].sketches['__profile__'].geometry[41], 
+    mdb.models['Project'].sketches['__profile__'].geometry[42], 
+    mdb.models['Project'].sketches['__profile__'].geometry[43], 
+    mdb.models['Project'].sketches['__profile__'].geometry[44], 
+    mdb.models['Project'].sketches['__profile__'].geometry[45], 
+    mdb.models['Project'].sketches['__profile__'].geometry[46], 
+    mdb.models['Project'].sketches['__profile__'].geometry[47], 
+    mdb.models['Project'].sketches['__profile__'].geometry[48], 
+    mdb.models['Project'].sketches['__profile__'].geometry[49], 
+    mdb.models['Project'].sketches['__profile__'].geometry[50], 
+    mdb.models['Project'].sketches['__profile__'].geometry[51], 
+    mdb.models['Project'].sketches['__profile__'].geometry[52], 
+    mdb.models['Project'].sketches['__profile__'].geometry[53], 
+    mdb.models['Project'].sketches['__profile__'].geometry[54], 
+    mdb.models['Project'].sketches['__profile__'].geometry[55], 
+    mdb.models['Project'].sketches['__profile__'].geometry[56], 
+    mdb.models['Project'].sketches['__profile__'].geometry[57], 
+    mdb.models['Project'].sketches['__profile__'].geometry[58], 
+    mdb.models['Project'].sketches['__profile__'].geometry[59], 
+    mdb.models['Project'].sketches['__profile__'].geometry[60], 
+    mdb.models['Project'].sketches['__profile__'].geometry[61], 
+    mdb.models['Project'].sketches['__profile__'].geometry[62], 
+    mdb.models['Project'].sketches['__profile__'].geometry[63], 
+    mdb.models['Project'].sketches['__profile__'].geometry[64], 
+    mdb.models['Project'].sketches['__profile__'].geometry[65], 
+    mdb.models['Project'].sketches['__profile__'].geometry[66], 
+    mdb.models['Project'].sketches['__profile__'].geometry[67], 
+    mdb.models['Project'].sketches['__profile__'].geometry[68], 
+    mdb.models['Project'].sketches['__profile__'].geometry[69], 
+    mdb.models['Project'].sketches['__profile__'].geometry[70], 
+    mdb.models['Project'].sketches['__profile__'].geometry[71], 
+    mdb.models['Project'].sketches['__profile__'].geometry[72], 
+    mdb.models['Project'].sketches['__profile__'].geometry[73], 
+    mdb.models['Project'].sketches['__profile__'].geometry[74], 
+    mdb.models['Project'].sketches['__profile__'].geometry[75], 
+    mdb.models['Project'].sketches['__profile__'].geometry[76], 
+    mdb.models['Project'].sketches['__profile__'].geometry[77], 
+    mdb.models['Project'].sketches['__profile__'].geometry[78], 
+    mdb.models['Project'].sketches['__profile__'].geometry[79], 
+    mdb.models['Project'].sketches['__profile__'].geometry[80], 
+    mdb.models['Project'].sketches['__profile__'].geometry[81], 
+    mdb.models['Project'].sketches['__profile__'].geometry[82], 
+    mdb.models['Project'].sketches['__profile__'].geometry[83], 
+    mdb.models['Project'].sketches['__profile__'].geometry[84], 
+    mdb.models['Project'].sketches['__profile__'].geometry[85], 
+    mdb.models['Project'].sketches['__profile__'].geometry[86], 
+    mdb.models['Project'].sketches['__profile__'].geometry[87], 
+    mdb.models['Project'].sketches['__profile__'].geometry[88], 
+    mdb.models['Project'].sketches['__profile__'].geometry[89], 
+    mdb.models['Project'].sketches['__profile__'].geometry[90], 
+    mdb.models['Project'].sketches['__profile__'].geometry[91], 
+    mdb.models['Project'].sketches['__profile__'].geometry[92], 
+    mdb.models['Project'].sketches['__profile__'].geometry[93], 
+    mdb.models['Project'].sketches['__profile__'].geometry[94], 
+    mdb.models['Project'].sketches['__profile__'].geometry[95], 
+    mdb.models['Project'].sketches['__profile__'].geometry[96], 
+    mdb.models['Project'].sketches['__profile__'].geometry[97], 
+    mdb.models['Project'].sketches['__profile__'].geometry[98], 
+    mdb.models['Project'].sketches['__profile__'].geometry[99], 
+    mdb.models['Project'].sketches['__profile__'].geometry[100], 
+    mdb.models['Project'].sketches['__profile__'].geometry[101], 
+    mdb.models['Project'].sketches['__profile__'].geometry[102], 
+    mdb.models['Project'].sketches['__profile__'].geometry[103], 
+    mdb.models['Project'].sketches['__profile__'].geometry[104], 
+    mdb.models['Project'].sketches['__profile__'].geometry[105], 
+    mdb.models['Project'].sketches['__profile__'].geometry[106], 
+    mdb.models['Project'].sketches['__profile__'].geometry[107], 
+    mdb.models['Project'].sketches['__profile__'].geometry[108], 
+    mdb.models['Project'].sketches['__profile__'].geometry[109], 
+    mdb.models['Project'].sketches['__profile__'].geometry[110], 
+    mdb.models['Project'].sketches['__profile__'].geometry[111], 
+    mdb.models['Project'].sketches['__profile__'].geometry[112], 
+    mdb.models['Project'].sketches['__profile__'].geometry[113], 
+    mdb.models['Project'].sketches['__profile__'].geometry[114], 
+    mdb.models['Project'].sketches['__profile__'].geometry[115], 
+    mdb.models['Project'].sketches['__profile__'].geometry[116], 
+    mdb.models['Project'].sketches['__profile__'].geometry[117], 
+    mdb.models['Project'].sketches['__profile__'].geometry[118], 
+    mdb.models['Project'].sketches['__profile__'].geometry[119], 
+    mdb.models['Project'].sketches['__profile__'].geometry[120], 
+    mdb.models['Project'].sketches['__profile__'].geometry[121], 
+    mdb.models['Project'].sketches['__profile__'].geometry[122], 
+    mdb.models['Project'].sketches['__profile__'].geometry[123], 
+    mdb.models['Project'].sketches['__profile__'].geometry[124], 
+    mdb.models['Project'].sketches['__profile__'].geometry[125], 
+    mdb.models['Project'].sketches['__profile__'].geometry[126], 
+    mdb.models['Project'].sketches['__profile__'].geometry[127], 
+    mdb.models['Project'].sketches['__profile__'].geometry[128], 
+    mdb.models['Project'].sketches['__profile__'].geometry[129], 
+    mdb.models['Project'].sketches['__profile__'].geometry[130], 
+    mdb.models['Project'].sketches['__profile__'].geometry[131], 
+    mdb.models['Project'].sketches['__profile__'].geometry[132], 
+    mdb.models['Project'].sketches['__profile__'].geometry[133], 
+    mdb.models['Project'].sketches['__profile__'].geometry[134], 
+    mdb.models['Project'].sketches['__profile__'].geometry[135], 
+    mdb.models['Project'].sketches['__profile__'].geometry[136], 
+    mdb.models['Project'].sketches['__profile__'].geometry[137], 
+    mdb.models['Project'].sketches['__profile__'].geometry[138], 
+    mdb.models['Project'].sketches['__profile__'].geometry[139], 
+    mdb.models['Project'].sketches['__profile__'].geometry[140], 
+    mdb.models['Project'].sketches['__profile__'].geometry[141], 
+    mdb.models['Project'].sketches['__profile__'].geometry[142], 
+    mdb.models['Project'].sketches['__profile__'].geometry[143], 
+    mdb.models['Project'].sketches['__profile__'].geometry[144], 
+    mdb.models['Project'].sketches['__profile__'].geometry[145], 
+    mdb.models['Project'].sketches['__profile__'].geometry[146], 
+    mdb.models['Project'].sketches['__profile__'].geometry[147], 
+    mdb.models['Project'].sketches['__profile__'].geometry[148], 
+    mdb.models['Project'].sketches['__profile__'].geometry[149], 
+    mdb.models['Project'].sketches['__profile__'].geometry[150], 
+    mdb.models['Project'].sketches['__profile__'].geometry[151], 
+    mdb.models['Project'].sketches['__profile__'].geometry[152], 
+    mdb.models['Project'].sketches['__profile__'].geometry[153], 
+    mdb.models['Project'].sketches['__profile__'].geometry[154], 
+    mdb.models['Project'].sketches['__profile__'].geometry[155], 
+    mdb.models['Project'].sketches['__profile__'].geometry[156], 
+    mdb.models['Project'].sketches['__profile__'].geometry[157], 
+    mdb.models['Project'].sketches['__profile__'].geometry[158], 
+    mdb.models['Project'].sketches['__profile__'].geometry[159], 
+    mdb.models['Project'].sketches['__profile__'].geometry[160], 
+    mdb.models['Project'].sketches['__profile__'].geometry[161], 
+    mdb.models['Project'].sketches['__profile__'].geometry[162], 
+    mdb.models['Project'].sketches['__profile__'].geometry[163], 
+    mdb.models['Project'].sketches['__profile__'].geometry[164], 
+    mdb.models['Project'].sketches['__profile__'].geometry[165], 
+    mdb.models['Project'].sketches['__profile__'].geometry[166], 
+    mdb.models['Project'].sketches['__profile__'].geometry[167], 
+    mdb.models['Project'].sketches['__profile__'].geometry[168], 
+    mdb.models['Project'].sketches['__profile__'].geometry[169], 
+    mdb.models['Project'].sketches['__profile__'].geometry[170], 
+    mdb.models['Project'].sketches['__profile__'].geometry[171], 
+    mdb.models['Project'].sketches['__profile__'].geometry[172], 
+    mdb.models['Project'].sketches['__profile__'].geometry[173], 
+    mdb.models['Project'].sketches['__profile__'].geometry[174], 
+    mdb.models['Project'].sketches['__profile__'].geometry[175], 
+    mdb.models['Project'].sketches['__profile__'].geometry[176], 
+    mdb.models['Project'].sketches['__profile__'].geometry[177], 
+    mdb.models['Project'].sketches['__profile__'].geometry[178], 
+    mdb.models['Project'].sketches['__profile__'].geometry[179], 
+    mdb.models['Project'].sketches['__profile__'].geometry[180], 
+    mdb.models['Project'].sketches['__profile__'].geometry[181], 
+    mdb.models['Project'].sketches['__profile__'].geometry[182], 
+    mdb.models['Project'].sketches['__profile__'].geometry[183], 
+    mdb.models['Project'].sketches['__profile__'].geometry[184], 
+    mdb.models['Project'].sketches['__profile__'].geometry[185], 
+    mdb.models['Project'].sketches['__profile__'].geometry[186], 
+    mdb.models['Project'].sketches['__profile__'].geometry[187], 
+    mdb.models['Project'].sketches['__profile__'].geometry[188], 
+    mdb.models['Project'].sketches['__profile__'].geometry[189], 
+    mdb.models['Project'].sketches['__profile__'].geometry[190], 
+    mdb.models['Project'].sketches['__profile__'].geometry[191], 
+    mdb.models['Project'].sketches['__profile__'].geometry[192], 
+    mdb.models['Project'].sketches['__profile__'].geometry[193], 
+    mdb.models['Project'].sketches['__profile__'].geometry[194], 
+    mdb.models['Project'].sketches['__profile__'].geometry[195], 
+    mdb.models['Project'].sketches['__profile__'].geometry[196], 
+    mdb.models['Project'].sketches['__profile__'].geometry[197], 
+    mdb.models['Project'].sketches['__profile__'].geometry[198], 
+    mdb.models['Project'].sketches['__profile__'].geometry[199], 
+    mdb.models['Project'].sketches['__profile__'].geometry[200], 
+    mdb.models['Project'].sketches['__profile__'].geometry[201], 
+    mdb.models['Project'].sketches['__profile__'].geometry[202], 
+    mdb.models['Project'].sketches['__profile__'].geometry[203], 
+    mdb.models['Project'].sketches['__profile__'].geometry[204], 
+    mdb.models['Project'].sketches['__profile__'].geometry[205], 
+    mdb.models['Project'].sketches['__profile__'].geometry[206], 
+    mdb.models['Project'].sketches['__profile__'].geometry[207], 
+    mdb.models['Project'].sketches['__profile__'].geometry[208], 
+    mdb.models['Project'].sketches['__profile__'].geometry[209], 
+    mdb.models['Project'].sketches['__profile__'].geometry[210], 
+    mdb.models['Project'].sketches['__profile__'].geometry[211], 
+    mdb.models['Project'].sketches['__profile__'].geometry[212], 
+    mdb.models['Project'].sketches['__profile__'].geometry[213], 
+    mdb.models['Project'].sketches['__profile__'].geometry[214], 
+    mdb.models['Project'].sketches['__profile__'].geometry[215], 
+    mdb.models['Project'].sketches['__profile__'].geometry[216], 
+    mdb.models['Project'].sketches['__profile__'].geometry[217], 
+    mdb.models['Project'].sketches['__profile__'].geometry[218], 
+    mdb.models['Project'].sketches['__profile__'].geometry[219], 
+    mdb.models['Project'].sketches['__profile__'].geometry[220], 
+    mdb.models['Project'].sketches['__profile__'].geometry[221], 
+    mdb.models['Project'].sketches['__profile__'].geometry[222], 
+    mdb.models['Project'].sketches['__profile__'].geometry[223], 
+    mdb.models['Project'].sketches['__profile__'].geometry[224], 
+    mdb.models['Project'].sketches['__profile__'].geometry[225], 
+    mdb.models['Project'].sketches['__profile__'].geometry[226], 
+    mdb.models['Project'].sketches['__profile__'].geometry[227], 
+    mdb.models['Project'].sketches['__profile__'].geometry[228], 
+    mdb.models['Project'].sketches['__profile__'].geometry[229], 
+    mdb.models['Project'].sketches['__profile__'].geometry[230], 
+    mdb.models['Project'].sketches['__profile__'].geometry[231], 
+    mdb.models['Project'].sketches['__profile__'].geometry[232], 
+    mdb.models['Project'].sketches['__profile__'].geometry[233], 
+    mdb.models['Project'].sketches['__profile__'].geometry[234], 
+    mdb.models['Project'].sketches['__profile__'].geometry[235], 
+    mdb.models['Project'].sketches['__profile__'].geometry[236], 
+    mdb.models['Project'].sketches['__profile__'].geometry[237], 
+    mdb.models['Project'].sketches['__profile__'].geometry[238], 
+    mdb.models['Project'].sketches['__profile__'].geometry[239], 
+    mdb.models['Project'].sketches['__profile__'].geometry[240], 
+    mdb.models['Project'].sketches['__profile__'].geometry[241], 
+    mdb.models['Project'].sketches['__profile__'].geometry[242], 
+    mdb.models['Project'].sketches['__profile__'].geometry[243], 
+    mdb.models['Project'].sketches['__profile__'].geometry[244], 
+    mdb.models['Project'].sketches['__profile__'].geometry[245], 
+    mdb.models['Project'].sketches['__profile__'].geometry[246], 
+    mdb.models['Project'].sketches['__profile__'].geometry[247], 
+    mdb.models['Project'].sketches['__profile__'].geometry[248], 
+    mdb.models['Project'].sketches['__profile__'].geometry[249], 
+    mdb.models['Project'].sketches['__profile__'].geometry[250], 
+    mdb.models['Project'].sketches['__profile__'].geometry[251], 
+    mdb.models['Project'].sketches['__profile__'].geometry[252], 
+    mdb.models['Project'].sketches['__profile__'].geometry[253], 
+    mdb.models['Project'].sketches['__profile__'].geometry[254], 
+    mdb.models['Project'].sketches['__profile__'].geometry[255], 
+    mdb.models['Project'].sketches['__profile__'].geometry[256], 
+    mdb.models['Project'].sketches['__profile__'].geometry[257], 
+    mdb.models['Project'].sketches['__profile__'].geometry[258], 
+    mdb.models['Project'].sketches['__profile__'].geometry[259], 
+    mdb.models['Project'].sketches['__profile__'].geometry[260], 
+    mdb.models['Project'].sketches['__profile__'].geometry[261], 
+    mdb.models['Project'].sketches['__profile__'].geometry[262], 
+    mdb.models['Project'].sketches['__profile__'].geometry[263], 
+    mdb.models['Project'].sketches['__profile__'].geometry[264], 
+    mdb.models['Project'].sketches['__profile__'].geometry[265], 
+    mdb.models['Project'].sketches['__profile__'].geometry[266], 
+    mdb.models['Project'].sketches['__profile__'].geometry[267], 
+    mdb.models['Project'].sketches['__profile__'].geometry[268], 
+    mdb.models['Project'].sketches['__profile__'].geometry[293], 
+    mdb.models['Project'].sketches['__profile__'].geometry[294], 
+    mdb.models['Project'].sketches['__profile__'].geometry[295], 
+    mdb.models['Project'].sketches['__profile__'].geometry[296], 
+    mdb.models['Project'].sketches['__profile__'].geometry[297], 
+    mdb.models['Project'].sketches['__profile__'].geometry[298], 
+    mdb.models['Project'].sketches['__profile__'].geometry[299], 
+    mdb.models['Project'].sketches['__profile__'].geometry[300], 
+    mdb.models['Project'].sketches['__profile__'].geometry[301], 
+    mdb.models['Project'].sketches['__profile__'].geometry[302], 
+    mdb.models['Project'].sketches['__profile__'].geometry[303]))
+mdb.models['Project'].Part(dimensionality=THREE_D, name='Beam', type=
+    DEFORMABLE_BODY)
+mdb.models['Project'].parts['Beam'].BaseSolidExtrude(depth=8.67, sketch=
+    mdb.models['Project'].sketches['__profile__'])
+del mdb.models['Project'].sketches['__profile__']
+mdb.models['Project'].parts['Beam'].features['Solid extrude-1'].setValues(
+    depth=8.5)
+mdb.models['Project'].parts['Beam'].regenerate()
+mdb.models['Project'].parts['Beam'].regenerate()
+mdb.models['Project'].Material(name='Al6061')
+mdb.models['Project'].materials['Al6061'].Elastic(table=((10000.0, 0.33), ))
+mdb.models['Project'].materials['Al6061'].Plastic(scaleStress=None, table=((
+    40.0, 0.0), (45.0, 0.05)))
+mdb.models['Project'].ConstrainedSketch(gridSpacing=0.45, name='__profile__', 
+    sheetSize=18.19, transform=
+    mdb.models['Project'].parts['Beam'].MakeSketchTransform(
+    sketchPlane=mdb.models['Project'].parts['Beam'].faces[2], 
+    sketchPlaneSide=SIDE1, 
+    sketchUpEdge=mdb.models['Project'].parts['Beam'].edges[9], 
+    sketchOrientation=RIGHT, origin=(4.543658, 4.982847, 4.25)))
+mdb.models['Project'].parts['Beam'].projectReferencesOntoSketch(filter=
+    COPLANAR_EDGES, sketch=mdb.models['Project'].sketches['__profile__'])
+mdb.models['Project'].sketches['__profile__'].Spot(point=(0.0, 0.0))
+mdb.models['Project'].sketches['__profile__'].Spot(point=(-4.25, 
+    -1.3299999945815e-07))
+mdb.models['Project'].sketches['__profile__'].CoincidentConstraint(
+    addUndoState=False, entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[5], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[2])
+mdb.models['Project'].sketches['__profile__'].EqualDistanceConstraint(
+    addUndoState=False, entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[0], entity2=
+    mdb.models['Project'].sketches['__profile__'].vertices[1], midpoint=
+    mdb.models['Project'].sketches['__profile__'].vertices[5])
+mdb.models['Project'].sketches['__profile__'].Spot(point=(0.0, 1.4625))
+mdb.models['Project'].sketches['__profile__'].undo()
+mdb.models['Project'].sketches['__profile__'].undo()
+mdb.models['Project'].sketches['__profile__'].undo()
+mdb.models['Project'].sketches['__profile__'].Spot(point=(0.0, 0.0))
+mdb.models['Project'].sketches['__profile__'].FixedConstraint(entity=
+    mdb.models['Project'].sketches['__profile__'].vertices[4])
+mdb.models['Project'].sketches['__profile__'].ConstructionLine(point1=(-0.45, 
+    0.45), point2=(-1.35, 0.45))
+mdb.models['Project'].sketches['__profile__'].HorizontalConstraint(
+    addUndoState=False, entity=
+    mdb.models['Project'].sketches['__profile__'].geometry[6])
+mdb.models['Project'].sketches['__profile__'].ConstructionLine(point1=(0.0, 
+    -0.45), point2=(-1.35, -0.45))
+mdb.models['Project'].sketches['__profile__'].HorizontalConstraint(
+    addUndoState=False, entity=
+    mdb.models['Project'].sketches['__profile__'].geometry[7])
+mdb.models['Project'].sketches['__profile__'].DistanceDimension(entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[4], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[6], textPoint=(
+    0.689862251281738, -0.104999328491211), value=0.375)
+mdb.models['Project'].sketches['__profile__'].DistanceDimension(entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[4], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[7], textPoint=(
+    0.689862251281738, -0.257963920471191), value=0.375)
+del mdb.models['Project'].sketches['__profile__']
+mdb.models['Project'].ConstrainedSketch(gridSpacing=0.45, name='__profile__', 
+    sheetSize=18.19, transform=
+    mdb.models['Project'].parts['Beam'].MakeSketchTransform(
+    sketchPlane=mdb.models['Project'].parts['Beam'].faces[2], 
+    sketchPlaneSide=SIDE1, 
+    sketchUpEdge=mdb.models['Project'].parts['Beam'].edges[9], 
+    sketchOrientation=RIGHT, origin=(4.543658, 4.982847, 4.25)))
+mdb.models['Project'].parts['Beam'].projectReferencesOntoSketch(filter=
+    COPLANAR_EDGES, sketch=mdb.models['Project'].sketches['__profile__'])
+mdb.models['Project'].sketches['__profile__'].Spot(point=(0.0, 0.0))
+mdb.models['Project'].sketches['__profile__'].FixedConstraint(entity=
+    mdb.models['Project'].sketches['__profile__'].vertices[4])
+mdb.models['Project'].sketches['__profile__'].ConstructionLine(point1=(0.0, 
+    0.45), point2=(-0.45, 0.45))
+mdb.models['Project'].sketches['__profile__'].HorizontalConstraint(
+    addUndoState=False, entity=
+    mdb.models['Project'].sketches['__profile__'].geometry[6])
+mdb.models['Project'].sketches['__profile__'].ConstructionLine(point1=(0.0, 
+    -0.45), point2=(-0.45, -0.45))
+mdb.models['Project'].sketches['__profile__'].HorizontalConstraint(
+    addUndoState=False, entity=
+    mdb.models['Project'].sketches['__profile__'].geometry[7])
+mdb.models['Project'].sketches['__profile__'].ConstructionLine(point1=(0.0, 
+    0.675), point2=(0.0, -0.675000000023283))
+mdb.models['Project'].sketches['__profile__'].VerticalConstraint(addUndoState=
+    False, entity=mdb.models['Project'].sketches['__profile__'].geometry[8])
+mdb.models['Project'].sketches['__profile__'].DistanceDimension(entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[4], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[6], textPoint=(
+    0.951287269592285, 0.0346872559814457), value=0.375)
+mdb.models['Project'].sketches['__profile__'].DistanceDimension(entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[4], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[7], textPoint=(
+    0.68941593170166, -0.226797843811035), value=0.375)
+mdb.models['Project'].sketches['__profile__'].CircleByCenterPerimeter(center=(
+    -1.01249999999854, 0.375), point1=(-0.823023796081543, 0.375))
+mdb.models['Project'].sketches['__profile__'].CoincidentConstraint(
+    addUndoState=False, entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[6], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[6])
+mdb.models['Project'].sketches['__profile__'].CoincidentConstraint(
+    addUndoState=False, entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[5], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[6])
+mdb.models['Project'].sketches['__profile__'].CircleByCenterPerimeter(center=(
+    -2.8125, -0.375), point1=(-2.475, -0.45))
+mdb.models['Project'].sketches['__profile__'].CoincidentConstraint(
+    addUndoState=False, entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[7], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[7])
+mdb.models['Project'].sketches['__profile__'].undo()
+mdb.models['Project'].sketches['__profile__'].undo()
+mdb.models['Project'].sketches['__profile__'].CircleByCenterPerimeter(center=(
+    -1.8, 0.375), point1=(-1.575, 0.375))
+mdb.models['Project'].sketches['__profile__'].CoincidentConstraint(
+    addUndoState=False, entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[6], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[6])
+mdb.models['Project'].sketches['__profile__'].CoincidentConstraint(
+    addUndoState=False, entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[5], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[6])
+mdb.models['Project'].sketches['__profile__'].CircleByCenterPerimeter(center=(
+    -3.15, -0.375), point1=(-2.925, -0.375))
+mdb.models['Project'].sketches['__profile__'].CoincidentConstraint(
+    addUndoState=False, entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[8], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[7])
+mdb.models['Project'].sketches['__profile__'].CoincidentConstraint(
+    addUndoState=False, entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[7], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[7])
+mdb.models['Project'].sketches['__profile__'].RadialDimension(curve=
+    mdb.models['Project'].sketches['__profile__'].geometry[9], radius=1.0, 
+    textPoint=(-1.8, 0.375))
+mdb.models['Project'].sketches['__profile__'].undo()
+mdb.models['Project'].sketches['__profile__'].RadialDimension(curve=
+    mdb.models['Project'].sketches['__profile__'].geometry[9], radius=0.5, 
+    textPoint=(-1.35211086273193, 0.643038963439942))
+mdb.models['Project'].sketches['__profile__'].RadialDimension(curve=
+    mdb.models['Project'].sketches['__profile__'].geometry[10], radius=0.5, 
+    textPoint=(-2.66681146621704, -0.146751190063476))
+mdb.models['Project'].sketches['__profile__'].DistanceDimension(entity1=
+    mdb.models['Project'].sketches['__profile__'].geometry[8], entity2=
+    mdb.models['Project'].sketches['__profile__'].vertices[6], textPoint=(
+    -1.17574882507324, 0.0453598252563481), value=1.25)
+mdb.models['Project'].sketches['__profile__'].undo()
+mdb.models['Project'].sketches['__profile__'].delete(objectList=(
+    mdb.models['Project'].sketches['__profile__'].constraints[24], ))
+mdb.models['Project'].sketches['__profile__'].undo()
+mdb.models['Project'].sketches['__profile__'].DistanceDimension(entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[6], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[8], textPoint=(
+    -0.368757724761963, 0.616357063415528), value=1.25)
+mdb.models['Project'].sketches['__profile__'].undo()
+mdb.models['Project'].sketches['__profile__'].DistanceDimension(entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[5], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[8], textPoint=(
+    -0.438233852386475, 0.621693824890137), value=1.25)
+mdb.models['Project'].sketches['__profile__'].undo()
+mdb.models['Project'].sketches['__profile__'].FixedConstraint(entity=
+    mdb.models['Project'].sketches['__profile__'].geometry[8])
+mdb.models['Project'].sketches['__profile__'].DistanceDimension(entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[5], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[8], textPoint=(
+    -0.203083992004395, 1.03793451702881), value=1.0)
+mdb.models['Project'].sketches['__profile__'].DistanceDimension(entity1=
+    mdb.models['Project'].sketches['__profile__'].vertices[7], entity2=
+    mdb.models['Project'].sketches['__profile__'].geometry[8], textPoint=(
+    -0.603907585144043, -0.755103851196289), value=3.0)
+mdb.models['Project'].sketches['__profile__'].copyMirror(mirrorLine=
+    mdb.models['Project'].sketches['__profile__'].geometry[8], objectList=(
+    mdb.models['Project'].sketches['__profile__'].geometry[10], 
+    mdb.models['Project'].sketches['__profile__'].geometry[9]))
+mdb.models['Project'].parts['Beam'].CutExtrude(flipExtrudeDirection=OFF, 
+    sketch=mdb.models['Project'].sketches['__profile__'], sketchOrientation=
+    RIGHT, sketchPlane=mdb.models['Project'].parts['Beam'].faces[2], 
+    sketchPlaneSide=SIDE1, sketchUpEdge=
+    mdb.models['Project'].parts['Beam'].edges[9])
+del mdb.models['Project'].sketches['__profile__']
+mdb.models['Project'].ConstrainedSketch(name='__edit__', objectToCopy=
+    mdb.models['Project'].parts['Beam'].features['Cut extrude-1'].sketch)
+mdb.models['Project'].parts['Beam'].projectReferencesOntoSketch(filter=
+    COPLANAR_EDGES, sketch=mdb.models['Project'].sketches['__edit__'], 
+    upToFeature=mdb.models['Project'].parts['Beam'].features['Cut extrude-1'])
+del mdb.models['Project'].sketches['__edit__']
+mdb.models['Project'].ConstrainedSketch(name='__edit__', objectToCopy=
+    mdb.models['Project'].parts['Beam'].features['Cut extrude-1'].sketch)
+mdb.models['Project'].parts['Beam'].projectReferencesOntoSketch(filter=
+    COPLANAR_EDGES, sketch=mdb.models['Project'].sketches['__edit__'], 
+    upToFeature=mdb.models['Project'].parts['Beam'].features['Cut extrude-1'])
+del mdb.models['Project'].sketches['__edit__']
+mdb.models['Project'].ConstrainedSketch(gridSpacing=0.43, name='__profile__', 
+    sheetSize=17.34, transform=
+    mdb.models['Project'].parts['Beam'].MakeSketchTransform(
+    sketchPlane=mdb.models['Project'].parts['Beam'].faces[12], 
+    sketchPlaneSide=SIDE1, 
+    sketchUpEdge=mdb.models['Project'].parts['Beam'].edges[50], 
+    sketchOrientation=RIGHT, origin=(4.543658, 4.982847, 4.25)))
+mdb.models['Project'].parts['Beam'].projectReferencesOntoSketch(filter=
+    COPLANAR_EDGES, sketch=mdb.models['Project'].sketches['__profile__'])
+mdb.models['Project'].sketches['__profile__'].Spot(point=(-3.0, -0.375))
+mdb.models['Project'].sketches['__profile__'].Spot(point=(-1.0, 0.375))
+mdb.models['Project'].sketches['__profile__'].Spot(point=(1.0, 0.375))
+mdb.models['Project'].sketches['__profile__'].Spot(point=(3.0, -0.375))
+mdb.models['Project'].sketches['__profile__'].CircleByCenterPerimeter(center=(
+    -3.0, -0.375), point1=(-2.5, -0.375))
+mdb.models['Project'].sketches['__profile__'].CircleByCenterPerimeter(center=(
+    -1.0, 0.375), point1=(-0.5, 0.375))
+mdb.models['Project'].sketches['__profile__'].CircleByCenterPerimeter(center=(
+    1.0, 0.375), point1=(0.5, 0.375))
+mdb.models['Project'].sketches['__profile__'].CircleByCenterPerimeter(center=(
+    3.0, -0.375), point1=(2.5, -0.375))
+mdb.models['Project'].parts['Beam'].CutExtrude(flipExtrudeDirection=ON, sketch=
+    mdb.models['Project'].sketches['__profile__'], sketchOrientation=RIGHT, 
+    sketchPlane=mdb.models['Project'].parts['Beam'].faces[12], sketchPlaneSide=
+    SIDE1, sketchUpEdge=mdb.models['Project'].parts['Beam'].edges[50])
+del mdb.models['Project'].sketches['__profile__']
+mdb.models['Project'].HomogeneousSolidSection(material='Al6061', name='Alum', 
+    thickness=None)
+mdb.models['Project'].parts['Beam'].Set(cells=
+    mdb.models['Project'].parts['Beam'].cells.getSequenceFromMask(('[#1 ]', ), 
+    ), name='Set-1')
+mdb.models['Project'].parts['Beam'].SectionAssignment(offset=0.0, offsetField=
+    '', offsetType=MIDDLE_SURFACE, region=
+    mdb.models['Project'].parts['Beam'].sets['Set-1'], sectionName='Alum', 
+    thicknessAssignment=FROM_SECTION)
+mdb.models['Project'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['Project'].parts['Beam'].cells.getSequenceFromMask(('[#1 ]', ), 
+    ), normal=mdb.models['Project'].parts['Beam'].edges[51], point=
+    mdb.models['Project'].parts['Beam'].vertices[7])
+mdb.models['Project'].parts['Beam'].PartitionCellByPlanePointNormal(cells=
+    mdb.models['Project'].parts['Beam'].cells.getSequenceFromMask(('[#1 ]', ), 
+    ), normal=mdb.models['Project'].parts['Beam'].edges[75], point=
+    mdb.models['Project'].parts['Beam'].vertices[39])
+mdb.models['Project'].parts['Beam'].seedPart(deviationFactor=0.1, 
+    minSizeFactor=0.1, size=0.1)
+mdb.models['Project'].parts['Beam'].seedEdgeBySize(constraint=FINER, 
+    deviationFactor=0.1, edges=
+    mdb.models['Project'].parts['Beam'].edges.getSequenceFromMask((
+    '[#240000 #41000800 #3b6f ]', ), ), minSizeFactor=0.1, size=0.05)
+mdb.models['Project'].parts['Beam'].generateMesh()
+mdb.models['Project'].ConstrainedSketch(name='__profile__', sheetSize=20.0)
+mdb.models['Project'].sketches['__profile__'].Spot(point=(0.0, 0.0))
+mdb.models['Project'].sketches['__profile__'].Spot(point=(0.625, -0.125))
+mdb.models['Project'].sketches['__profile__'].FixedConstraint(entity=
+    mdb.models['Project'].sketches['__profile__'].vertices[0])
+mdb.models['Project'].sketches['__profile__'].delete(objectList=(
+    mdb.models['Project'].sketches['__profile__'].vertices[1], ))
+mdb.models['Project'].sketches['__profile__'].ArcByCenterEnds(center=(0.0, 0.0)
+    , direction=CLOCKWISE, point1=(0.5, 0.0), point2=(-0.5, 0.0))
+mdb.models['Project'].sketches['__profile__'].RadialDimension(curve=
+    mdb.models['Project'].sketches['__profile__'].geometry[2], radius=0.47, 
+    textPoint=(0.0809211730957031, -1.09295248985291))
+mdb.models['Project'].sketches['__profile__'].undo()
+mdb.models['Project'].sketches['__profile__'].RadialDimension(curve=
+    mdb.models['Project'].sketches['__profile__'].geometry[2], radius=0.492, 
+    textPoint=(-0.0127773284912109, -1.64580798149109))
+mdb.models['Project'].sketches['__profile__'].undo()
+mdb.models['Project'].sketches['__profile__'].undo()
+mdb.models['Project'].sketches['__profile__'].ArcByCenterEnds(center=(0.0, 0.0)
+    , direction=COUNTERCLOCKWISE, point1=(-0.5, -0.5), point2=(0.75, -0.75))
+mdb.models['Project'].sketches['__profile__'].RadialDimension(curve=
+    mdb.models['Project'].sketches['__profile__'].geometry[2], radius=0.492, 
+    textPoint=(0.0212955474853516, -1.46719312667847))
+mdb.models['Project'].Part(dimensionality=THREE_D, name='TopRoller', type=
+    ANALYTIC_RIGID_SURFACE)
+mdb.models['Project'].parts['TopRoller'].AnalyticRigidSurfExtrude(depth=10.0, 
+    sketch=mdb.models['Project'].sketches['__profile__'])
+del mdb.models['Project'].sketches['__profile__']
+mdb.models['Project'].parts['TopRoller'].ReferencePoint(point=(0.0, 0.0, 0.0))
+mdb.models['Project'].ConstrainedSketch(name='__profile__', sheetSize=20.0)
+mdb.models['Project'].sketches['__profile__'].Spot(point=(0.0, 0.0))
+mdb.models['Project'].sketches['__profile__'].FixedConstraint(entity=
+    mdb.models['Project'].sketches['__profile__'].vertices[0])
+mdb.models['Project'].sketches['__profile__'].ArcByCenterEnds(center=(0.0, 0.0)
+    , direction=COUNTERCLOCKWISE, point1=(0.5, 0.5), point2=(-0.5, 0.5))
+mdb.models['Project'].sketches['__profile__'].RadialDimension(curve=
+    mdb.models['Project'].sketches['__profile__'].geometry[2], radius=0.197, 
+    textPoint=(0.506823539733887, 1.28857827186584))
+mdb.models['Project'].Part(dimensionality=THREE_D, name='BotRoller', type=
+    ANALYTIC_RIGID_SURFACE)
+mdb.models['Project'].parts['BotRoller'].AnalyticRigidSurfExtrude(depth=10.0, 
+    sketch=mdb.models['Project'].sketches['__profile__'])
+del mdb.models['Project'].sketches['__profile__']
+mdb.models['Project'].parts['BotRoller'].ReferencePoint(point=(0.0, 0.0, 0.0))
+mdb.models['Project'].rootAssembly.DatumCsysByDefault(CARTESIAN)
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='Beam-1', part=
+    mdb.models['Project'].parts['Beam'])
+del mdb.models['Project'].rootAssembly.features['Beam-1']
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='Beam-1', part=
+    mdb.models['Project'].parts['Beam'])
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='BotRoller-1', 
+    part=mdb.models['Project'].parts['BotRoller'])
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='TopRoller-1', 
+    part=mdb.models['Project'].parts['TopRoller'])
+mdb.models['Project'].rootAssembly.instances['BotRoller-1'].translate(vector=(
+    5.79082680637816, 0.0, 0.0))
+mdb.models['Project'].rootAssembly.instances['TopRoller-1'].translate(vector=(
+    6.34760268588445, 0.0, 0.0))
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='BotRoller-2', 
+    part=mdb.models['Project'].parts['BotRoller'])
+mdb.models['Project'].rootAssembly.instances['BotRoller-2'].translate(vector=(
+    6.86265926530073, 0.0, 0.0))
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Project'].rootAssembly.rotate(angle=90.0, axisDirection=(0.0, 10.0, 
+    0.0), axisPoint=(4.543658, 4.11859, 8.5), instanceList=('BotRoller-1', 
+    'TopRoller-1', 'BotRoller-2'))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-1', ), 
+    vector=(-1.043658, 0.0, -15.252831))
+mdb.models['Project'].rootAssembly.translate(instanceList=('TopRoller-1', ), 
+    vector=(-1.043658, 0.492, -2.446055))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-1', ), 
+    vector=(0.0, 0.0, 16.0))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-2', ), 
+    vector=(-1.043658, 0.0, -5.930999))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-1', ), 
+    vector=(0.0, 0.0, 0.25))
+mdb.models['Project'].rootAssembly.translate(instanceList=('TopRoller-1', ), 
+    vector=(5.576791, 6.482858, 0.0))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-1', 
+    'BotRoller-2'), vector=(8.0, 3.25, -0.25))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-1', ), 
+    vector=(0.0, 0.035836, 0.0))
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-1', 
+    'TopRoller-1', 'BotRoller-2'), vector=(4.369157, 0.0, 0.0))
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Project'].parts['Beam'].DatumPlaneByThreePoints(point1=
+    mdb.models['Project'].parts['Beam'].InterestingPoint(
+    mdb.models['Project'].parts['Beam'].edges[109], MIDDLE), point2=
+    mdb.models['Project'].parts['Beam'].InterestingPoint(
+    mdb.models['Project'].parts['Beam'].edges[59], MIDDLE), point3=
+    mdb.models['Project'].parts['Beam'].InterestingPoint(
+    mdb.models['Project'].parts['Beam'].edges[85], MIDDLE))
+mdb.models['Project'].parts['Beam'].DatumPlaneByOffset(flip=SIDE1, offset=0.05, 
+    plane=mdb.models['Project'].parts['Beam'].datums[9])
+mdb.models['Project'].parts['Beam'].DatumPlaneByOffset(flip=SIDE2, offset=0.05, 
+    plane=mdb.models['Project'].parts['Beam'].datums[9])
+mdb.models['Project'].rootAssembly.regenerate()
+mdb.models['Project'].parts['Beam'].deleteFeatures(('Datum plane-1', 
+    'Datum plane-2', 'Datum plane-3'))
+mdb.models['Project'].rootAssembly.regenerate()
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-2', ), 
+    vector=(0.0, 0.0, 0.5))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-1', ), 
+    vector=(0.0, 0.0, 0.25))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-2', ), 
+    vector=(0.0, 0.0, -0.25))
+del mdb.models['Project'].rootAssembly.features['BotRoller-1']
+del mdb.models['Project'].rootAssembly.features['TopRoller-1']
+del mdb.models['Project'].rootAssembly.features['BotRoller-2']
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='BotRoller-1', 
+    part=mdb.models['Project'].parts['BotRoller'])
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='TopRoller-1', 
+    part=mdb.models['Project'].parts['TopRoller'])
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='BotRoller-2', 
+    part=mdb.models['Project'].parts['BotRoller'])
+mdb.models['Project'].rootAssembly.rotate(angle=90.0, axisDirection=(0.0, 10.0, 
+    0.0), axisPoint=(4.543658, 4.11859, 8.5), instanceList=('BotRoller-1', 
+    'TopRoller-1', 'BotRoller-2'))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-2', ), 
+    vector=(0.0, 0.0, 8.0))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-2', ), 
+    vector=(0.0, 0.0, -8.0))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-2', ), 
+    vector=(-1.043658, 0.0, -5.043658))
+del mdb.models['Project'].rootAssembly.features['BotRoller-1']
+del mdb.models['Project'].rootAssembly.features['TopRoller-1']
+del mdb.models['Project'].rootAssembly.features['BotRoller-2']
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='BotRoller-1', 
+    part=mdb.models['Project'].parts['BotRoller'])
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='TopRoller-1', 
+    part=mdb.models['Project'].parts['TopRoller'])
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='BotRoller-2', 
+    part=mdb.models['Project'].parts['BotRoller'])
+mdb.models['Project'].rootAssembly.rotate(angle=90.0, axisDirection=(0.0, 10.0, 
+    0.0), axisPoint=(4.543658, 4.11859, 8.5), instanceList=('BotRoller-1', 
+    'TopRoller-1', 'BotRoller-2'))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-2', ), 
+    vector=(-1.043658, 0.0, -12.793658))
+del mdb.models['Project'].rootAssembly.features['BotRoller-1']
+del mdb.models['Project'].rootAssembly.features['TopRoller-1']
+del mdb.models['Project'].rootAssembly.features['BotRoller-2']
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='Beam-2', part=
+    mdb.models['Project'].parts['Beam'])
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='BotRoller-1', 
+    part=mdb.models['Project'].parts['BotRoller'])
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='TopRoller-1', 
+    part=mdb.models['Project'].parts['TopRoller'])
+del mdb.models['Project'].rootAssembly.features['Beam-2']
+del mdb.models['Project'].rootAssembly.features['BotRoller-1']
+del mdb.models['Project'].rootAssembly.features['TopRoller-1']
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='BotRoller-1', 
+    part=mdb.models['Project'].parts['BotRoller'])
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='TopRoller-1', 
+    part=mdb.models['Project'].parts['TopRoller'])
+mdb.models['Project'].rootAssembly.instances['BotRoller-1'].translate(vector=(
+    5.79082680637816, 0.0, 0.0))
+mdb.models['Project'].rootAssembly.instances['TopRoller-1'].translate(vector=(
+    6.34760268588445, 0.0, 0.0))
+mdb.models['Project'].rootAssembly.Instance(dependent=ON, name='BotRoller-2', 
+    part=mdb.models['Project'].parts['BotRoller'])
+mdb.models['Project'].rootAssembly.instances['BotRoller-2'].translate(vector=(
+    6.86265926530073, 0.0, 0.0))
+mdb.models['Project'].rootAssembly.rotate(angle=90.0, axisDirection=(0.0, 10.0, 
+    0.0), axisPoint=(4.543658, 4.11859, 8.5), instanceList=('BotRoller-1', 
+    'TopRoller-1', 'BotRoller-2'))
+mdb.models['Project'].rootAssembly.translate(instanceList=('TopRoller-1', ), 
+    vector=(0.0, 0.0, 0.556776))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-2', ), 
+    vector=(0.0, 0.0, 1.071833))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-2', ), 
+    vector=(0.0, 0.0, -8.0))
+mdb.models['Project'].rootAssembly.translate(instanceList=('TopRoller-1', ), 
+    vector=(0.0, 0.0, -4.0))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-1', 
+    'TopRoller-1', 'BotRoller-2'), vector=(4.533133, 6.974858, 0.997169))
+mdb.models['Project'].ConstrainedSketch(name='__edit__', objectToCopy=
+    mdb.models['Project'].parts['Beam'].features['Solid extrude-1'].sketch)
+mdb.models['Project'].parts['Beam'].projectReferencesOntoSketch(filter=
+    COPLANAR_EDGES, sketch=mdb.models['Project'].sketches['__edit__'], 
+    upToFeature=
+    mdb.models['Project'].parts['Beam'].features['Solid extrude-1'])
+del mdb.models['Project'].sketches['__edit__']
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-1', 
+    'BotRoller-2'), vector=(0.0, -3.689022, 0.0))
+mdb.models['Project'].rootAssembly.translate(instanceList=('BotRoller-1', 
+    'TopRoller-1', 'BotRoller-2'), vector=(3.792366, 0.0, 0.0))
+mdb.models['Project'].ContactProperty('IntProp-1')
+mdb.models['Project'].interactionProperties['IntProp-1'].NormalBehavior(
+    allowSeparation=ON, constraintEnforcementMethod=DEFAULT, 
+    pressureOverclosure=HARD)
+mdb.models['Project'].rootAssembly.Surface(name='m_Surf-1', side2Faces=
+    mdb.models['Project'].rootAssembly.instances['TopRoller-1'].faces.getSequenceFromMask(
+    ('[#1 ]', ), ))
+mdb.models['Project'].rootAssembly.Surface(name='s_Surf-1', side1Faces=
+    mdb.models['Project'].rootAssembly.instances['Beam-1'].faces.getSequenceFromMask(
+    ('[#0 #e0 ]', ), ))
+mdb.models['Project'].SurfaceToSurfaceContactStd(adjustMethod=NONE, 
+    clearanceRegion=None, createStepName='Initial', datumAxis=None, 
+    initialClearance=OMIT, interactionProperty='IntProp-1', main=
+    mdb.models['Project'].rootAssembly.surfaces['m_Surf-1'], name='TopRoller', 
+    secondary=mdb.models['Project'].rootAssembly.surfaces['s_Surf-1'], sliding=
+    FINITE, thickness=ON)
+mdb.models['Project'].rootAssembly.Surface(name='m_Surf-3', side1Faces=
+    mdb.models['Project'].rootAssembly.instances['BotRoller-2'].faces.getSequenceFromMask(
+    ('[#1 ]', ), ))
+mdb.models['Project'].rootAssembly.Surface(name='s_Surf-3', side1Faces=
+    mdb.models['Project'].rootAssembly.instances['Beam-1'].faces.getSequenceFromMask(
+    ('[#38000000 ]', ), ))
+mdb.models['Project'].SurfaceToSurfaceContactStd(adjustMethod=NONE, 
+    clearanceRegion=None, createStepName='Initial', datumAxis=None, 
+    initialClearance=OMIT, interactionProperty='IntProp-1', main=
+    mdb.models['Project'].rootAssembly.surfaces['m_Surf-3'], name=
+    'BottomRoller2', secondary=
+    mdb.models['Project'].rootAssembly.surfaces['s_Surf-3'], sliding=FINITE, 
+    thickness=ON)
+mdb.models['Project'].rootAssembly.Surface(name='m_Surf-5', side1Faces=
+    mdb.models['Project'].rootAssembly.instances['BotRoller-1'].faces.getSequenceFromMask(
+    ('[#1 ]', ), ))
+mdb.models['Project'].rootAssembly.Surface(name='s_Surf-5', side1Faces=
+    mdb.models['Project'].rootAssembly.instances['Beam-1'].faces.getSequenceFromMask(
+    ('[#38000000 ]', ), ))
+mdb.models['Project'].SurfaceToSurfaceContactStd(adjustMethod=NONE, 
+    clearanceRegion=None, createStepName='Initial', datumAxis=None, 
+    initialClearance=OMIT, interactionProperty='IntProp-1', main=
+    mdb.models['Project'].rootAssembly.surfaces['m_Surf-5'], name=
+    'BottomRoller1', secondary=
+    mdb.models['Project'].rootAssembly.surfaces['s_Surf-5'], sliding=FINITE, 
+    thickness=ON)
+mdb.models['Project'].rootAssembly.Set(name='Set-1', referencePoints=((
+    mdb.models['Project'].rootAssembly.instances['BotRoller-1'].referencePoints[2], 
+    ), (
+    mdb.models['Project'].rootAssembly.instances['BotRoller-2'].referencePoints[2], 
+    )))
+mdb.models['Project'].EncastreBC(createStepName='Initial', localCsys=None, 
+    name='Fixed', region=mdb.models['Project'].rootAssembly.sets['Set-1'])
+mdb.models['Project'].rootAssembly.Set(name='Set-2', referencePoints=(
+    mdb.models['Project'].rootAssembly.instances['TopRoller-1'].referencePoints[2], 
+    ))
+mdb.models['Project'].DisplacementBC(amplitude=UNSET, createStepName='Initial', 
+    distributionType=UNIFORM, fieldName='', localCsys=None, name='TopRoller', 
+    region=mdb.models['Project'].rootAssembly.sets['Set-2'], u1=SET, u2=UNSET, 
+    u3=SET, ur1=SET, ur2=SET, ur3=SET)
+mdb.models['Project'].rootAssembly.Set(name='Set-3', vertices=
+    mdb.models['Project'].rootAssembly.instances['Beam-1'].vertices.getSequenceFromMask(
+    ('[#0 #10000000 ]', ), ))
+mdb.models['Project'].DisplacementBC(amplitude=UNSET, createStepName='Initial', 
+    distributionType=UNIFORM, fieldName='', localCsys=None, name='TD_Restraint'
+    , region=mdb.models['Project'].rootAssembly.sets['Set-3'], u1=SET, u2=UNSET
+    , u3=UNSET, ur1=UNSET, ur2=UNSET, ur3=UNSET)
+del mdb.models['Project'].boundaryConditions['TD_Restraint']
+mdb.models['Project'].rootAssembly.Set(name='Set-4', vertices=
+    mdb.models['Project'].rootAssembly.instances['Beam-1'].vertices.getSequenceFromMask(
+    ('[#20000000 #10000000 ]', ), ))
+mdb.models['Project'].DisplacementBC(amplitude=UNSET, createStepName='Initial', 
+    distributionType=UNIFORM, fieldName='', localCsys=None, name='TD_Restraint'
+    , region=mdb.models['Project'].rootAssembly.sets['Set-4'], u1=SET, u2=UNSET
+    , u3=UNSET, ur1=UNSET, ur2=UNSET, ur3=UNSET)
+mdb.models['Project'].rootAssembly.Set(name='Set-5', vertices=
+    mdb.models['Project'].rootAssembly.instances['Beam-1'].vertices.getSequenceFromMask(
+    ('[#20000000 ]', ), ))
+mdb.models['Project'].DisplacementBC(amplitude=UNSET, createStepName='Initial', 
+    distributionType=UNIFORM, fieldName='', localCsys=None, name=
+    'AxialRestraint', region=mdb.models['Project'].rootAssembly.sets['Set-5'], 
+    u1=UNSET, u2=UNSET, u3=SET, ur1=UNSET, ur2=UNSET, ur3=UNSET)
+mdb.models['Project'].StaticStep(name='Load', nlgeom=ON, previous='Initial')
+mdb.models['Project'].rootAssembly.Set(name='Set-6', referencePoints=(
+    mdb.models['Project'].rootAssembly.instances['TopRoller-1'].referencePoints[2], 
+    ))
+mdb.models['Project'].ConcentratedForce(cf2=-6.25, createStepName='Load', 
+    distributionType=UNIFORM, field='', localCsys=None, name='Load-1', region=
+    mdb.models['Project'].rootAssembly.sets['Set-6'])
+mdb.models['Project'].steps['Load'].setValues(initialInc=0.1, maxNumInc=
+    1000000)
+mdb.Job(atTime=None, contactPrint=OFF, description='', echoPrint=OFF, 
+    explicitPrecision=SINGLE, getMemoryFromAnalysis=True, historyPrint=OFF, 
+    memory=90, memoryUnits=PERCENTAGE, model='Project', modelPrint=OFF, name=
+    'Beam', nodalOutputPrecision=SINGLE, numCpus=1, numGPUs=0, queue=None, 
+    resultsFormat=ODB, scratch='', type=ANALYSIS, userSubroutine='', waitHours=
+    0, waitMinutes=0)
+mdb.jobs['Beam'].submit(consistencyChecking=OFF)
+mdb.jobs['Beam']._Message(STARTED, {'phase': BATCHPRE_PHASE, 'jobName': 'Beam', 
+    'clientHost': 'COCOEC-L1D1509', 'handle': 0})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'PATH BASED TRACKING IS DEFINED IN CONTACT PAIR (ASSEMBLY_S_SURF-5,ASSEMBLY_BOTROLLER-1_M_SURF-5). PATH BASED TRACKING CANNOT BE USED WITH ANALYTICAL RIGID MAIN SURFACES, THE STATE BASED TRACKING ALGORITHM WILL BE USED INSTEAD.', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THERE ARE 74 FACETS THAT ARE FOUND TO BE FACING IN THE WRONG DIRECTION WITH RESPECT TO THE MAIN SURFACE FOR THE CONTACT PAIR (ASSEMBLY_S_SURF-5,ASSEMBLY_BOTROLLER-1_M_SURF-5).  PLEASE CHECK THE ORIENTATION OF THE SURFACES RELATIVE TO EACH OTHER.', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'PATH BASED TRACKING IS DEFINED IN CONTACT PAIR (ASSEMBLY_S_SURF-3,ASSEMBLY_BOTROLLER-2_M_SURF-3). PATH BASED TRACKING CANNOT BE USED WITH ANALYTICAL RIGID MAIN SURFACES, THE STATE BASED TRACKING ALGORITHM WILL BE USED INSTEAD.', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THERE ARE 74 FACETS THAT ARE FOUND TO BE FACING IN THE WRONG DIRECTION WITH RESPECT TO THE MAIN SURFACE FOR THE CONTACT PAIR (ASSEMBLY_S_SURF-3,ASSEMBLY_BOTROLLER-2_M_SURF-3).  PLEASE CHECK THE ORIENTATION OF THE SURFACES RELATIVE TO EACH OTHER.', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'PATH BASED TRACKING IS DEFINED IN CONTACT PAIR (ASSEMBLY_S_SURF-1,ASSEMBLY_TOPROLLER-1_M_SURF-1). PATH BASED TRACKING CANNOT BE USED WITH ANALYTICAL RIGID MAIN SURFACES, THE STATE BASED TRACKING ALGORITHM WILL BE USED INSTEAD.', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': '51 elements are distorted. Either the isoparametric angles are out of the suggested limits or the triangular or tetrahedral quality measure is bad. The elements have been identified in element set WarnElemDistorted.', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(ODB_FILE, {'file': 'E:\\Beam.odb', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(COMPLETED, {'message': 'Analysis phase complete', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(STARTED, {'phase': STANDARD_PHASE, 'jobName': 'Beam', 
+    'clientHost': 'COCOEC-L1D1509', 'handle': 19240})
+mdb.jobs['Beam']._Message(STEP, {'stepId': 1, 'phase': STANDARD_PHASE, 
+    'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(ODB_FRAME, {'step': 0, 'frame': 0, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THERE ARE 3 UNCONNECTED REGIONS IN THE MODEL.', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(MEMORY_ESTIMATE, {'memory': 531.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(PHYSICAL_MEMORY, {'physical_memory': 65274.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(MINIMUM_MEMORY, {'minimum_memory': 100.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.4 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT HAS EXCEEDED FIFTY TIMES THE STRAIN TO CAUSE FIRST YIELD AT 26184 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT IS SO LARGE THAT THE PROGRAM WILL NOT ATTEMPT THE PLASTICITY CALCULATION AT 26184 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(STATUS, {'step': 1, 'increment': 1, 
+    'attempts': ' 1U', 'severe': 0, 'equilibrium': 1, 'iterations': 1, 
+    'totalTime': 0.0, 'stepTime': 0.0, 'timeIncrement': 0.1, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.4 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'The system matrix has 11943 negative eigenvalues.', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+09     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT HAS EXCEEDED FIFTY TIMES THE STRAIN TO CAUSE FIRST YIELD AT 232 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT IS SO LARGE THAT THE PROGRAM WILL NOT ATTEMPT THE PLASTICITY CALCULATION AT 3 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'EXCESSIVE DISTORTION AT A TOTAL OF 88 INTEGRATION POINTS IN SOLID (CONTINUUM) ELEMENTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'EXCESSIVE DISTORTION AT A TOTAL OF 88 INTEGRATION POINTS FROM ALL ELEMENTS IN THE MODEL', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(STATUS, {'step': 1, 'increment': 1, 
+    'attempts': ' 2U', 'severe': 1, 'equilibrium': 1, 'iterations': 2, 
+    'totalTime': 0.0, 'stepTime': 0.0, 'timeIncrement': 0.025, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT HAS EXCEEDED FIFTY TIMES THE STRAIN TO CAUSE FIRST YIELD AT 26184 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'The system matrix has 19583 negative eigenvalues.', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT HAS EXCEEDED FIFTY TIMES THE STRAIN TO CAUSE FIRST YIELD AT 2 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT IS SO LARGE THAT THE PROGRAM WILL NOT ATTEMPT THE PLASTICITY CALCULATION AT 2 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'EXCESSIVE DISTORTION AT A TOTAL OF 7837 INTEGRATION POINTS IN SOLID (CONTINUUM) ELEMENTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'EXCESSIVE DISTORTION AT A TOTAL OF 7837 INTEGRATION POINTS FROM ALL ELEMENTS IN THE MODEL', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(STATUS, {'step': 1, 'increment': 1, 
+    'attempts': ' 3U', 'severe': 1, 'equilibrium': 1, 'iterations': 2, 
+    'totalTime': 0.0, 'stepTime': 0.0, 'timeIncrement': 0.00625, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 1.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 1.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(STATUS, {'step': 1, 'increment': 1, 
+    'attempts': ' 4U', 'severe': 4, 'equilibrium': 3, 'iterations': 7, 
+    'totalTime': 0.0, 'stepTime': 0.0, 'timeIncrement': 0.0015625, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 1.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 1.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(STATUS, {'step': 1, 'increment': 1, 
+    'attempts': ' 5U', 'severe': 0, 'equilibrium': 4, 'iterations': 4, 
+    'totalTime': 0.0, 'stepTime': 0.0, 'timeIncrement': 0.000390625, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(ERROR, {
+    'message': 'Too many attempts made for this increment', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(ABORTED, {
+    'message': 'Analysis phase failed due to errors', 'phase': STANDARD_PHASE, 
+    'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(ERROR, {
+    'message': 'Abaqus/Standard Analysis exited with an error - Please see the  message file for possible error messages if the file exists.', 
+    'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(JOB_ABORTED, {
+    'message': 'Abaqus/Standard Analysis exited with an error - Please see the  message file for possible error messages if the file exists.', 
+    'jobName': 'Beam'})
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+del mdb.jobs['Beam']
+mdb.Job(atTime=None, contactPrint=OFF, description='', echoPrint=OFF, 
+    explicitPrecision=SINGLE, getMemoryFromAnalysis=True, historyPrint=OFF, 
+    memory=90, memoryUnits=PERCENTAGE, model='Project', modelPrint=OFF, name=
+    'Beam', nodalOutputPrecision=SINGLE, numCpus=1, numGPUs=0, queue=None, 
+    resultsFormat=ODB, scratch='', type=ANALYSIS, userSubroutine='', waitHours=
+    0, waitMinutes=0)
+mdb.jobs['Beam'].submit(consistencyChecking=OFF)
+mdb.jobs['Beam']._Message(STARTED, {'phase': BATCHPRE_PHASE, 'jobName': 'Beam', 
+    'clientHost': 'COCOEC-L1D1509', 'handle': 0})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'PATH BASED TRACKING IS DEFINED IN CONTACT PAIR (ASSEMBLY_S_SURF-5,ASSEMBLY_BOTROLLER-1_M_SURF-5). PATH BASED TRACKING CANNOT BE USED WITH ANALYTICAL RIGID MAIN SURFACES, THE STATE BASED TRACKING ALGORITHM WILL BE USED INSTEAD.', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THERE ARE 74 FACETS THAT ARE FOUND TO BE FACING IN THE WRONG DIRECTION WITH RESPECT TO THE MAIN SURFACE FOR THE CONTACT PAIR (ASSEMBLY_S_SURF-5,ASSEMBLY_BOTROLLER-1_M_SURF-5).  PLEASE CHECK THE ORIENTATION OF THE SURFACES RELATIVE TO EACH OTHER.', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'PATH BASED TRACKING IS DEFINED IN CONTACT PAIR (ASSEMBLY_S_SURF-3,ASSEMBLY_BOTROLLER-2_M_SURF-3). PATH BASED TRACKING CANNOT BE USED WITH ANALYTICAL RIGID MAIN SURFACES, THE STATE BASED TRACKING ALGORITHM WILL BE USED INSTEAD.', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THERE ARE 74 FACETS THAT ARE FOUND TO BE FACING IN THE WRONG DIRECTION WITH RESPECT TO THE MAIN SURFACE FOR THE CONTACT PAIR (ASSEMBLY_S_SURF-3,ASSEMBLY_BOTROLLER-2_M_SURF-3).  PLEASE CHECK THE ORIENTATION OF THE SURFACES RELATIVE TO EACH OTHER.', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'PATH BASED TRACKING IS DEFINED IN CONTACT PAIR (ASSEMBLY_S_SURF-1,ASSEMBLY_TOPROLLER-1_M_SURF-1). PATH BASED TRACKING CANNOT BE USED WITH ANALYTICAL RIGID MAIN SURFACES, THE STATE BASED TRACKING ALGORITHM WILL BE USED INSTEAD.', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': '51 elements are distorted. Either the isoparametric angles are out of the suggested limits or the triangular or tetrahedral quality measure is bad. The elements have been identified in element set WarnElemDistorted.', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(ODB_FILE, {'file': 'E:\\Beam.odb', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(COMPLETED, {'message': 'Analysis phase complete', 
+    'phase': BATCHPRE_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(STARTED, {'phase': STANDARD_PHASE, 'jobName': 'Beam', 
+    'clientHost': 'COCOEC-L1D1509', 'handle': 15816})
+mdb.jobs['Beam']._Message(STEP, {'stepId': 1, 'phase': STANDARD_PHASE, 
+    'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(ODB_FRAME, {'step': 0, 'frame': 0, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THERE ARE 3 UNCONNECTED REGIONS IN THE MODEL.', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(MEMORY_ESTIMATE, {'memory': 531.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(PHYSICAL_MEMORY, {'physical_memory': 65274.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(MINIMUM_MEMORY, {'minimum_memory': 100.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.4 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT HAS EXCEEDED FIFTY TIMES THE STRAIN TO CAUSE FIRST YIELD AT 26184 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT IS SO LARGE THAT THE PROGRAM WILL NOT ATTEMPT THE PLASTICITY CALCULATION AT 26184 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(STATUS, {'step': 1, 'increment': 1, 
+    'attempts': ' 1U', 'severe': 0, 'equilibrium': 1, 'iterations': 1, 
+    'totalTime': 0.0, 'stepTime': 0.0, 'timeIncrement': 0.1, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.4 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'The system matrix has 11943 negative eigenvalues.', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+09     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT HAS EXCEEDED FIFTY TIMES THE STRAIN TO CAUSE FIRST YIELD AT 232 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT IS SO LARGE THAT THE PROGRAM WILL NOT ATTEMPT THE PLASTICITY CALCULATION AT 3 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'EXCESSIVE DISTORTION AT A TOTAL OF 88 INTEGRATION POINTS IN SOLID (CONTINUUM) ELEMENTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'EXCESSIVE DISTORTION AT A TOTAL OF 88 INTEGRATION POINTS FROM ALL ELEMENTS IN THE MODEL', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(STATUS, {'step': 1, 'increment': 1, 
+    'attempts': ' 2U', 'severe': 1, 'equilibrium': 1, 'iterations': 2, 
+    'totalTime': 0.0, 'stepTime': 0.0, 'timeIncrement': 0.025, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT HAS EXCEEDED FIFTY TIMES THE STRAIN TO CAUSE FIRST YIELD AT 26184 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'The system matrix has 19583 negative eigenvalues.', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT HAS EXCEEDED FIFTY TIMES THE STRAIN TO CAUSE FIRST YIELD AT 2 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'THE STRAIN INCREMENT IS SO LARGE THAT THE PROGRAM WILL NOT ATTEMPT THE PLASTICITY CALCULATION AT 2 POINTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'EXCESSIVE DISTORTION AT A TOTAL OF 7837 INTEGRATION POINTS IN SOLID (CONTINUUM) ELEMENTS', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'EXCESSIVE DISTORTION AT A TOTAL OF 7837 INTEGRATION POINTS FROM ALL ELEMENTS IN THE MODEL', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(STATUS, {'step': 1, 'increment': 1, 
+    'attempts': ' 3U', 'severe': 1, 'equilibrium': 1, 'iterations': 2, 
+    'totalTime': 0.0, 'stepTime': 0.0, 'timeIncrement': 0.00625, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 1.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 1.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(STATUS, {'step': 1, 'increment': 1, 
+    'attempts': ' 4U', 'severe': 4, 'equilibrium': 3, 'iterations': 7, 
+    'totalTime': 0.0, 'stepTime': 0.0, 'timeIncrement': 0.0015625, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 10.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 1.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(WARNING, {
+    'message': 'Solver problem. Numerical singularity when processing node BEAM-1.81 D.O.F. 2 ratio = 1.E+12     .', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(STATUS, {'step': 1, 'increment': 1, 
+    'attempts': ' 5U', 'severe': 0, 'equilibrium': 4, 'iterations': 4, 
+    'totalTime': 0.0, 'stepTime': 0.0, 'timeIncrement': 0.000390625, 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(ERROR, {
+    'message': 'Too many attempts made for this increment', 
+    'phase': STANDARD_PHASE, 'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(ABORTED, {
+    'message': 'Analysis phase failed due to errors', 'phase': STANDARD_PHASE, 
+    'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(ERROR, {
+    'message': 'Abaqus/Standard Analysis exited with an error - Please see the  message file for possible error messages if the file exists.', 
+    'jobName': 'Beam'})
+mdb.jobs['Beam']._Message(JOB_ABORTED, {
+    'message': 'Abaqus/Standard Analysis exited with an error - Please see the  message file for possible error messages if the file exists.', 
+    'jobName': 'Beam'})
+# Save by rbilock on 2026_10_26-00.20.57; build 2026 2025_09_23-10.43.03 RELr428 206049

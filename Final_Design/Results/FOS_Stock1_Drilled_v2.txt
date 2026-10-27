@@ -1,0 +1,21 @@
+FACTOR OF SAFETY - Stock1_Drilled_v2
+ODB: E:\Semester Project\Stock1_Drilled_v2\Stock1_Drilled_v2.odb
+Job status: completed successfully; step 100 % complete
+
+Beam length analysed      = 8.200 in
+Weight (curved C3D10)     = 0.993 lb    limit 1.00 lb   -> PASS
+   (v1 straight-tet method would give 1.002 lb)
+Elastic slope k           = 235298 lbf/in
+Peak load reached         = 9090 lbf
+Offset-line load          = 8123 lbf at 0.0555 in travel
+FOS = P_offset / 5000     = 1.625    required >= 1.25 (P >= 6250 lbf)   -> PASS
+Peak von Mises at 5443 lbf = 40.9 ksi (saved frame at step time 0.31)
+Where it yields first (peak plastic strain at 8215 lbf):
+   PEEQ 0.0469  web/fillet, lower half, 4.07 in from mid-span (over a support roller)
+   PEEQ 0.0374  web/fillet, lower half, 3.51 in from mid-span (over a support roller)
+   PEEQ 0.0200  bottom flange, 4.01 in from mid-span (over a support roller)
+   PEEQ 0.0160  web/fillet, lower half, 2.70 in from mid-span
+   PEEQ 0.0148  web/fillet, lower half, 2.77 in from mid-span
+Cost (cost-sheet estimate) = $143    limit $600   -> PASS
+
+OVERALL: MEETS weight, strength and cost

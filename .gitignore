@@ -35,7 +35,8 @@ archive/
 *_log.txt
 
 # Abaqus results databases: 300+ MB each, over GitHub's 100 MB file limit.
-# Only the final design's .odb is kept, through Git LFS (see .gitattributes).
+# Only the final design's .odb is kept (two copies, one LFS object), through Git LFS (see .gitattributes).
 # The iteration .odb files stay on the project drive; regenerate them from the .inp.
 *.odb
 !abaqus/final_design/job/Stock1_Drilled_v2.odb
+!Final_Design/Abaqus/job/Stock1_Drilled_v2.odb
