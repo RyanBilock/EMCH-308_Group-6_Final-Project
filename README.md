@@ -67,8 +67,9 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 ├── abaqus/
 │   ├── base_models/            ProjectBeam.cae (original model: rollers, material) · Baseline_Stock1.cae
 │   ├── final_design/           Stock1_Drilled_v2.cae / .jnl  (final model)
-│   │   └── job/                Stock1_Drilled_v2 job: .cae with job, .jnl, .inp
+│   │   └── job/                Stock1_Drilled_v2 job: .cae with job, .jnl, .inp, .odb (Git LFS)
 │   ├── iterations/
+│   │   ├── Stock3_Beam_8p2in/  .inp (Stock 3, 8.2 in Rev A design)
 │   │   ├── Stock1_Notched/     .cae, .jnl, .inp
 │   │   └── Stock1_Drilled_v1/  model .cae / .jnl  +  job/ (.cae, .jnl, .inp)
 │   └── python/
@@ -89,10 +90,13 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 │   └── concept_drawings/       Earlier material-removal and cost-plan concepts (superseded)
 ├── cost/                       Course cost sheet filled in for the final design
 ├── report/                     Final report (to come)
-└── Blackboard Files/           Course documents: project statement, rubric, guide, blank cost sheet
+├── Blackboard Files/           Course documents: project statement, rubric, guide, blank cost sheet
+└── Organize_Project_v4.py      One-time script that tidied the project drive into this layout
 ```
 
-**Not on GitHub:** the `.odb` result files (300+ MB each) are over GitHub's 100 MB file limit. They stay on the team's project drive and can be regenerated from the `.inp` in each job folder.
+**Final design results (`.odb`):** `abaqus/final_design/job/Stock1_Drilled_v2.odb` (314 MB) is stored with [Git Large File Storage (LFS)](https://git-lfs.com), since it is over GitHub's 100 MB file limit. Install Git LFS once (`git lfs install`) before cloning, or run `git lfs pull` in an existing clone, to download the real file instead of a small pointer. Open it in Abaqus/CAE or run `FOS_Stock1_Drilled_v2.py` on it directly — no need to re-run the 30-minute job.
+
+**Not on GitHub:** the iteration `.odb` files (50–540 MB each). They stay on the team's project drive and can be regenerated from the `.inp` in each job folder.
 
 ## Running the models
 

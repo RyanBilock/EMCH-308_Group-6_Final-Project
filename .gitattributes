@@ -1,0 +1,2 @@
+# Abaqus output databases are stored with Git Large File Storage (LFS)
+*.odb filter=lfs diff=lfs merge=lfs -text
