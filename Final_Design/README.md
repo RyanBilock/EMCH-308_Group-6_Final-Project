@@ -1,6 +1,6 @@
 # Final Design: Rev C (Stock 1, roller pads + sawn notches)
 
-> **Status: Abaqus run complete (Nov 3, 2026): meets weight, FoS and cost.** FoS 1.772, weight 0.914 lb, cost $131.78. Mesh-convergence check still optional. The last fully analysed design, Rev B, is in [`Old_Designs/RevB_Stock1_Drilled_v2/`](../Old_Designs/RevB_Stock1_Drilled_v2/).
+> **Status: Abaqus run complete (Nov 3, 2026): meets weight, FoS and cost.** FoS 1.772, weight 0.914 lb, cost $131.78. Drawing, design sheet and STEP file done. Optional: warning-free rerun (`Stock1_RevC_v2`) and mesh-convergence check. The last fully analysed design, Rev B, is in [`Old_Designs/RevB_Stock1_Drilled_v2/`](../Old_Designs/RevB_Stock1_Drilled_v2/).
 
 These are **copies**: each file also stays in its original location (listed below). Change the original, then refresh the copy here.
 
@@ -33,10 +33,10 @@ With setups the sheet does not model (second drill size, flipping between flange
 
 ## Open items before release to MTC
 
-1. ~~Run the Rev C Abaqus model~~ Done Nov 3, 2026: FoS 1.772, mesh weight 0.9139 lb (see `Results/`). Optional: run the mesh-convergence job (`MESH_LEVEL = 'CHECK'`), then `FOS_Stock1_RevC_v2.py`.
+1. ~~Run the Rev C Abaqus model~~ Done Nov 3, 2026: FoS 1.772, mesh weight 0.9139 lb (see `Results/`). The job finished with 7 solver warnings, all from one rejected attempt at increment 2; results are valid. Optional: warning-free rerun with `fix_Stock1_RevC_v1.py` (the first try, Nov 3, was stopped by the license server after 5 clean increments; rerun it) and the mesh-convergence job (`MESH_LEVEL = 'CHECK'`), then `FOS_Stock1_RevC_v3.py`.
 2. Confirm with David Wilson (MTC) that the notches can be sawn out to the relief holes.
 3. Fig. 1 allows Ø1.00 ± 0.02 (0.98–1.02); the Ø1.03 holes are a deliberate team choice.
-4. ~~Make the Rev C manufacturing drawing~~ Done: `Drawings/USC06_MTC06_IBeam_RevC_Drawing.pdf` (3 sheets). STEP file: run `Export_STEP_v4.py`.
+4. ~~Make the Rev C manufacturing drawing~~ Done: `Drawings/USC06_MTC06_IBeam_RevC_Drawing.pdf` (3 sheets). ~~STEP file~~ Done: `CAD/USC06_MTC06_IBeam_RevC.step` (inches), checked in a CAD kernel: one valid solid, 8.40 × 2.50 × 3.00 in, 9.3252 in³ (0.914 lb), 4 × Ø1.03 web holes, 8 × R0.25 notch corners.
 
 ## What's here
 
@@ -52,7 +52,11 @@ With setups the sheet does not model (second drill size, flipping between flange
 | | `Export_STEP_v4.py` | Writes `cad/USC06_MTC06_IBeam_RevC.step` (inches) after geometry checks | `abaqus/python/final/` |
 | | `make_RevC_drawing_v1.py` · `make_RevC_design_sheet_v1.py` | Generate the manufacturing drawing and the design sheet | `cad/drawings/source/` |
 | | `make_RevC_concept_v2.py` | Draws the concept sheet and recomputes weight, cost, stresses | `cad/drawings/source/` |
-| `Results/` | `Design_Comparison.png` | Abaqus curves of the earlier designs (Rev C to be added) | `results/` |
-| `Abaqus/` | *(after the run)* | Rev C model, job and `.odb` | `abaqus/final_design/` |
-| `Results/` | *(after the run)* | `FOS_Stock1_RevC_v1.txt` / `_LoadDisp.csv` / `.png` | `results/final_design/` |
-| `CAD/` | *(to come)* | Rev C STEP file | `cad/` |
+| `Results/` | `FOS_Stock1_RevC_v1.txt` / `_LoadDisp.csv` | FoS, weight, cost and accuracy report; load–displacement data | `results/final_design/` |
+| | `Stock1_RevC_v1_LoadDisp.png` | Load–displacement plot with the offset line (Rev B for comparison) | `results/final_design/` |
+| | `Design_Comparison.png` | Abaqus curves of the earlier designs | `results/` |
+| `Abaqus/` | `Stock1_RevC_v1.cae` / `.jnl` | Rev C Abaqus model | `abaqus/final_design/` |
+| `Abaqus/job/` | `Stock1_RevC_v1.cae` / `.inp` / `.jnl` | Model with its job; input file | `abaqus/final_design/job/` |
+| | `Stock1_RevC_v1_geometry.txt` | CAD volumes and mesh settings read by the FoS script | `abaqus/final_design/job/` |
+| | `Stock1_RevC_v1.odb` | Results, 519 MB: **project drive only** (too large for the free Git LFS quota); regenerate from the `.inp` | `abaqus/final_design/job/` |
+| `CAD/` | `USC06_MTC06_IBeam_RevC.step` | 3D model for MTC (inches) | `cad/` |

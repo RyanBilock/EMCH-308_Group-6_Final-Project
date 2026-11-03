@@ -41,6 +41,7 @@ Rev C replaced Rev B as the team's final design in Nov 2026, to gain weight marg
 - **Web:** unchanged except the 4 required holes, opened to Ø1.03 (1-1/32 drill). Note: Fig. 1 allows Ø1.00 ± 0.02.
 - **Design sheet (views, dimensions, FoS curve, cost, weight):** [`cad/drawings/Design_Sheet_Stock1_RevC_v1.pdf`](cad/drawings/Design_Sheet_Stock1_RevC_v1.pdf) · [PNG](cad/drawings/Design_Sheet_Stock1_RevC_v1.png)
 - **Manufacturing drawing (for MTC, 3 sheets):** [`cad/USC06_MTC06_IBeam_RevC_Drawing.pdf`](cad/USC06_MTC06_IBeam_RevC_Drawing.pdf)
+- **STEP file (for MTC, inches):** [`cad/USC06_MTC06_IBeam_RevC.step`](cad/USC06_MTC06_IBeam_RevC.step), checked: one valid solid, 8.40 × 2.50 × 3.00 in, 9.3252 in³
 - **Concept sheet:** [`cad/concept_drawings/Proposal_RevC_Stock1_v2.pdf`](cad/concept_drawings/Proposal_RevC_Stock1_v2.pdf) (script: `cad/drawings/source/make_RevC_concept_v2.py`)
 - **Cost sheet:** [`cost/ProjectCostSheet_RevC_Stock1_v2.xlsx`](cost/ProjectCostSheet_RevC_Stock1_v2.xlsx)
 
@@ -61,7 +62,7 @@ Rev C replaced Rev B as the team's final design in Nov 2026, to gain weight marg
 
 With extra setups the sheet does not model (second drill size, flipping between flanges, a cross-cut) the total is $183.46, still under $600. If MTC has to mill the notches instead of sawing them, the cost goes to about $1,860–$3,890 and the design fails the cost limit.
 
-**Open items:** confirm the sawn notches with MTC · run `Export_STEP_v4.py` for the STEP file · optional: warning-free rerun (`fix_Stock1_RevC_v1.py`) and mesh-convergence job.
+**Open items:** confirm the sawn notches with MTC · optional: warning-free rerun (`fix_Stock1_RevC_v1.py`; the first try was stopped by the license server after 5 clean increments) and mesh-convergence job.
 
 ## Previous design: Rev B (Stock 1 drilled v2, superseded)
 
@@ -76,7 +77,7 @@ The last fully analysed design. All its files are in [`Old_Designs/RevB_Stock1_D
 **Looking for the final design?** Everything for Rev C is copied into [`Final_Design/`](Final_Design/); Rev B is in [`Old_Designs/RevB_Stock1_Drilled_v2/`](Old_Designs/RevB_Stock1_Drilled_v2/). The originals stay in the folders below.
 
 ```
-├── Final_Design/               Rev C (current): concept sheet, cost sheet, script; Abaqus and CAD to come
+├── Final_Design/               Rev C (current): model, job, results, drawings, STEP, cost sheet, scripts (see its README)
 ├── Old_Designs/
 │   └── RevB_Stock1_Drilled_v2/ Rev B package: model, job, .odb, FoS report, drawings, STEP, cost, scripts
 ├── abaqus/
@@ -89,7 +90,8 @@ The last fully analysed design. All its files are in [`Old_Designs/RevB_Stock1_D
 │   │   ├── Stock1_Plain/       .cae, .jnl, .inp (Stock 1, no material removed)
 │   │   ├── Stock1_Notched/     .cae, .jnl, .inp
 │   │   └── Stock1_Drilled_v1/  model .cae / .jnl  +  job/ (.cae, .jnl, .inp)
-│   ├── final_design/           Rev C model (created by Stock1_RevC_v1.py) + job/ and mesh_check/
+│   ├── final_design/           Rev C model Stock1_RevC_v1.cae · job/ (.cae, .inp, .jnl, geometry; .odb on the
+│   │                           project drive only) · job_v2/ and mesh_check/ for the optional reruns
 │   └── python/
 │       ├── final/              Rev C: Stock1_RevC_v1.py (build + finest mesh + job) · fix_Stock1_RevC_v1.py
 │       │                       (warning-free rerun) · FOS_Stock1_RevC_v3.py · Export_STEP_v4.py (STEP)
@@ -103,6 +105,7 @@ The last fully analysed design. All its files are in [`Old_Designs/RevB_Stock1_D
 │   ├── final_design/           Rev C FoS report, CSV, plot (written by FOS_Stock1_RevC_v1.py)
 │   └── iterations/             Stock1_Drilled_v2_RevB · Stock3_Beam_8p2in · Stock1_Notched · Stock1_Drilled_v1
 ├── cad/
+│   ├── USC06_MTC06_IBeam_RevC.step          3D model for MTC (Rev C, inches)
 │   ├── USC06_MTC06_IBeam_RevC_Drawing.pdf   Manufacturing drawing for MTC (Rev C, 3 sheets) + _sheet1–3.png
 │   ├── concept_drawings/       Proposal_RevC_Stock1_v2 (current design) · earlier material-removal and cost-plan concepts
 │   ├── drawings/               Design_Sheet_Stock1_RevC_v1 (one-page design sheet)
@@ -113,12 +116,13 @@ The last fully analysed design. All its files are in [`Old_Designs/RevB_Stock1_D
 ├── cost/                       ProjectCostSheet_RevC_Stock1_v2.xlsx (current) · old_designs/ (Rev B)
 ├── report/                     Final report (to come)
 ├── Blackboard Files/           Course documents: project statement, rubric, guide, blank cost sheet
-└── Organize_Project_v4.py      One-time script that tidied the project drive into this layout
+├── Organize_Project_v4.py      One-time script that tidied the project drive into the first layout
+└── Organize_Project_v5.py      Brings a local copy into this layout (git sync + local-only files); see below
 ```
 
 **Rev B results (`.odb`):** `abaqus/iterations/Stock1_Drilled_v2_RevB/job/Stock1_Drilled_v2.odb` (314 MB) is stored with [Git Large File Storage (LFS)](https://git-lfs.com), since it is over GitHub's 100 MB file limit. Install Git LFS once (`git lfs install`) before cloning, or run `git lfs pull` in an existing clone, to download the real file instead of a small pointer. Open it in Abaqus/CAE or run `FOS_Stock1_Drilled_v3.py` on it directly — no need to re-run the 30-minute job.
 
-**Not on GitHub:** the iteration `.odb` files (50–540 MB each). They stay on the team's project drive and can be regenerated from the `.inp` in each job folder.
+**Not on GitHub:** the iteration `.odb` files (50–540 MB each) and the Rev C `.odb` (519 MB). They stay on the team's project drive and can be regenerated from the `.inp` in each job folder.
 
 ## Running the models
 
