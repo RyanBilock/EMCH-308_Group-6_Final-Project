@@ -117,7 +117,7 @@ The last fully analysed design. All its files are in [`Old_Designs/RevB_Stock1_D
 ├── report/                     Final report (to come)
 ├── Blackboard Files/           Course documents: project statement, rubric, guide, blank cost sheet
 ├── Organize_Project_v4.py      One-time script that tidied the project drive into the first layout
-└── Organize_Project_v5.py      Brings a local copy into this layout (git sync + local-only files); see below
+└── Organize_Project_v5.ps1     Brings a local copy into this layout (PowerShell; no Python, Abaqus or git needed)
 ```
 
 **Rev B results (`.odb`):** `abaqus/iterations/Stock1_Drilled_v2_RevB/job/Stock1_Drilled_v2.odb` (314 MB) is stored with [Git Large File Storage (LFS)](https://git-lfs.com), since it is over GitHub's 100 MB file limit. Install Git LFS once (`git lfs install`) before cloning, or run `git lfs pull` in an existing clone, to download the real file instead of a small pointer. Open it in Abaqus/CAE or run `FOS_Stock1_Drilled_v3.py` on it directly — no need to re-run the 30-minute job.
