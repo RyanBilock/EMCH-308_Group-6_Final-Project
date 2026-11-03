@@ -44,7 +44,7 @@ Rev C replaced Rev B as the team's final design in Nov 2026, to gain weight marg
 
 ![Rev C concept sheet](cad/concept_drawings/Proposal_RevC_Stock1_v2.png)
 
-| Requirement | Limit | Rev C (hand calc) | |
+| Requirement | Limit | Rev C | |
 |---|---|---|---|
 | Weight (0.098 lb/in³) | ≤ 1.00 lb | 0.914 lb (Abaqus mesh 0.9139 lb, matches CAD to 0.001 %; 0.928 lb if every notch is 0.02 in shallow) | Pass |
 | FoS (offset method, 0.02 in) | ≥ 1.25 | **1.772** (P_offset = 8,858 lbf, Abaqus, 234,665-node mesh) | Pass |
