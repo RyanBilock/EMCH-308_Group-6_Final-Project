@@ -31,52 +31,24 @@ Finite element design and validation of an 8" × 3" I-beam for EMCH 308 (Introdu
 - Two steel support rollers, Ø0.394", 8" center-to-center
 - Loaded to 6,250 lbf; FoS checked against a 0.02" offset line from the linear-elastic load–displacement response
 
-## Final design: Stock 1 drilled v2
+## Final design: Rev C (concept, Abaqus check pending)
 
-- **Stock:** Stock 1, AA I 3 × 2.03 (6061), cut to 8.20 in
-- **Holes:** 4 × Ø1.00 Fig. 1 web holes (required) + 28 × Ø25/32 (0.78125) flange holes, drill thru, centred ±0.7875 from the web
-  - Top flange: z = ±1.30, ±2.18, ±3.06 in from mid-span (12 holes)
-  - Bottom flange: z = ±0.44, ±1.32, ±2.20, ±3.08 in from mid-span (16 holes)
-- **Design sheet (views, dimensions, cost, FOS, weight):** [`cad/drawings/Design_Sheet_Stock1_Drilled_v2.pdf`](cad/drawings/Design_Sheet_Stock1_Drilled_v2.pdf) · [PNG](cad/drawings/Design_Sheet_Stock1_Drilled_v2.png)
-- **Manufacturing drawing (for MTC):** [`cad/USC06_MTC06_IBeam_RevB_Drawing.pdf`](cad/USC06_MTC06_IBeam_RevB_Drawing.pdf)
-- **Hole layout:** [`cad/drawings/Hole_Layout_Stock1_Drilled_v2.png`](cad/drawings/Hole_Layout_Stock1_Drilled_v2.png)
-- **No milling, no extra web holes.** Holes are kept clear of the load roller and the supports, where the web yields first.
+Rev C replaced Rev B as the team's final design in Nov 2026, to gain weight margin (Rev B was 0.993 lb) and keep the flanges full width under every test roller. Its numbers are hand calculations until the Rev C Abaqus model is run. Everything for it is in [`Final_Design/`](Final_Design/).
 
-![Final design sheet](cad/drawings/Design_Sheet_Stock1_Drilled_v2.png)
-
-| Requirement | Limit | Final design | |
-|---|---|---|---|
-| Weight | ≤ 1.00 lb | 0.993 lb (CAD and curved-element mesh agree) | Pass |
-| FoS (offset method, 0.02 in) | ≥ 1.25 | 1.625 (P_offset = 8,123 lbf) | Pass |
-| Cost (course cost sheet) | ≤ $600 | $143.47 | Pass |
-
-**Cost breakdown** (course cost-sheet formulas; filled-in sheet: [`cost/ProjectCostSheet_Stock1_Drilled_v2.xlsx`](cost/ProjectCostSheet_Stock1_Drilled_v2.xlsx)):
-
-| Item | Calculation | Cost |
-|---|---|---|
-| Material, Stock 1 | 8.4 in × 2.03/12 lb/in × $38.72/lb | $55.02 |
-| Saw cut to 8.20 in (1 cut) | (0.1667 + 0.0167 × 1) h × $100/h | $18.34 |
-| Drill (4 Fig. 1 + 28 flange = 32 holes) | (0.1667 + 0.0167 × 32) h × $100/h | $70.11 |
-| **Total** | | **$143.47** |
-
-If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005 in), add facing both ends: (0.5 + 0.04 × 2) h × $250/h = $145.00, for a total of $288.47 — still under $600.
-
-## Proposed revision: Rev C concept (v2, under review)
-
-Not released to MTC. Rev B above stays the final design until Rev C is checked in Abaqus and MTC confirms the cutting method.
-
-- **Stock:** Stock 1, AA I 3 × 2.03 (6061), full 8.40 in raw length (no cross-cut; support overhang 0.20 in vs. 0.10 in)
+- **Stock:** Stock 1, AA I 3 × 2.03 (6061-T6), full 8.40 in raw length (no cross-cut; 0.20 in overhang past each support vs. 0.10 in on Rev B)
 - **Flanges:** full 2.50 in width kept wherever a roller touches: top flange |z| ≤ 0.75 in (load roller), bottom flange |z| ≥ 3.50 in (supports). Elsewhere the tips are notched 0.65 in deep (flange 1.20 in wide).
 - **Corners:** 8 × Ø0.50 relief holes drilled first; saw cuts end tangent to them, so every inside corner is R0.25 (no sharp corners)
 - **Web:** unchanged except the 4 required holes, opened to Ø1.03 (1-1/32 drill). Note: Fig. 1 allows Ø1.00 ± 0.02.
 - **Concept sheet:** [`cad/concept_drawings/Proposal_RevC_Stock1_v2.pdf`](cad/concept_drawings/Proposal_RevC_Stock1_v2.pdf) · [PNG](cad/concept_drawings/Proposal_RevC_Stock1_v2.png) (script: `cad/drawings/source/make_RevC_concept_v2.py`)
 - **Cost sheet:** [`cost/ProjectCostSheet_RevC_Stock1_v2.xlsx`](cost/ProjectCostSheet_RevC_Stock1_v2.xlsx)
 
-| Requirement | Limit | Rev C v2 (hand calc) |
-|---|---|---|
-| Weight (0.098 lb/in³) | ≤ 1.00 lb | 0.914 lb (0.928 lb if every notch is 0.02 in shallow) |
-| Cost (course cost sheet) | ≤ $600 | $131.78 |
-| FoS | ≥ 1.25 | Abaqus run still to do |
+![Rev C concept sheet](cad/concept_drawings/Proposal_RevC_Stock1_v2.png)
+
+| Requirement | Limit | Rev C (hand calc) | |
+|---|---|---|---|
+| Weight (0.098 lb/in³) | ≤ 1.00 lb | 0.914 lb (0.928 lb if every notch is 0.02 in shallow) | Pass |
+| FoS (offset method, 0.02 in) | ≥ 1.25 | Abaqus run still to do | Pending |
+| Cost (course cost sheet) | ≤ $600 | $131.78 | Pass |
 
 | Item | Calculation | Cost |
 |---|---|---|
@@ -87,61 +59,67 @@ Not released to MTC. Rev B above stays the final design until Rev C is checked i
 
 With extra setups the sheet does not model (second drill size, flipping between flanges, a cross-cut) the total is $183.46, still under $600. If MTC has to mill the notches instead of sawing them, the cost goes to about $1,860–$3,890 and the design fails the cost limit.
 
-![Rev C concept v2](cad/concept_drawings/Proposal_RevC_Stock1_v2.png)
+**Open items:** run the Rev C Abaqus model · confirm the sawn notches with MTC · make the Rev C manufacturing drawing and STEP file.
+
+## Previous design: Rev B (Stock 1 drilled v2, superseded)
+
+The last fully analysed design. All its files are in [`Old_Designs/RevB_Stock1_Drilled_v2/`](Old_Designs/RevB_Stock1_Drilled_v2/).
+
+- Stock 1, cut to 8.20 in · 4 × Ø1.00 web holes + 28 × Ø25/32 flange holes, drilled
+- Weight 0.993 lb · FoS 1.625 (P_offset = 8,123 lbf) · cost $143.47 — meets all three, but with almost no weight margin
+- Design sheet: [`cad/old_designs/RevB/drawings/Design_Sheet_Stock1_Drilled_v2.pdf`](cad/old_designs/RevB/drawings/Design_Sheet_Stock1_Drilled_v2.pdf) · Manufacturing drawing: [`cad/old_designs/RevB/USC06_MTC06_IBeam_RevB_Drawing.pdf`](cad/old_designs/RevB/USC06_MTC06_IBeam_RevB_Drawing.pdf) · Cost sheet: [`cost/old_designs/ProjectCostSheet_Stock1_Drilled_v2.xlsx`](cost/old_designs/ProjectCostSheet_Stock1_Drilled_v2.xlsx)
 
 ## Repository layout
 
-**Looking for the final design?** Everything for it (model, job, `.odb`, FoS report, drawings, STEP, cost sheet, scripts) is copied into [`Final_Design/`](Final_Design/). The originals stay in the folders below.
+**Looking for the final design?** Everything for Rev C is copied into [`Final_Design/`](Final_Design/); Rev B is in [`Old_Designs/RevB_Stock1_Drilled_v2/`](Old_Designs/RevB_Stock1_Drilled_v2/). The originals stay in the folders below.
 
 ```
-├── Final_Design/               Copies of every final-design file in one place (see its README)
+├── Final_Design/               Rev C (current): concept sheet, cost sheet, script; Abaqus and CAD to come
+├── Old_Designs/
+│   └── RevB_Stock1_Drilled_v2/ Rev B package: model, job, .odb, FoS report, drawings, STEP, cost, scripts
 ├── abaqus/
 │   ├── base_models/            ProjectBeam.cae (original model: rollers, material) · Baseline_Stock1.cae ·
 │   │                           ProjectBeam_fixed.cae (original model after the fix_history repairs)
-│   ├── final_design/           Stock1_Drilled_v2.cae / .jnl  (final model)
-│   │   └── job/                Stock1_Drilled_v2 job: .cae with job, .jnl, .inp, .odb (Git LFS)
 │   ├── iterations/
+│   │   ├── Stock1_Drilled_v2_RevB/  Rev B model .cae / .jnl  +  job/ (.cae, .jnl, .inp, .odb via Git LFS)
 │   │   ├── Stock3_Beam_8p2in/  Beam_8p2in.inp (Stock 3, 8.2 in Rev A design; source of the Stock 3 results) ·
 │   │   │                       Beam_8p2in_v10_refined.inp (finer mesh, fix_ProjectBeam v10; no results)
 │   │   ├── Stock1_Plain/       .cae, .jnl, .inp (Stock 1, no material removed)
 │   │   ├── Stock1_Notched/     .cae, .jnl, .inp
 │   │   └── Stock1_Drilled_v1/  model .cae / .jnl  +  job/ (.cae, .jnl, .inp)
 │   └── python/
-│       ├── final/              Stock1_Drilled_v2.py (builds final model + job) · FOS_Stock1_Drilled_v3.py ·
-│       │                       Export_STEP_v3.py (writes cad/USC06_MTC06_IBeam_RevB.step, labelled in inches)
+│       ├── iterations/         Scripts for every earlier design, incl. Rev B: Stock1_Drilled_v2.py ·
+│       │                       FOS_Stock1_Drilled_v3.py · Export_STEP_v3.py
 │       ├── tools/              Baseline_Stock1_v1.py · FOS_ProjectBeam_v3.py (FoS for any .odb)
-│       ├── iterations/         Scripts for the notched, plain and drilled v1 designs · FOS_Stock1_Drilled_v2.py (superseded)
 │       └── fix_history/        Repair scripts for the original model, v1–v5 (see its README)
 ├── results/
-│   ├── Design_Comparison.png   All four Abaqus load–displacement curves
-│   ├── final_design/           Stock 1 drilled v2: FoS report, CSV, plot
-│   └── iterations/             Stock3_Beam_8p2in · Stock1_Notched · Stock1_Drilled_v1
+│   ├── Design_Comparison.png   Abaqus load–displacement curves of the earlier designs
+│   └── iterations/             Stock1_Drilled_v2_RevB · Stock3_Beam_8p2in · Stock1_Notched · Stock1_Drilled_v1
 ├── cad/
-│   ├── USC06_MTC06_IBeam_RevB.step          3D model for MTC (Rev B, inches)
-│   ├── creo/                   Creo Parametric part made from the STEP file
-│   ├── USC06_MTC06_IBeam_RevB_Drawing.pdf   Manufacturing drawing (Rev B, 2 sheets, course-example style)
-│   ├── drawings/               Design_Sheet_Stock1_Drilled_v2 · Hole_Layout_Stock1_Drilled_v2 · RevB drawing GD&T version
-│   │   └── source/             Drawing scripts: make_RevB_drawing_v1–v3 · make_RevC_concept_v1–v2
-│   └── concept_drawings/       Proposal_RevC_Stock1_v2 (current proposal) · earlier material-removal and cost-plan concepts (superseded)
-├── cost/                       Course cost sheets: Stock1_Drilled_v2 (final, Rev B) · RevC_Stock1_v2 (proposal)
+│   ├── concept_drawings/       Proposal_RevC_Stock1_v2 (current design) · earlier material-removal and cost-plan concepts
+│   ├── drawings/source/        Drawing scripts: make_RevC_concept_v1–v2 · make_RevB_drawing_v1–v3
+│   └── old_designs/RevB/       Rev B STEP, manufacturing drawing (2 sheets), creo/ part, drawings/ (design sheet,
+│                               hole layout, GD&T version)
+├── cost/                       ProjectCostSheet_RevC_Stock1_v2.xlsx (current) · old_designs/ (Rev B)
 ├── report/                     Final report (to come)
 ├── Blackboard Files/           Course documents: project statement, rubric, guide, blank cost sheet
 └── Organize_Project_v4.py      One-time script that tidied the project drive into this layout
 ```
 
-**Final design results (`.odb`):** `abaqus/final_design/job/Stock1_Drilled_v2.odb` (314 MB) is stored with [Git Large File Storage (LFS)](https://git-lfs.com), since it is over GitHub's 100 MB file limit. Install Git LFS once (`git lfs install`) before cloning, or run `git lfs pull` in an existing clone, to download the real file instead of a small pointer. Open it in Abaqus/CAE or run `FOS_Stock1_Drilled_v3.py` on it directly — no need to re-run the 30-minute job.
+**Rev B results (`.odb`):** `abaqus/iterations/Stock1_Drilled_v2_RevB/job/Stock1_Drilled_v2.odb` (314 MB) is stored with [Git Large File Storage (LFS)](https://git-lfs.com), since it is over GitHub's 100 MB file limit. Install Git LFS once (`git lfs install`) before cloning, or run `git lfs pull` in an existing clone, to download the real file instead of a small pointer. Open it in Abaqus/CAE or run `FOS_Stock1_Drilled_v3.py` on it directly — no need to re-run the 30-minute job.
 
 **Not on GitHub:** the iteration `.odb` files (50–540 MB each). They stay on the team's project drive and can be regenerated from the `.inp` in each job folder.
 
 ## Running the models
 
+**Rev C:** the Abaqus build script has not been written yet. `cad/drawings/source/make_RevC_concept_v2.py` (plain Python with numpy and matplotlib) redraws the concept sheet and recomputes its weight, cost and hand-calc stresses.
+
+**Rev B** (kept for reference; scripts in `abaqus/python/iterations/`):
+
 1. In Abaqus/CAE, **File → Set Work Directory** → `abaqus/base_models/` (the folder holding `ProjectBeam.cae`).
-2. **File → Run Script** → `abaqus/python/final/Stock1_Drilled_v2.py`. It builds the final beam, saves `Stock1_Drilled_v2.cae`, and submits the job in a `Stock1_Drilled_v2/` folder next to it (about 30 min).
-3. When the job shows *Completed*, **Run Script** → `abaqus/python/final/FOS_Stock1_Drilled_v3.py`. It finds the `.odb` from any work directory in the repo (a fresh run first, then `abaqus/final_design/job/`), reports weight, FoS, cost and where the beam yields first, and saves a report, CSV and plot to `results/final_design/`. (`Stock1_Drilled_v2.py` still prints "run FOS_Stock1_Drilled_v2.py" when its job finishes; use v3, which replaced it.)
-
-4. To make the STEP file for manufacturing: set the work directory to the project folder and **Run Script** → `abaqus/python/final/Export_STEP_v3.py`. It exports only the `Beam` part to `cad/USC06_MTC06_IBeam_RevB.step` (Rev B: Rev A was the Stock 3 package already sent to MTC) after checking its size, volume and holes. The file is labelled in inches, so CAD programs import it at the right size; check one dimension after import.
-
-Scripts write their output next to `ProjectBeam.cae`; move the finished model and job into `abaqus/final_design/` to match this layout.
+2. **File → Run Script** → `Stock1_Drilled_v2.py`. It builds the Rev B beam, saves `Stock1_Drilled_v2.cae`, and submits the job in a `Stock1_Drilled_v2/` folder next to it (about 30 min).
+3. When the job shows *Completed*, set the work directory to the job folder and **Run Script** → `FOS_Stock1_Drilled_v3.py`. It reports weight, FoS, cost and where the beam yields first. It was written before the Rev C reorganisation, so it saves to `results/final_design/`; move the output to `results/iterations/Stock1_Drilled_v2_RevB/`.
+4. `Export_STEP_v3.py` exports the Rev B `Beam` part to `cad/USC06_MTC06_IBeam_RevB.step`; the current copy lives in `cad/old_designs/RevB/`.
 
 ## Design history
 
@@ -152,8 +130,8 @@ Scripts write their output next to `ProjectBeam.cae`; move the finished model an
 | Stock 3, required holes only | 1.68 | 3.545 | — | Too heavy |
 | Stock 1, notched flanges | 0.957 | 1.637 | over $600 (milling) | Meets weight and FoS, cost too high |
 | Stock 1, drilled v1 (32 flange + 2 web holes, milled end reliefs) | 0.993 | 1.246 | $510 | Fails FoS: the web yields around the extra web holes |
-| **Stock 1, drilled v2 (28 × Ø25/32 flange holes)** | **0.993** | **1.625** | **$143.47** | **Final: meets all three** |
-| Rev C concept v2 (roller pads, sawn notches, Ø1.03 holes) | 0.914 (hand calc) | to run | $131.78 | Proposed: needs Abaqus check and MTC confirmation |
+| Stock 1, drilled v2 — Rev B (28 × Ø25/32 flange holes) | 0.993 | 1.625 | $143.47 | Superseded: meets all three, almost no weight margin |
+| **Rev C (roller pads, sawn notches, Ø1.03 holes)** | **0.914 (hand calc)** | **Abaqus to run** | **$131.78** | **Current final design** |
 
 ## Tools
 
