@@ -61,7 +61,7 @@ Rev C replaced Rev B as the team's final design in Nov 2026, to gain weight marg
 
 With extra setups the sheet does not model (second drill size, flipping between flanges, a cross-cut) the total is $183.46, still under $600. If MTC has to mill the notches instead of sawing them, the cost goes to about $1,860–$3,890 and the design fails the cost limit.
 
-**Open items:** confirm the sawn notches with MTC · Rev C STEP file · optional mesh-convergence job.
+**Open items:** confirm the sawn notches with MTC · run `Export_STEP_v4.py` for the STEP file · optional: warning-free rerun (`fix_Stock1_RevC_v1.py`) and mesh-convergence job.
 
 ## Previous design: Rev B (Stock 1 drilled v2, superseded)
 
@@ -91,7 +91,8 @@ The last fully analysed design. All its files are in [`Old_Designs/RevB_Stock1_D
 │   │   └── Stock1_Drilled_v1/  model .cae / .jnl  +  job/ (.cae, .jnl, .inp)
 │   ├── final_design/           Rev C model (created by Stock1_RevC_v1.py) + job/ and mesh_check/
 │   └── python/
-│       ├── final/              Rev C: Stock1_RevC_v1.py (build + finest mesh + job) · FOS_Stock1_RevC_v2.py
+│       ├── final/              Rev C: Stock1_RevC_v1.py (build + finest mesh + job) · fix_Stock1_RevC_v1.py
+│       │                       (warning-free rerun) · FOS_Stock1_RevC_v3.py · Export_STEP_v4.py (STEP)
 │       │                       (FoS, weight and accuracy report)
 │       ├── iterations/         Scripts for every earlier design, incl. Rev B: Stock1_Drilled_v2.py ·
 │       │                       FOS_Stock1_Drilled_v3.py · Export_STEP_v3.py
@@ -126,7 +127,9 @@ The last fully analysed design. All its files are in [`Old_Designs/RevB_Stock1_D
 1. In Abaqus/CAE, **File → Set Work Directory** → `abaqus/base_models/` (the folder holding `ProjectBeam.cae`).
 2. **File → Run Script** → `Stock1_RevC_v1.py`. It builds the Rev C beam, searches for the finest C3D10 mesh under the license's 250,000-node limit (allow 20–45 min of meshing), and submits job `Stock1_RevC_v1`. It saves straight into `abaqus/final_design/` (model) and `abaqus/final_design/job/` (job files, `.odb`, `Stock1_RevC_v1_geometry.txt`). The fine job takes roughly 1–3 hours.
 3. *(Optional, for the accuracy report)* set `MESH_LEVEL = 'CHECK'` at the top of `Stock1_RevC_v1.py` and run it again. It builds the same beam at the Rev B mesh density as job `Stock1_RevC_v1_MeshCheck` in `abaqus/final_design/mesh_check/` (about 30–40 min).
-4. When the job reads *Completed*, **Run Script** → `FOS_Stock1_RevC_v2.py` (work directory anywhere in the repo; v2 fixes the plot axes of v1). It reports weight, FoS and cost against the limits, plus accuracy checks: mesh volume vs. CAD volume vs. hand calculation, FoS sensitivity to the elastic-fit window, curve resolution, mesh convergence (if step 3 was run), where the curve departs from linear, and the permanent set at 6,250 lbf. Output: `results/final_design/`.
+4. When the job reads *Completed*, **Run Script** → `FOS_Stock1_RevC_v3.py` (work directory anywhere in the repo). It reports weight, FoS and cost against the limits, the solver warning/error count, and accuracy checks: mesh volume vs. CAD volume vs. hand calculation, FoS sensitivity to the elastic-fit window, curve resolution, mesh convergence (if step 3 was run), where the curve departs from linear, and the permanent set at 6,250 lbf. Output: `results/final_design/`.
+5. **Warning-free rerun:** **Run Script** → `fix_Stock1_RevC_v1.py`. The v1 job finished with 7 warnings, all from one rejected attempt while the beam settled onto the supports. This opens `Stock1_RevC_v1.cae` (same mesh), starts the support-roller contacts closed and uses a 0.1 % first increment, and submits job `Stock1_RevC_v2` in `abaqus/final_design/job_v2/` (about 2 hours). `FOS_Stock1_RevC_v3.py` then reports v2 and compares it with v1.
+6. **STEP file for MTC:** **Run Script** → `Export_STEP_v4.py`. It checks the Rev C beam (8.40 × 2.50 × 3.00 in, 9.3252 in³, 4 × Ø1.03 holes) and writes `cad/USC06_MTC06_IBeam_RevC.step`, labelled in inches.
 
 `cad/drawings/source/make_RevC_concept_v2.py` (plain Python with numpy and matplotlib) redraws the concept sheet and recomputes its weight, cost and hand-calc stresses.
 
