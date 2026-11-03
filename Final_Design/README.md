@@ -1,6 +1,6 @@
 # Final Design: Rev C (Stock 1, roller pads + sawn notches)
 
-> **Status: concept, Abaqus check pending.** Rev C is the team's current final design. Its numbers are hand calculations until the Abaqus model is built and run. The last fully analysed design, Rev B, is in [`Old_Designs/RevB_Stock1_Drilled_v2/`](../Old_Designs/RevB_Stock1_Drilled_v2/).
+> **Status: Abaqus run complete (Nov 3, 2026): meets weight, FoS and cost.** FoS 1.772, weight 0.914 lb, cost $131.78. Mesh-convergence check still optional. The last fully analysed design, Rev B, is in [`Old_Designs/RevB_Stock1_Drilled_v2/`](../Old_Designs/RevB_Stock1_Drilled_v2/).
 
 These are **copies**: each file also stays in its original location (listed below). Change the original, then refresh the copy here.
 
@@ -18,8 +18,8 @@ These are **copies**: each file also stays in its original location (listed belo
 
 | Requirement | Limit | Rev C | |
 |---|---|---|---|
-| Weight (0.098 lb/in³) | ≤ 1.00 lb | 0.914 lb (0.928 lb if every notch is 0.02 in shallow) | Pass (hand calc) |
-| Factor of safety (FoS), 0.02 in offset method | ≥ 1.25 | Abaqus run still to do | Pending |
+| Weight (0.098 lb/in³) | ≤ 1.00 lb | 0.914 lb (Abaqus mesh 0.9139 lb, matches CAD to 0.001 %; 0.928 lb if every notch is 0.02 in shallow) | Pass |
+| Factor of safety (FoS), 0.02 in offset method | ≥ 1.25 | **1.772** (P_offset = 8,858 lbf, Abaqus, 234,665-node mesh) | Pass |
 | Cost (course cost sheet) | ≤ $600 | $131.78 | Pass |
 
 | Item | Calculation | Cost |
@@ -33,7 +33,7 @@ With setups the sheet does not model (second drill size, flipping between flange
 
 ## Open items before release to MTC
 
-1. Run the Rev C Abaqus model (`Stock1_RevC_v1.py`, then `FOS_Stock1_RevC_v1.py`); confirm FoS ≥ 1.25 and where the web first yields. Optional mesh-convergence job: `MESH_LEVEL = 'CHECK'`.
+1. ~~Run the Rev C Abaqus model~~ Done Nov 3, 2026: FoS 1.772, mesh weight 0.9139 lb (see `Results/`). Optional: run the mesh-convergence job (`MESH_LEVEL = 'CHECK'`), then `FOS_Stock1_RevC_v2.py`.
 2. Confirm with David Wilson (MTC) that the notches can be sawn out to the relief holes.
 3. Fig. 1 allows Ø1.00 ± 0.02 (0.98–1.02); the Ø1.03 holes are a deliberate team choice.
 4. Make the Rev C manufacturing drawing and STEP file for MTC.

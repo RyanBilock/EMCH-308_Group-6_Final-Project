@@ -31,9 +31,9 @@ Finite element design and validation of an 8" × 3" I-beam for EMCH 308 (Introdu
 - Two steel support rollers, Ø0.394", 8" center-to-center
 - Loaded to 6,250 lbf; FoS checked against a 0.02" offset line from the linear-elastic load–displacement response
 
-## Final design: Rev C (concept, Abaqus check pending)
+## Final design: Rev C (Abaqus run complete)
 
-Rev C replaced Rev B as the team's final design in Nov 2026, to gain weight margin (Rev B was 0.993 lb) and keep the flanges full width under every test roller. Its numbers are hand calculations until the Rev C Abaqus model is run. Everything for it is in [`Final_Design/`](Final_Design/).
+Rev C replaced Rev B as the team's final design in Nov 2026, to gain weight margin (Rev B was 0.993 lb) and keep the flanges full width under every test roller. The Abaqus run (Nov 3, 2026) confirms it meets all three requirements. Everything for it is in [`Final_Design/`](Final_Design/).
 
 - **Stock:** Stock 1, AA I 3 × 2.03 (6061-T6), full 8.40 in raw length (no cross-cut; 0.20 in overhang past each support vs. 0.10 in on Rev B)
 - **Flanges:** full 2.50 in width kept wherever a roller touches: top flange |z| ≤ 0.75 in (load roller), bottom flange |z| ≥ 3.50 in (supports). Elsewhere the tips are notched 0.65 in deep (flange 1.20 in wide).
@@ -46,8 +46,8 @@ Rev C replaced Rev B as the team's final design in Nov 2026, to gain weight marg
 
 | Requirement | Limit | Rev C (hand calc) | |
 |---|---|---|---|
-| Weight (0.098 lb/in³) | ≤ 1.00 lb | 0.914 lb (0.928 lb if every notch is 0.02 in shallow) | Pass |
-| FoS (offset method, 0.02 in) | ≥ 1.25 | Abaqus run still to do | Pending |
+| Weight (0.098 lb/in³) | ≤ 1.00 lb | 0.914 lb (Abaqus mesh 0.9139 lb, matches CAD to 0.001 %; 0.928 lb if every notch is 0.02 in shallow) | Pass |
+| FoS (offset method, 0.02 in) | ≥ 1.25 | **1.772** (P_offset = 8,858 lbf, Abaqus, 234,665-node mesh) | Pass |
 | Cost (course cost sheet) | ≤ $600 | $131.78 | Pass |
 
 | Item | Calculation | Cost |
@@ -89,7 +89,7 @@ The last fully analysed design. All its files are in [`Old_Designs/RevB_Stock1_D
 │   │   └── Stock1_Drilled_v1/  model .cae / .jnl  +  job/ (.cae, .jnl, .inp)
 │   ├── final_design/           Rev C model (created by Stock1_RevC_v1.py) + job/ and mesh_check/
 │   └── python/
-│       ├── final/              Rev C: Stock1_RevC_v1.py (build + finest mesh + job) · FOS_Stock1_RevC_v1.py
+│       ├── final/              Rev C: Stock1_RevC_v1.py (build + finest mesh + job) · FOS_Stock1_RevC_v2.py
 │       │                       (FoS, weight and accuracy report)
 │       ├── iterations/         Scripts for every earlier design, incl. Rev B: Stock1_Drilled_v2.py ·
 │       │                       FOS_Stock1_Drilled_v3.py · Export_STEP_v3.py
@@ -121,7 +121,7 @@ The last fully analysed design. All its files are in [`Old_Designs/RevB_Stock1_D
 1. In Abaqus/CAE, **File → Set Work Directory** → `abaqus/base_models/` (the folder holding `ProjectBeam.cae`).
 2. **File → Run Script** → `Stock1_RevC_v1.py`. It builds the Rev C beam, searches for the finest C3D10 mesh under the license's 250,000-node limit (allow 20–45 min of meshing), and submits job `Stock1_RevC_v1`. It saves straight into `abaqus/final_design/` (model) and `abaqus/final_design/job/` (job files, `.odb`, `Stock1_RevC_v1_geometry.txt`). The fine job takes roughly 1–3 hours.
 3. *(Optional, for the accuracy report)* set `MESH_LEVEL = 'CHECK'` at the top of `Stock1_RevC_v1.py` and run it again. It builds the same beam at the Rev B mesh density as job `Stock1_RevC_v1_MeshCheck` in `abaqus/final_design/mesh_check/` (about 30–40 min).
-4. When the job reads *Completed*, **Run Script** → `FOS_Stock1_RevC_v1.py` (work directory anywhere in the repo). It reports weight, FoS and cost against the limits, plus accuracy checks: mesh volume vs. CAD volume vs. hand calculation, FoS sensitivity to the elastic-fit window, curve resolution, mesh convergence (if step 3 was run), where the curve departs from linear, and the permanent set at 6,250 lbf. Output: `results/final_design/`.
+4. When the job reads *Completed*, **Run Script** → `FOS_Stock1_RevC_v2.py` (work directory anywhere in the repo; v2 fixes the plot axes of v1). It reports weight, FoS and cost against the limits, plus accuracy checks: mesh volume vs. CAD volume vs. hand calculation, FoS sensitivity to the elastic-fit window, curve resolution, mesh convergence (if step 3 was run), where the curve departs from linear, and the permanent set at 6,250 lbf. Output: `results/final_design/`.
 
 `cad/drawings/source/make_RevC_concept_v2.py` (plain Python with numpy and matplotlib) redraws the concept sheet and recomputes its weight, cost and hand-calc stresses.
 
@@ -142,7 +142,7 @@ The last fully analysed design. All its files are in [`Old_Designs/RevB_Stock1_D
 | Stock 1, notched flanges | 0.957 | 1.637 | over $600 (milling) | Meets weight and FoS, cost too high |
 | Stock 1, drilled v1 (32 flange + 2 web holes, milled end reliefs) | 0.993 | 1.246 | $510 | Fails FoS: the web yields around the extra web holes |
 | Stock 1, drilled v2 — Rev B (28 × Ø25/32 flange holes) | 0.993 | 1.625 | $143.47 | Superseded: meets all three, almost no weight margin |
-| **Rev C (roller pads, sawn notches, Ø1.03 holes)** | **0.914 (hand calc)** | **Abaqus to run** | **$131.78** | **Current final design** |
+| **Rev C (roller pads, sawn notches, Ø1.03 holes)** | **0.914** | **1.772** | **$131.78** | **Current final design: meets all three** |
 
 ## Tools
 
