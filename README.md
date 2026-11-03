@@ -39,10 +39,12 @@ Rev C replaced Rev B as the team's final design in Nov 2026, to gain weight marg
 - **Flanges:** full 2.50 in width kept wherever a roller touches: top flange |z| ≤ 0.75 in (load roller), bottom flange |z| ≥ 3.50 in (supports). Elsewhere the tips are notched 0.65 in deep (flange 1.20 in wide).
 - **Corners:** 8 × Ø0.50 relief holes drilled first; saw cuts end tangent to them, so every inside corner is R0.25 (no sharp corners)
 - **Web:** unchanged except the 4 required holes, opened to Ø1.03 (1-1/32 drill). Note: Fig. 1 allows Ø1.00 ± 0.02.
-- **Concept sheet:** [`cad/concept_drawings/Proposal_RevC_Stock1_v2.pdf`](cad/concept_drawings/Proposal_RevC_Stock1_v2.pdf) · [PNG](cad/concept_drawings/Proposal_RevC_Stock1_v2.png) (script: `cad/drawings/source/make_RevC_concept_v2.py`)
+- **Design sheet (views, dimensions, FoS curve, cost, weight):** [`cad/drawings/Design_Sheet_Stock1_RevC_v1.pdf`](cad/drawings/Design_Sheet_Stock1_RevC_v1.pdf) · [PNG](cad/drawings/Design_Sheet_Stock1_RevC_v1.png)
+- **Manufacturing drawing (for MTC, 3 sheets):** [`cad/USC06_MTC06_IBeam_RevC_Drawing.pdf`](cad/USC06_MTC06_IBeam_RevC_Drawing.pdf)
+- **Concept sheet:** [`cad/concept_drawings/Proposal_RevC_Stock1_v2.pdf`](cad/concept_drawings/Proposal_RevC_Stock1_v2.pdf) (script: `cad/drawings/source/make_RevC_concept_v2.py`)
 - **Cost sheet:** [`cost/ProjectCostSheet_RevC_Stock1_v2.xlsx`](cost/ProjectCostSheet_RevC_Stock1_v2.xlsx)
 
-![Rev C concept sheet](cad/concept_drawings/Proposal_RevC_Stock1_v2.png)
+![Rev C design sheet](cad/drawings/Design_Sheet_Stock1_RevC_v1.png)
 
 | Requirement | Limit | Rev C | |
 |---|---|---|---|
@@ -59,7 +61,7 @@ Rev C replaced Rev B as the team's final design in Nov 2026, to gain weight marg
 
 With extra setups the sheet does not model (second drill size, flipping between flanges, a cross-cut) the total is $183.46, still under $600. If MTC has to mill the notches instead of sawing them, the cost goes to about $1,860–$3,890 and the design fails the cost limit.
 
-**Open items:** run the Rev C Abaqus model (scripts ready, see *Running the models*) · confirm the sawn notches with MTC · make the Rev C manufacturing drawing and STEP file.
+**Open items:** confirm the sawn notches with MTC · Rev C STEP file · optional mesh-convergence job.
 
 ## Previous design: Rev B (Stock 1 drilled v2, superseded)
 
@@ -100,8 +102,11 @@ The last fully analysed design. All its files are in [`Old_Designs/RevB_Stock1_D
 │   ├── final_design/           Rev C FoS report, CSV, plot (written by FOS_Stock1_RevC_v1.py)
 │   └── iterations/             Stock1_Drilled_v2_RevB · Stock3_Beam_8p2in · Stock1_Notched · Stock1_Drilled_v1
 ├── cad/
+│   ├── USC06_MTC06_IBeam_RevC_Drawing.pdf   Manufacturing drawing for MTC (Rev C, 3 sheets) + _sheet1–3.png
 │   ├── concept_drawings/       Proposal_RevC_Stock1_v2 (current design) · earlier material-removal and cost-plan concepts
-│   ├── drawings/source/        Drawing scripts: make_RevC_concept_v1–v2 · make_RevB_drawing_v1–v3
+│   ├── drawings/               Design_Sheet_Stock1_RevC_v1 (one-page design sheet)
+│   │   └── source/             Drawing scripts: make_RevC_drawing_v1 · make_RevC_design_sheet_v1 ·
+│   │                           make_RevC_concept_v1–v2 · make_RevB_drawing_v1–v3
 │   └── old_designs/RevB/       Rev B STEP, manufacturing drawing (2 sheets), creo/ part, drawings/ (design sheet,
 │                               hole layout, GD&T version)
 ├── cost/                       ProjectCostSheet_RevC_Stock1_v2.xlsx (current) · old_designs/ (Rev B)

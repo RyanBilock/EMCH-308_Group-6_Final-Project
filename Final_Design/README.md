@@ -4,7 +4,7 @@
 
 These are **copies**: each file also stays in its original location (listed below). Change the original, then refresh the copy here.
 
-![Rev C concept sheet](Drawings/Proposal_RevC_Stock1_v2.png)
+![Rev C design sheet](Drawings/Design_Sheet_Stock1_RevC_v1.png)
 
 ## Summary
 
@@ -36,18 +36,21 @@ With setups the sheet does not model (second drill size, flipping between flange
 1. ~~Run the Rev C Abaqus model~~ Done Nov 3, 2026: FoS 1.772, mesh weight 0.9139 lb (see `Results/`). Optional: run the mesh-convergence job (`MESH_LEVEL = 'CHECK'`), then `FOS_Stock1_RevC_v2.py`.
 2. Confirm with David Wilson (MTC) that the notches can be sawn out to the relief holes.
 3. Fig. 1 allows Ø1.00 ± 0.02 (0.98–1.02); the Ø1.03 holes are a deliberate team choice.
-4. Make the Rev C manufacturing drawing and STEP file for MTC.
+4. ~~Make the Rev C manufacturing drawing~~ Done: `Drawings/USC06_MTC06_IBeam_RevC_Drawing.pdf` (3 sheets). STEP file still to do.
 
 ## What's here
 
 | Folder | File | What it is | Original location |
 |---|---|---|---|
-| `Drawings/` | `Proposal_RevC_Stock1_v2.pdf` / `.png` | Concept sheet: flange plans, side view, sections, weight, cost, strength | `cad/concept_drawings/` |
+| `Drawings/` | `Design_Sheet_Stock1_RevC_v1.pdf` / `.png` | One-page design sheet: views, dimensions, Abaqus FoS curve, cost, weight, feature schedule | `cad/drawings/` |
+| | `USC06_MTC06_IBeam_RevC_Drawing.pdf` + `_sheet1–3.png` | Manufacturing drawing for MTC (3 sheets, 1:1) | `cad/` |
+| | `Proposal_RevC_Stock1_v2.pdf` / `.png` | Concept sheet: flange plans, side view, sections, weight, cost, strength | `cad/concept_drawings/` |
 | `Cost/` | `ProjectCostSheet_RevC_Stock1_v2.xlsx` | Course cost sheet, filled in ($131.78) | `cost/` |
 | `Scripts/` | `Stock1_RevC_v1.py` | Builds the Rev C beam, finest mesh under the 250,000-node limit, submits the job | `abaqus/python/final/` |
 | | `FOS_Stock1_RevC_v1.py` | Reads the `.odb`: FoS, weight, cost, accuracy checks, mesh convergence | `abaqus/python/final/` |
+| | `make_RevC_drawing_v1.py` · `make_RevC_design_sheet_v1.py` | Generate the manufacturing drawing and the design sheet | `cad/drawings/source/` |
 | | `make_RevC_concept_v2.py` | Draws the concept sheet and recomputes weight, cost, stresses | `cad/drawings/source/` |
 | `Results/` | `Design_Comparison.png` | Abaqus curves of the earlier designs (Rev C to be added) | `results/` |
 | `Abaqus/` | *(after the run)* | Rev C model, job and `.odb` | `abaqus/final_design/` |
 | `Results/` | *(after the run)* | `FOS_Stock1_RevC_v1.txt` / `_LoadDisp.csv` / `.png` | `results/final_design/` |
-| `CAD/` | *(to come)* | Rev C STEP file and MTC manufacturing drawing | `cad/` |
+| `CAD/` | *(to come)* | Rev C STEP file | `cad/` |
