@@ -33,7 +33,7 @@ With setups the sheet does not model (second drill size, flipping between flange
 
 ## Open items before release to MTC
 
-1. Build and run the Rev C Abaqus model; confirm FoS ≥ 1.25 and where the web first yields.
+1. Run the Rev C Abaqus model (`Stock1_RevC_v1.py`, then `FOS_Stock1_RevC_v1.py`); confirm FoS ≥ 1.25 and where the web first yields. Optional mesh-convergence job: `MESH_LEVEL = 'CHECK'`.
 2. Confirm with David Wilson (MTC) that the notches can be sawn out to the relief holes.
 3. Fig. 1 allows Ø1.00 ± 0.02 (0.98–1.02); the Ø1.03 holes are a deliberate team choice.
 4. Make the Rev C manufacturing drawing and STEP file for MTC.
@@ -44,7 +44,10 @@ With setups the sheet does not model (second drill size, flipping between flange
 |---|---|---|---|
 | `Drawings/` | `Proposal_RevC_Stock1_v2.pdf` / `.png` | Concept sheet: flange plans, side view, sections, weight, cost, strength | `cad/concept_drawings/` |
 | `Cost/` | `ProjectCostSheet_RevC_Stock1_v2.xlsx` | Course cost sheet, filled in ($131.78) | `cost/` |
-| `Scripts/` | `make_RevC_concept_v2.py` | Draws the concept sheet and recomputes weight, cost, stresses | `cad/drawings/source/` |
+| `Scripts/` | `Stock1_RevC_v1.py` | Builds the Rev C beam, finest mesh under the 250,000-node limit, submits the job | `abaqus/python/final/` |
+| | `FOS_Stock1_RevC_v1.py` | Reads the `.odb`: FoS, weight, cost, accuracy checks, mesh convergence | `abaqus/python/final/` |
+| | `make_RevC_concept_v2.py` | Draws the concept sheet and recomputes weight, cost, stresses | `cad/drawings/source/` |
 | `Results/` | `Design_Comparison.png` | Abaqus curves of the earlier designs (Rev C to be added) | `results/` |
-| `Abaqus/` | *(to come)* | Rev C model, job and `.odb` | `abaqus/final_design/` |
+| `Abaqus/` | *(after the run)* | Rev C model, job and `.odb` | `abaqus/final_design/` |
+| `Results/` | *(after the run)* | `FOS_Stock1_RevC_v1.txt` / `_LoadDisp.csv` / `.png` | `results/final_design/` |
 | `CAD/` | *(to come)* | Rev C STEP file and MTC manufacturing drawing | `cad/` |
