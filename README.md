@@ -61,6 +61,34 @@ Finite element design and validation of an 8" × 3" I-beam for EMCH 308 (Introdu
 
 If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005 in), add facing both ends: (0.5 + 0.04 × 2) h × $250/h = $145.00, for a total of $288.47 — still under $600.
 
+## Proposed revision: Rev C concept (v2, under review)
+
+Not released to MTC. Rev B above stays the final design until Rev C is checked in Abaqus and MTC confirms the cutting method.
+
+- **Stock:** Stock 1, AA I 3 × 2.03 (6061), full 8.40 in raw length (no cross-cut; support overhang 0.20 in vs. 0.10 in)
+- **Flanges:** full 2.50 in width kept wherever a roller touches: top flange |z| ≤ 0.75 in (load roller), bottom flange |z| ≥ 3.50 in (supports). Elsewhere the tips are notched 0.65 in deep (flange 1.20 in wide).
+- **Corners:** 8 × Ø0.50 relief holes drilled first; saw cuts end tangent to them, so every inside corner is R0.25 (no sharp corners)
+- **Web:** unchanged except the 4 required holes, opened to Ø1.03 (1-1/32 drill). Note: Fig. 1 allows Ø1.00 ± 0.02.
+- **Concept sheet:** [`cad/concept_drawings/Proposal_RevC_Stock1_v2.pdf`](cad/concept_drawings/Proposal_RevC_Stock1_v2.pdf) · [PNG](cad/concept_drawings/Proposal_RevC_Stock1_v2.png) (script: `cad/drawings/source/make_RevC_concept_v2.py`)
+- **Cost sheet:** [`cost/ProjectCostSheet_RevC_Stock1_v2.xlsx`](cost/ProjectCostSheet_RevC_Stock1_v2.xlsx)
+
+| Requirement | Limit | Rev C v2 (hand calc) |
+|---|---|---|
+| Weight (0.098 lb/in³) | ≤ 1.00 lb | 0.914 lb (0.928 lb if every notch is 0.02 in shallow) |
+| Cost (course cost sheet) | ≤ $600 | $131.78 |
+| FoS | ≥ 1.25 | Abaqus run still to do |
+
+| Item | Calculation | Cost |
+|---|---|---|
+| Material, Stock 1 | 8.4 in × 2.03/12 lb/in × $38.72/lb | $55.02 |
+| Saw (14 cuts) | (0.1667 + 0.0167 × 14) h × $100/h | $40.05 |
+| Drill (4 web + 8 relief = 12 holes) | (0.1667 + 0.0167 × 12) h × $100/h | $36.71 |
+| **Total** | | **$131.78** |
+
+With extra setups the sheet does not model (second drill size, flipping between flanges, a cross-cut) the total is $183.46, still under $600. If MTC has to mill the notches instead of sawing them, the cost goes to about $1,860–$3,890 and the design fails the cost limit.
+
+![Rev C concept v2](cad/concept_drawings/Proposal_RevC_Stock1_v2.png)
+
 ## Repository layout
 
 **Looking for the final design?** Everything for it (model, job, `.odb`, FoS report, drawings, STEP, cost sheet, scripts) is copied into [`Final_Design/`](Final_Design/). The originals stay in the folders below.
@@ -93,8 +121,9 @@ If MTC needs the ends faced for length tolerance (saw ±0.02 in vs. face ±0.005
 │   ├── creo/                   Creo Parametric part made from the STEP file
 │   ├── USC06_MTC06_IBeam_RevB_Drawing.pdf   Manufacturing drawing (Rev B, 2 sheets, course-example style)
 │   ├── drawings/               Design_Sheet_Stock1_Drilled_v2 · Hole_Layout_Stock1_Drilled_v2 · RevB drawing GD&T version
-│   └── concept_drawings/       Earlier material-removal and cost-plan concepts (superseded)
-├── cost/                       Course cost sheet filled in for the final design
+│   │   └── source/             Drawing scripts: make_RevB_drawing_v1–v3 · make_RevC_concept_v1–v2
+│   └── concept_drawings/       Proposal_RevC_Stock1_v2 (current proposal) · earlier material-removal and cost-plan concepts (superseded)
+├── cost/                       Course cost sheets: Stock1_Drilled_v2 (final, Rev B) · RevC_Stock1_v2 (proposal)
 ├── report/                     Final report (to come)
 ├── Blackboard Files/           Course documents: project statement, rubric, guide, blank cost sheet
 └── Organize_Project_v4.py      One-time script that tidied the project drive into this layout
@@ -124,6 +153,7 @@ Scripts write their output next to `ProjectBeam.cae`; move the finished model an
 | Stock 1, notched flanges | 0.957 | 1.637 | over $600 (milling) | Meets weight and FoS, cost too high |
 | Stock 1, drilled v1 (32 flange + 2 web holes, milled end reliefs) | 0.993 | 1.246 | $510 | Fails FoS: the web yields around the extra web holes |
 | **Stock 1, drilled v2 (28 × Ø25/32 flange holes)** | **0.993** | **1.625** | **$143.47** | **Final: meets all three** |
+| Rev C concept v2 (roller pads, sawn notches, Ø1.03 holes) | 0.914 (hand calc) | to run | $131.78 | Proposed: needs Abaqus check and MTC confirmation |
 
 ## Tools
 
