@@ -98,7 +98,8 @@ The last fully analysed design. All its files are in [`Old_Designs/RevB_Stock1_D
 │       │                       (FoS, weight and accuracy report)
 │       ├── iterations/         Scripts for every earlier design, incl. Rev B: Stock1_Drilled_v2.py ·
 │       │                       FOS_Stock1_Drilled_v3.py · Export_STEP_v3.py
-│       ├── tools/              Baseline_Stock1_v1.py · FOS_ProjectBeam_v3.py (FoS for any .odb)
+│       ├── tools/              Baseline_Stock1_v1.py · FOS_ProjectBeam_v3.py (FoS for any .odb) ·
+│       │                       plot_FOS_RevC_v1.py (Rev C FoS plot from the CSV, plain Python)
 │       └── fix_history/        Repair scripts for the original model, v1–v5 (see its README)
 ├── results/
 │   ├── Design_Comparison.png   Abaqus load–displacement curves of the earlier designs

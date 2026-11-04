@@ -51,12 +51,13 @@ With setups the sheet does not model (second drill size, flipping between flange
 | | `fix_Stock1_RevC_v1.py` | Warning-free rerun of the v1 model as job `Stock1_RevC_v2` | `abaqus/python/final/` |
 | | `Export_STEP_v4.py` | Writes `cad/USC06_MTC06_IBeam_RevC.step` (inches) after geometry checks | `abaqus/python/final/` |
 | | `make_RevC_drawing_v1.py` · `make_RevC_design_sheet_v1.py` | Generate the manufacturing drawing and the design sheet | `cad/drawings/source/` |
+| | `plot_FOS_RevC_v1.py` | Redraws the FoS plot from the CSV (plain Python) | `abaqus/python/tools/` |
 | | `make_RevC_concept_v2.py` | Draws the concept sheet and recomputes weight, cost, stresses | `cad/drawings/source/` |
 | `Results/` | `FOS_Stock1_RevC_v1.txt` / `_LoadDisp.csv` | FoS, weight, cost and accuracy report; load–displacement data | `results/final_design/` |
-| | `Stock1_RevC_v1_LoadDisp.png` | Load–displacement plot with the offset line (Rev B for comparison) | `results/final_design/` |
+| | `Stock1_RevC_v1_LoadDisp.png` | Load–displacement plot: Rev C, offset line, crossing, 5,000 / 6,250 lbf levels | `results/final_design/` |
 | | `Design_Comparison.png` | Abaqus curves of the earlier designs | `results/` |
 | `Abaqus/` | `Stock1_RevC_v1.cae` / `.jnl` | Rev C Abaqus model | `abaqus/final_design/` |
 | `Abaqus/job/` | `Stock1_RevC_v1.cae` / `.inp` / `.jnl` | Model with its job; input file | `abaqus/final_design/job/` |
 | | `Stock1_RevC_v1_geometry.txt` | CAD volumes and mesh settings read by the FoS script | `abaqus/final_design/job/` |
-| | `Stock1_RevC_v1.odb` | Results, 519 MB: **project drive only** (too large for the free Git LFS quota); regenerate from the `.inp` | `abaqus/final_design/job/` |
+| | `Stock1_RevC_v1.odb` | Results, 519 MB: **local copy only**, here and in `abaqus/final_design/job/` (too large for the free Git LFS quota); regenerate from the `.inp` | `abaqus/final_design/job/` |
 | `CAD/` | `USC06_MTC06_IBeam_RevC.step` | 3D model for MTC (inches) | `cad/` |
