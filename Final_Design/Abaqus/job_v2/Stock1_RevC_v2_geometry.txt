@@ -1,0 +1,16 @@
+# Written by Stock1_RevC_v1.py; read by FOS_Stock1_RevC_v1.py
+beam_length_in = 8.400000
+cad_blank_in3 = 14.495465
+cad_bottom_notches_in3 = 2.352054
+cad_top_notches_in3 = 2.318254
+cad_volume_in3 = 9.325227
+cad_web_holes_in3 = 0.499931
+hand_calc_lb_at_0p098 = 0.914000
+notch_depth_in = 0.650000
+web_hole_dia_in = 1.030000
+mesh_curvature = 0.050000
+mesh_elements = 151673
+mesh_level = FINE
+mesh_min_size = 0.100000
+mesh_nodes = 234665
+mesh_seed_in = 0.075661

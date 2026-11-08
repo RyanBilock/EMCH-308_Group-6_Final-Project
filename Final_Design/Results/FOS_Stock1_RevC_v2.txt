@@ -1,0 +1,52 @@
+FACTOR OF SAFETY, WEIGHT AND ACCURACY - Stock1_RevC_v2 (Rev C)
+ODB: E:\EMCH308_repo\abaqus\final_design\job_v2\Stock1_RevC_v2.odb
+Job status: completed successfully; step 100 % complete
+Mesh: 151673 C3D10 elements, 234665 nodes, seed 0.0757 in
+
+REQUIREMENTS
+  Weight (curved C3D10, 0.098 lb/in^3) = 0.9139 lb   limit 1.00 lb   -> PASS
+  FOS = P_offset / 5000 = 1.770   required >= 1.25 (P >= 6250 lbf)   -> PASS
+  Cost (course cost sheet) = $131.78   limit $600   -> PASS
+  OVERALL: MEETS weight, strength and cost
+
+LOAD-DISPLACEMENT
+  Beam length analysed  = 8.400 in
+  Elastic slope k       = 251006 lbf/in (fit 15 points, 15-45 % of peak)
+  Peak load reached     = 9612 lbf
+  Offset-line load      = 8850 lbf at 0.0552 in travel
+  Peak von Mises at 5930 lbf = 41.3 ksi (saved frame at step time 0.30)
+
+DEFORMATION AT THE TEST LOAD (6250 lbf)
+  Curve departs 1 % from linear at  5411 lbf
+  Curve departs 2 % from linear at  5930 lbf
+  At 6250 lbf: travel 0.0258 in, 3.6 % below the straight line
+  Estimated permanent set after unloading from 6250 lbf = 0.0009 in (the offset test allows 0.020 in)
+  Largest plastic strain at 8890 lbf (saved frame nearest the offset load):
+     PEEQ 0.0433  web/fillet, lower half, 4.16 in from mid-span (over a support roller)
+     PEEQ 0.0397  top flange, 0.01 in from mid-span (under the load roller)
+     PEEQ 0.0278  bottom flange, 3.99 in from mid-span (over a support roller)
+     PEEQ 0.0266  web/fillet, lower half, 3.53 in from mid-span (over a support roller)
+     PEEQ 0.0169  web/fillet, upper half, 0.48 in from mid-span (under the load roller)
+
+SOLVER MESSAGES (Stock1_RevC_v2.msg / .dat)
+  Analysis warnings: 0   errors: 0   (negative-eigenvalue warnings: 0)
+  -> CLEAN RUN: no warnings or errors.
+  Compared with Stock1_RevC_v1 (7 warnings): FOS 1.770 vs 1.772 (-0.08 %), k +0.80 %
+
+WEIGHT ACCURACY
+  Mesh volume, curved C3D10 (exact)    = 9.3255 in^3
+  Mesh volume, straight-sided tets     = 9.3558 in^3  (+0.33 %; fills in curved holes)
+  CAD volume (Abaqus part)             = 9.3252 in^3  -> mesh differs by +0.003 %
+  Weight at 0.0975 lb/in^3 (Rev B basis) = 0.9092 lb
+  Weight at 0.098 lb/in^3 (cost sheet)  = 0.9139 lb   hand calc 0.914 lb -> -0.01 %
+  Margin under the 1.00 lb limit       = 0.086 lb (8.6 %)
+  Length check: mesh 8.4000 in vs design 8.4000 in
+
+FOS ACCURACY
+  Elastic fit 10-30 % of peak: k = 252013 lbf/in, FOS = 1.769
+  Elastic fit 15-45 % of peak: k = 251006 lbf/in, FOS = 1.770
+  Elastic fit 20-50 % of peak: k = 250048 lbf/in, FOS = 1.771
+  Spread from the fit window          = 0.002 (0.1 % of the reported FOS)
+  Curve points: 106 in the step; at the crossing they are 0.0008 in / 35 lbf apart
+  Mesh convergence: not checked.  Set MESH_LEVEL = 'CHECK' in Stock1_RevC_v1.py,
+     run it, and run this script again to compare the two meshes.

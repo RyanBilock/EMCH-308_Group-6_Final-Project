@@ -1,10 +1,10 @@
 # Final Design: Rev C (Stock 1, roller pads + sawn notches)
 
-> **Status: Abaqus run complete (Nov 3, 2026): meets weight, FoS and cost.** FoS 1.772, weight 0.914 lb, cost $131.78. Drawing, design sheet and STEP file done. Optional: warning-free rerun (`Stock1_RevC_v2`) and mesh-convergence check. The last fully analysed design, Rev B, is in [`Old_Designs/RevB_Stock1_Drilled_v2/`](../Old_Designs/RevB_Stock1_Drilled_v2/).
+> **Status: warning-free Abaqus rerun complete (Nov 8, 2026, job `Stock1_RevC_v2`, 0 warnings, 0 errors): meets weight, FoS and cost.** FoS 1.770, weight 0.914 lb, cost $131.78 (the Nov 3 v1 run gave FoS 1.772). Drawing, design sheet and STEP file done. Optional: mesh-convergence check. The last fully analysed design, Rev B, is in [`Old_Designs/RevB_Stock1_Drilled_v2/`](../Old_Designs/RevB_Stock1_Drilled_v2/).
 
 These are **copies**: each file also stays in its original location (listed below). Change the original, then refresh the copy here.
 
-![Rev C design sheet](Drawings/Design_Sheet_Stock1_RevC_v1.png)
+![Rev C design sheet](Drawings/Design_Sheet_Stock1_RevC_v2.png)
 
 ## Summary
 
@@ -18,8 +18,8 @@ These are **copies**: each file also stays in its original location (listed belo
 
 | Requirement | Limit | Rev C | |
 |---|---|---|---|
-| Weight (0.098 lb/in³) | ≤ 1.00 lb | 0.914 lb (Abaqus mesh 0.9139 lb, matches CAD to 0.001 %; 0.928 lb if every notch is 0.02 in shallow) | Pass |
-| Factor of safety (FoS), 0.02 in offset method | ≥ 1.25 | **1.772** (P_offset = 8,858 lbf, Abaqus, 234,665-node mesh) | Pass |
+| Weight (0.098 lb/in³) | ≤ 1.00 lb | 0.914 lb (Abaqus mesh 0.9139 lb, matches CAD to 0.003 %; 0.928 lb if every notch is 0.02 in shallow) | Pass |
+| Factor of safety (FoS), 0.02 in offset method | ≥ 1.25 | **1.770** (P_offset = 8,850 lbf, Abaqus job `Stock1_RevC_v2`, 234,665-node mesh, 0 solver warnings; v1: 1.772) | Pass |
 | Cost (course cost sheet) | ≤ $600 | $131.78 | Pass |
 
 | Item | Calculation | Cost |
@@ -33,7 +33,7 @@ With setups the sheet does not model (second drill size, flipping between flange
 
 ## Open items before release to MTC
 
-1. ~~Run the Rev C Abaqus model~~ Done Nov 3, 2026: FoS 1.772, mesh weight 0.9139 lb (see `Results/`). The job finished with 7 solver warnings, all from one rejected attempt at increment 2; results are valid. Optional: warning-free rerun with `fix_Stock1_RevC_v1.py` (the first try, Nov 3, was stopped by the license server after 5 clean increments; rerun it) and the mesh-convergence job (`MESH_LEVEL = 'CHECK'`), then `FOS_Stock1_RevC_v3.py`.
+1. ~~Run the Rev C Abaqus model~~ Done Nov 3, 2026 (`Stock1_RevC_v1`): FoS 1.772, 7 solver warnings from one rejected attempt at increment 2. ~~Warning-free rerun~~ Done Nov 8, 2026 with `Stock1_RevC_Job_v1.py` (`Stock1_RevC_v2`): **0 warnings, 0 errors, FoS 1.770** (−0.08 % vs v1; stiffness +0.8 %), so the v1 result was sound. Optional: mesh-convergence job (`MESH_LEVEL = 'CHECK'` in `Stock1_RevC_v1.py`), then `FOS_Stock1_RevC_v3.py`.
 2. Confirm with David Wilson (MTC) that the notches can be sawn out to the relief holes.
 3. Fig. 1 allows Ø1.00 ± 0.02 (0.98–1.02); the Ø1.03 holes are a deliberate team choice.
 4. ~~Make the Rev C manufacturing drawing~~ Done: `Drawings/USC06_MTC06_IBeam_RevC_Drawing.pdf` (3 sheets). ~~STEP file~~ Done: `CAD/USC06_MTC06_IBeam_RevC.step` (inches), checked in a CAD kernel: one valid solid, 8.40 × 2.50 × 3.00 in, 9.3252 in³ (0.914 lb), 4 × Ø1.03 web holes, 8 × R0.25 notch corners.
@@ -42,22 +42,26 @@ With setups the sheet does not model (second drill size, flipping between flange
 
 | Folder | File | What it is | Original location |
 |---|---|---|---|
-| `Drawings/` | `Design_Sheet_Stock1_RevC_v1.pdf` / `.png` | One-page design sheet: views, dimensions, Abaqus FoS curve, cost, weight, feature schedule | `cad/drawings/` |
+| `Drawings/` | `Design_Sheet_Stock1_RevC_v2.pdf` / `.png` | One-page design sheet: views, dimensions, Abaqus FoS curve (v2 run), cost, weight, feature schedule (`_v1` = Nov 3 numbers, kept for reference) | `cad/drawings/` |
 | | `USC06_MTC06_IBeam_RevC_Drawing.pdf` + `_sheet1–3.png` | Manufacturing drawing for MTC (3 sheets, 1:1) | `cad/` |
 | | `Proposal_RevC_Stock1_v2.pdf` / `.png` | Concept sheet: flange plans, side view, sections, weight, cost, strength | `cad/concept_drawings/` |
 | `Cost/` | `ProjectCostSheet_RevC_Stock1_v2.xlsx` | Course cost sheet, filled in ($131.78) | `cost/` |
 | `Scripts/` | `Stock1_RevC_v1.py` | Builds the Rev C beam, finest mesh under the 250,000-node limit, submits the job | `abaqus/python/final/` |
 | | `FOS_Stock1_RevC_v1.py` → `_v3.py` | Reads the `.odb`: FoS, weight, cost, solver warnings, accuracy checks, mesh convergence (use v3) | `abaqus/python/final/` |
 | | `fix_Stock1_RevC_v1.py` | Warning-free rerun of the v1 model as job `Stock1_RevC_v2` | `abaqus/python/final/` |
+| | `Stock1_RevC_Job_v1.py` | **One-step run:** builds + runs `Stock1_RevC_v2` (waits, auto-resubmits once), runs `FOS_Stock1_RevC_v3.py`, refreshes these copies, commits and pushes to GitHub | `abaqus/python/final/` |
 | | `Export_STEP_v4.py` | Writes `cad/USC06_MTC06_IBeam_RevC.step` (inches) after geometry checks | `abaqus/python/final/` |
-| | `make_RevC_drawing_v1.py` · `make_RevC_design_sheet_v1.py` | Generate the manufacturing drawing and the design sheet | `cad/drawings/source/` |
-| | `plot_FOS_RevC_v1.py` | Redraws the FoS plot from the CSV (plain Python) | `abaqus/python/tools/` |
+| | `make_RevC_drawing_v1.py` · `make_RevC_design_sheet_v2.py` | Generate the manufacturing drawing and the design sheet | `cad/drawings/source/` |
+| | `plot_FOS_RevC_v2.py` | Redraws the FoS plot from the v2 CSV, with the v1 curve overlaid (plain Python) | `abaqus/python/tools/` |
 | | `make_RevC_concept_v2.py` | Draws the concept sheet and recomputes weight, cost, stresses | `cad/drawings/source/` |
-| `Results/` | `FOS_Stock1_RevC_v1.txt` / `_LoadDisp.csv` | FoS, weight, cost and accuracy report; load–displacement data | `results/final_design/` |
-| | `Stock1_RevC_v1_LoadDisp.png` | Load–displacement plot: Rev C, offset line, crossing, 5,000 / 6,250 lbf levels | `results/final_design/` |
+| `Results/` | `FOS_Stock1_RevC_v2.txt` / `_LoadDisp.csv` | **Reported run:** FoS, weight, cost, solver messages (0 warnings), v1 comparison, accuracy checks; load–displacement data |
+| | `FOS_Stock1_RevC_v1.txt` / `_LoadDisp.csv` | Nov 3 run (7 warnings), kept for comparison | `results/final_design/` |
+| | `Stock1_RevC_v2_LoadDisp.png` | Load–displacement plot: v2 curve with v1 overlaid, offset line, crossing, 5,000 / 6,250 lbf levels |
+| | `Stock1_RevC_v1_LoadDisp.png` | Nov 3 plot | `results/final_design/` |
 | | `Design_Comparison.png` | Abaqus curves of the earlier designs | `results/` |
 | `Abaqus/` | `Stock1_RevC_v1.cae` / `.jnl` | Rev C Abaqus model | `abaqus/final_design/` |
-| `Abaqus/job/` | `Stock1_RevC_v1.cae` / `.inp` / `.jnl` | Model with its job; input file | `abaqus/final_design/job/` |
+| `Abaqus/job_v2/` | `Stock1_RevC_v2.cae` / `.inp` / `.jnl` / `_geometry.txt` | **Reported run** (warning-free): model with its job; input file | `abaqus/final_design/job_v2/` |
+| `Abaqus/job/` | `Stock1_RevC_v1.cae` / `.inp` / `.jnl` | Nov 3 run: model with its job; input file | `abaqus/final_design/job/` |
 | | `Stock1_RevC_v1_geometry.txt` | CAD volumes and mesh settings read by the FoS script | `abaqus/final_design/job/` |
-| | `Stock1_RevC_v1.odb` | Results, 519 MB: **local copy only**, here and in `abaqus/final_design/job/` (too large for the free Git LFS quota); regenerate from the `.inp` | `abaqus/final_design/job/` |
+| | `Stock1_RevC_v1.odb` · `Stock1_RevC_v2.odb` | Results, 519 MB each: **local copies only** (too large for the free Git LFS quota); v1 here and in `abaqus/final_design/job/`, v2 only in `abaqus/final_design/job_v2/`; regenerate from the `.inp` | `abaqus/final_design/job/` · `job_v2/` |
 | `CAD/` | `USC06_MTC06_IBeam_RevC.step` | 3D model for MTC (inches) | `cad/` |
